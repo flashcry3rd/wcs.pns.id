@@ -106,6 +106,16 @@ class Home extends BaseController
         echo view("wc-program");
     }
 
+    public function data_timbang()
+    {
+        $arr = array(
+            "menu" => "/data_timbang"
+        );
+        session()->set($arr);
+
+        echo view("data-timbang");
+    }
+
     public function serialData()
     {
         $model = new Home_model();
