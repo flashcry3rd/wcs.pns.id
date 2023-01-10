@@ -351,7 +351,7 @@
               <div class="card card-plain mt-8">
                 <div class="card-header pb-0 text-left bg-transparent">
                   <h3 class="font-weight-bolder text-info text-gradient">Weight Scale System</h3>
-                  <p class="mb-0">Pratama Nusantara Sakti</p>
+                  <p class="mb-0">Pratama Nusantara Sakti ini test conflict</p>
                 </div>
                 <div class="card-body">
                   <form role="form" action="home/login" method="post">
