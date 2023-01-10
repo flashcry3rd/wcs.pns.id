@@ -108,12 +108,14 @@ class Home extends BaseController
 
     public function data_timbang()
     {
+        $model = new Home_model();
         $arr = array(
             "menu" => "/data_timbang"
         );
         session()->set($arr);
+        $data['timbang'] = $model->selectAll('tbl_weight_scale_temp');
 
-        echo view("data-timbang");
+        echo view("data-timbang", $data);
     }
 
     public function serialData()
@@ -200,13 +202,13 @@ class Home extends BaseController
             "op_alat2" => $this->request->getPost('op_alat2'),
             "createby" => $this->request->getPost('createby'),
         ];
-        // $model = new Home_model();
-        // $insert = $model->dataInsert('tbl_weight_scale_temp', $data);
-        // if($insert){
-        //     $return = array( 'status' => "success", "msg" => "Data weight in berhasil di proses !" );
-        // }else{
-        //     $return = array( 'status' => "error", "msg" => "Simpan data weight in gagal , mohon segera menghubungi administrator !");
-        // }
+        $model = new Home_model();
+        $insert = $model->dataInsert('tbl_weight_scale_temp', $data);
+        if($insert){
+            $return = array( 'status' => "success", "msg" => "Data weight in berhasil di proses !" );
+        }else{
+            $return = array( 'status' => "error", "msg" => "Simpan data weight in gagal , mohon segera menghubungi administrator !");
+        }
         
         // $strArr = implode(",",$data);
         $dataQR = array(

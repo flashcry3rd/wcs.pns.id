@@ -22,6 +22,15 @@ class Home_model extends Model
         return $row;
     }
 
+    public function selectAll($table)
+    {
+        $tb = $this->db->table($table);
+        $get = $tb->get();
+        $result = $get->getResult('array');
+         
+        return $result;
+    }
+
     public function getMenu($id)
     {
         $query = "SELECT b.* FROM master_menu_user as a 
