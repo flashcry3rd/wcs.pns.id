@@ -151,12 +151,6 @@ class Home extends BaseController
         // $data['tgl_muat'] = $year."-".$month."-".$day ;
         $data['tgl_muat'] = $day."/".$month."/".$year ;
         $data['jam_muat'] = $hour.":".$minute.":".$second; 
-        
-
-
-        // $tipe = $data['rd'][0];
-
-        // dd($readData);
 
         echo json_encode($data);
 
