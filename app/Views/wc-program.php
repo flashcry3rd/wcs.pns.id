@@ -40,27 +40,41 @@
     
   </div> 
 </div>
-  
+
 <div class="container-fluid">
+  <div class="row mt-4">
+    <div class="col-12">
+      <div class="row">
+        <div class="card h-100 badan-read" style="display: none" >
+          <div class="card-body">
+            <div class="row" style="text-align: center;" >
+              <div class="center">
+                <div class="form-group">
+                <h2>Data Barcode</h2>
+                <!-- <button class="message-button btn btn-primary" id='get-serial-messages' data-value="0" >Get Data</button> -->
+                <label><i><a style="color: red;">Arahkan kursor anda ke form input berikut *</a></i></label>
+                <br>
+                <input class="form-control" type="text" id="get-serial-messages" >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+<div class="container-fluid" >
   <div class="row mt-4">
     <div class="col-12">
       <form id="form-wcs" method="post">
         <div class="row">
-          <div class="card h-100" id="badan-read" style="display: ;">
-            <div class="card-body">
-              <div class="row" style="text-align: center;">
-                <div class="center">
-                  <div class="form-group">
-                  <h2>Data Barcode</h2>
-                  <!-- <button class="message-button btn btn-primary" id='get-serial-messages' data-value="0" >Get Data</button> -->
-                  <label><i><a style="color: red;">Arahkan kursor anda ke form input berikut *</a></i></label>
-                  <br>
-                  <input class="form-control" type="text" id="get-serial-messages" >
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-
+          <div class="card h-100 badan-read" id="badan-read" style="display: none; " >
+            <div class="card-body" >
+            <div style="height: 500px; overflow-y: auto; overflow-x: hidden;">
+              <div class="row" >
+              
                 <div class="form-group">
                   <h5 >No. Transaksi </h5>
                   <input id="no_transaksi" name="no_transaksi" class="form-control barcode" readonly >
@@ -270,7 +284,7 @@
               </div>
               <!-- <button class="message-button" data-value="1" disabled="true">On</button> -->
             </div>
-            
+            </div>
           </div>
         </div>
       </form>
@@ -303,8 +317,8 @@
                     await port.open({ baudRate: 9600, dataBits: 7, stopBits: 1, bufferSize: '16777216' });
                     this.reader = port.readable.getReader();
                     let signals = await port.getSignals();
-                    $("#badan-connect").fadeOut(500);
-                    $("#badan-read").fadeIn(500);
+                    $("#badan-connect").fadeOut(500); 
+                    $(".badan-read").fadeIn(500);
                 }
                 catch (err) {
                     console.error('There was an error opening the serial port:', err);
@@ -353,7 +367,7 @@
         type: "post",
         url: "<?= base_url() ?>/home/serialData",
         success: function(data){
-          // document.querySelector("#berat-in").value = data['call'];
+          document.querySelector("#berat-in").value = data['call'];
           
           $("#tipe_tiket").val(data['tipe']);
           $("#get-serial-messages").val("");
@@ -383,7 +397,7 @@
           $("#op_alat2").val(data['rd'][23]);
           $("#tgl_muat").val(data['tgl_muat']);
           $("#jam_muat").val(data['jam_muat']);
-          $("#tgl_tebang").val(data['rd'][18]);
+          $("#tgl_tebang").val(data['tgl_tebang']);
           $("#createby").val(data['rd'][24]);
           
         }

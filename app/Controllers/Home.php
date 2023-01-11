@@ -10,6 +10,8 @@ use function PHPSTORM_META\map;
 // require "vendor/autoload.php";
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
+use PhpParser\Lexer\TokenEmulator\ExplicitOctalEmulator;
+
 // use App\ThirdParty\phpSerial;
 
 
@@ -98,6 +100,9 @@ class Home extends BaseController
 
     public function wc_program()
     {
+        if(session()->get('menu')!="/wc_program"){
+            echo "<script >location.reload()</script>";
+        }
         $arr = array(
             "menu" => "/wc_program"
         );
@@ -114,6 +119,7 @@ class Home extends BaseController
         );
         session()->set($arr);
         $data['timbang'] = $model->selectAll('tbl_weight_scale_temp');
+        $data['vendor'] = $model->selectAll('master_vendor');
 
         echo view("data-timbang", $data);
     }
@@ -122,16 +128,16 @@ class Home extends BaseController
     {
         $model = new Home_model();
 
-        // $value = $this->request->getPost('data');
-        // $arr0 = explode("\r\n", $value);
-        // $count0 = count($arr0);
-        // $getMin10 = $count0 - 2 ;
-        // $pars = $arr0[$getMin10];
+        $value = $this->request->getPost('data');
+        $arr0 = explode("\r\n", $value);
+        $count0 = count($arr0);
+        $getMin10 = $count0 - 2 ;
+        $pars = $arr0[$getMin10];
         
-        // $arr1 = explode(",", $pars);
-        // $count1 = count($arr1);
-        // $getMin11 = $count1 - 1;
-        // $data['call'] = str_replace("+", "", $arr1[$getMin11]);
+        $arr1 = explode(",", $pars);
+        $count1 = count($arr1);
+        $getMin11 = $count1 - 1;
+        $data['call'] = str_replace("+", "", $arr1[$getMin11]);
        
         $value = $this->request->getPost('value');
         $data['rd'] = json_decode($value);
@@ -160,9 +166,12 @@ class Home extends BaseController
         $hour = substr($tglStr, 6, 2);
         $minute = substr($tglStr, 8, 2);
         $second = substr($tglStr, 10, 2);
+        $arrT = explode("/",$arr[18]);
+        $tglTebang = $arrT[1]."/".$arrT[0]."/".$arrT[2];
         // $data['tgl_muat'] = $year."-".$month."-".$day ;
         $data['tgl_muat'] = $day."/".$month."/".$year ;
         $data['jam_muat'] = $hour.":".$minute.":".$second; 
+        $data['tgl_tebang'] = $tglTebang;
 
         echo json_encode($data);
 
@@ -173,7 +182,15 @@ class Home extends BaseController
 
         $dateNow = date("Y-m-d H:i:s");
         $noTrans = str_replace("/","", $this->request->getPost('no_transaksi'));
-       
+        $arrT = explode("/", $this->request->getPost('tgl_tebang'));
+        $tglTebang = $arrT[2]."-".$arrT[0]."-".$arrT[1];
+        $arrM = explode("/", $this->request->getPost('tgl_muat'));
+        $tglMuat = $arrM[2]."-".$arrM[1]."-".$arrM[0]." ".$this->request->getPost('jam_muat');
+
+        $b1 = str_replace("Kg", "", $this->request->getPost('berat_in'));
+        $b1 = str_replace(".", "", $b1);
+        $b1 = str_replace(",", ".", $b1);
+
         $data = [
             
             "no_transaksi" => $this->request->getPost('no_transaksi'),
@@ -192,7 +209,7 @@ class Home extends BaseController
             "tujuan_tugboat" => $this->request->getPost('rute'),
             "kode_truck" => $this->request->getPost('no_truck'),
             "supir" => $this->request->getPost('driver'),
-            "weight_in" => $this->request->getPost('berat_in'),
+            "weight_in" => $b1,
             "weight_in_time" => $dateNow,
             "retase" => $this->request->getPost('retase'),
             "kontraktor_delivery" => $this->request->getPost('kode_kon_delivery'),
@@ -201,6 +218,8 @@ class Home extends BaseController
             "no_alat2" => $this->request->getPost('no_alat2'),
             "op_alat2" => $this->request->getPost('op_alat2'),
             "createby" => $this->request->getPost('createby'),
+            "tgl_harvesting" => $tglTebang,
+            "tgl_muat" => $tglMuat
         ];
         $model = new Home_model();
         $insert = $model->dataInsert('tbl_weight_scale_temp', $data);
@@ -209,6 +228,8 @@ class Home extends BaseController
         }else{
             $return = array( 'status' => "error", "msg" => "Simpan data weight in gagal , mohon segera menghubungi administrator !");
         }
+
+       
         
         // $strArr = implode(",",$data);
         $dataQR = array(
@@ -263,7 +284,7 @@ class Home extends BaseController
             //24
             '24' => $this->request->getPost('createby'),
             //25 timbang in 
-            '25' => $this->request->getPost('berat_in')
+            '25' => $b1
 
         );
 
