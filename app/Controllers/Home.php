@@ -223,11 +223,7 @@ class Home extends BaseController
         ];
         $model = new Home_model();
         $insert = $model->dataInsert('tbl_weight_scale_temp', $data);
-        if($insert){
-            $return = array( 'status' => "success", "msg" => "Data weight in berhasil di proses !" );
-        }else{
-            $return = array( 'status' => "error", "msg" => "Simpan data weight in gagal , mohon segera menghubungi administrator !");
-        }
+       
 
        
         
@@ -293,9 +289,13 @@ class Home extends BaseController
         $writer = new PngWriter();
         $result = $writer->write($qr);
         $result->saveToFile( ROOTPATH."/assets/qr/$noTrans.png");
-        header("Content-Type: " . $result->getMimeType());
+        if($result){
+            $return = array( 'status' => "success", "msg" => "Data weight in berhasil di proses !" );
+        }else{
+            $return = array( 'status' => "error", "msg" => "Simpan data weight in gagal , mohon segera menghubungi administrator !");
+        }
    
-        echo json_decode(json_encode($strArr));
+        echo json_encode($return);
     }
 
 

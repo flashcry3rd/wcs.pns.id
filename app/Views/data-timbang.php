@@ -8,7 +8,8 @@
         cursor: pointer;
     }
 </style>
-<link href="./assets/css/data-table.css" rel="stylesheet" />
+<!-- <link href="./assets/css/data-table.css" rel="stylesheet" /> -->
+<!-- <link href="./assets/bootstrap5/css/bootstrap.css" rel="stylesheet" /> -->
 <link href="./assets/css/data-table-min.css" rel="stylesheet" />
 <div class="container-fluid">
     <div class="row mt-4">
@@ -72,11 +73,13 @@
 <script src="./assets/js/jquery-3.5.1.js"></script>
 <script src="./assets/js/data-tables-bs5.min.js"></script>
 <script src="./assets/js/data-tables.min.js"></script>
+<script src="./assets/bootstrap5/js/bootstrap.bundle.min.js"></script>
 <script>
 
 $(document).ready(function () {
     $('#data-timbang').DataTable({
-        
+        pageLength: false,
+        paging: false
     });
 });
 </script>
