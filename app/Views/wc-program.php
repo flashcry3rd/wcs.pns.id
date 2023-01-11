@@ -56,6 +56,7 @@
                 <br>
                 <input class="form-control" type="text" id="get-serial-messages" >
                 </div>
+                <label ><i><a style="color: red;" id='warning'></a></i></label>
               </div>
             </div>
           </div>
@@ -399,6 +400,14 @@
           $("#jam_muat").val(data['jam_muat']);
           $("#tgl_tebang").val(data['tgl_tebang']);
           $("#createby").val(data['rd'][24]);
+          $("#warning").html(data['alert']);
+          if(data['alert']!=''){
+            $("#cetak-in").fadeOut(500);
+            $("#cetak-out").fadeOut(500);
+          }else{
+            $("#cetak-in").fadeIn(500);
+            $("#cetak-out").fadeIn(500);
+          }
           
         }
       })

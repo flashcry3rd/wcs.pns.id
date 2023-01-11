@@ -44,8 +44,7 @@ class Home_model extends Model
     public function dataInsert($table, $data)
     {
         $tb = $this->db->table($table);
-        $insert = $tb->insert($data);
-        if($insert){
+        if($tb->insert($data)){
             return true;
         }else{
             return false;

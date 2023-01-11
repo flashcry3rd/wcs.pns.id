@@ -173,6 +173,16 @@ class Home extends BaseController
         $data['jam_muat'] = $hour.":".$minute.":".$second; 
         $data['tgl_tebang'] = $tglTebang;
 
+        //cari no transaksi
+        $whereArrCek = array('no_transaksi' => $no_transaksi);
+        $arrCek = $model->getSelect("tbl_weight_scale_temp", $whereArrCek);
+        $numCek = count($arrCek);
+        if($numCek > 0){
+            $data['alert'] = "Data Transaksi sudah pernah di SCAN";
+        }else{
+            $data['alert'] = "";
+        }
+
         echo json_encode($data);
 
     }
@@ -222,10 +232,7 @@ class Home extends BaseController
             "tgl_muat" => $tglMuat
         ];
         $model = new Home_model();
-        $insert = $model->dataInsert('tbl_weight_scale_temp', $data);
-       
-
-       
+        $model->dataInsert('tbl_weight_scale_temp', $data);
         
         // $strArr = implode(",",$data);
         $dataQR = array(
@@ -292,7 +299,7 @@ class Home extends BaseController
         if($result){
             $return = array( 'status' => "success", "msg" => "Data weight in berhasil di proses !" );
         }else{
-            $return = array( 'status' => "error", "msg" => "Simpan data weight in gagal , mohon segera menghubungi administrator !");
+            $return = array( 'status' => "error", "msg" => "Simpan data weight in gagal , data sudah pernah di SCAN !");
         }
    
         echo json_encode($return);
