@@ -425,6 +425,7 @@
           url: '<?= base_url() ?>/home/saveTruckIn',
           success: function(data){
             alert(data['msg']);
+            $("#form-wcs").trigger('reset');
           }
         })
     })
