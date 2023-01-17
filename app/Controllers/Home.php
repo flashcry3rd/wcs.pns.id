@@ -148,9 +148,9 @@ class Home extends BaseController
         };
         $data['tipe'] = $arr[0];
         
-        $kode_kontraktor = $arr[5];
+        $kode_kontraktor = $arr[4];
         $where1 = array( 'kode_vendor' => $kode_kontraktor );
-        $kon_delivery = $arr[6];
+        $kon_delivery = $arr[5];
         $where2 = array( 'kode_vendor' => $kon_delivery );
         $rowKon = $model->getSelectRow("master_vendor", $where1);
         $rowKonDev = $model->getSelectRow("master_vendor", $where2);
@@ -166,7 +166,7 @@ class Home extends BaseController
         $hour = substr($tglStr, 6, 2);
         $minute = substr($tglStr, 8, 2);
         $second = substr($tglStr, 10, 2);
-        $arrT = explode("/",$arr[18]);
+        $arrT = explode("/",$arr[16]);
         $tglTebang = $arrT[1]."/".$arrT[0]."/".$arrT[2];
         // $data['tgl_muat'] = $year."-".$month."-".$day ;
         $data['tgl_muat'] = $day."/".$month."/".$year ;
@@ -191,9 +191,10 @@ class Home extends BaseController
     {
 
         $dateNow = date("Y-m-d H:i:s");
+        $no_transaksi = $this->request->getPost('no_transaksi'); 
         $noTrans = str_replace("/","", $this->request->getPost('no_transaksi'));
         $arrT = explode("/", $this->request->getPost('tgl_tebang'));
-        $tglTebang = $arrT[2]."-".$arrT[0]."-".$arrT[1];
+        $tglTebang = $arrT[2]."-".$arrT[1]."-".$arrT[0];
         $arrM = explode("/", $this->request->getPost('tgl_muat'));
         $tglMuat = $arrM[2]."-".$arrM[1]."-".$arrM[0]." ".$this->request->getPost('jam_muat');
 
@@ -206,6 +207,7 @@ class Home extends BaseController
             "no_transaksi" => $this->request->getPost('no_transaksi'),
             "tipe" => $this->request->getPost('tipe_tiket'),
             "no_tiket_mobil" => $this->request->getPost('no_tiket'),
+            "tiket_barge" => $this->request->getPost('tiket_barge'),
             // "no_wo" => $this->request->getPost('no_wo'),
             "kode_petak" => $this->request->getPost('no_petak'),
             "ancak" => $this->request->getPost('ancak'),
@@ -236,56 +238,45 @@ class Home extends BaseController
         
         // $strArr = implode(",",$data);
         $dataQR = array(
-            //0
+            
             '0' => $this->request->getPost('tipe_tiket'),
-            //1
+            
             '1' => $this->request->getPost('no_transaksi'),
-            //2
-            '2' => $this->request->getPost('no_tiket'),
-            //3
-            '3' => $this->request->getPost('no_barge'),
-            //4
-            '4' => $this->request->getPost('no_petak'),
-            //5
-            '5' => $this->request->getPost('kode_kontraktor'),
-            //6
-            '6' => $this->request->getPost('kode_kon_delivery'),
-            //7
-            '7' => $this->request->getPost('no_barge'),
-            //8
-            '8' => $this->request->getPost('no_truck'),
-            //9
-            '9' => $this->request->getPost('driver'),
-            //10
-            '10' => $this->request->getPost('no_polisi'),
-            //11
-            '11' => $this->request->getPost('ancak'),
-            //12
-            '12' => $this->request->getPost('retase'),
-            //13
-            '13' => $this->request->getPost('rute'),
-            //14
-            '14' => $this->request->getPost('tujuan'),
-            //15
-            '15' => $this->request->getPost('kepala_regu'),
-            //16
-            '16' => $this->request->getPost('no_tug_boat'),
-            //17
-            '17' => $this->request->getPost('nahkoda'),
-            //18
-            '18' => $this->request->getPost('tgl_tebang'),
-            //19
-            '19' => $this->request->getPost('jenis_tebu'),
-            //20
-            '20' => $this->request->getPost('no_alat1'),
-            //21
-            '21' => $this->request->getPost('op_alat1'),
-            //22
-            '22' => $this->request->getPost('no_alat2'),
-            //23
-            '23' => $this->request->getPost('op_alat2'),
-            //24
-            '24' => $this->request->getPost('createby'),
+            '2' => $this->request->getPost('no_petak'),
+            '3' => $this->request->getPost('tiket_barge'),
+            '4' => $this->request->getPost('kode_kontraktor'),
+            
+            '5' => $this->request->getPost('kode_kon_delivery'),
+            
+            '6' => $this->request->getPost('no_barge'),
+            
+            '7' => $this->request->getPost('no_truck'),
+            
+            '8' => $this->request->getPost('driver'),
+            '9' => $this->request->getPost('ancak'),
+            '10' => $this->request->getPost('retase'),
+            '11' => $this->request->getPost('rute'),
+            '12' => $this->request->getPost('tujuan'),
+            
+            '13' => $this->request->getPost('kepala_regu'),
+            
+            '14' => $this->request->getPost('no_tug_boat'),
+            
+            '15' => $this->request->getPost('nahkoda'),
+            
+            '16' => $this->request->getPost('tgl_tebang'),
+            
+            '17' => $this->request->getPost('jenis_tebu'),
+            
+            '18' => $this->request->getPost('no_alat1'),
+            
+            '19' => $this->request->getPost('op_alat1'),
+            
+            '20' => $this->request->getPost('no_alat2'),
+            
+            '21' => $this->request->getPost('op_alat2'),
+            
+            '22' => $this->request->getPost('createby'),
             //25 timbang in 
             '25' => $b1
 
@@ -297,12 +288,30 @@ class Home extends BaseController
         $result = $writer->write($qr);
         $result->saveToFile( ROOTPATH."/assets/qr/$noTrans.png");
         if($result){
-            $return = array( 'status' => "success", "msg" => "Data weight in berhasil di proses !" );
+            $return = array( 'status' => "success", "msg" => "Data weight in berhasil di proses !", "file" => $noTrans, "no" => $no_transaksi );
         }else{
-            $return = array( 'status' => "error", "msg" => "Simpan data weight in gagal , data sudah pernah di SCAN !");
+            $return = array( 'status' => "error", "msg" => "Simpan data weight in gagal , data sudah pernah di SCAN !", "file" => $noTrans, "no" => $no_transaksi);
         }
    
         echo json_encode($return);
+    }
+
+    public function barcode_in()
+    {
+        $noTrans = $this->request->getGet('no');
+        $data['file'] = $this->request->getGet('file');
+
+        $model = new Home_model();
+        $where = array( 'no_transaksi' => $noTrans);
+        $data['timbang'] = $model->getSelectRow('tbl_weight_scale_temp', $where);
+        $kode_kontraktor = $data['timbang']->kode_kontraktor;
+        $kode_kon_delivery = $data['timbang']->kontraktor_delivery;
+        $where1 = array( 'kode_vendor' => $kode_kontraktor );
+        $data['kontraktor'] = $model->getSelectRow('master_vendor', $where1);
+        $where2 = array( 'kode_vendor' => $kode_kon_delivery );
+        $data['kon_delivery'] = $model->getSelectRow('master_vendor', $where2);
+
+        echo view('temp/barcode-print', $data);
     }
 
 

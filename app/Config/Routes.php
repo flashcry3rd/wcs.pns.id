@@ -34,6 +34,7 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 $routes->get('/apps', 'Home::apps');
 $routes->get('/logout', 'Home::logout');
+$routes->get('/barcode-in', 'Home::barcode_in');
 
 /*
  * --------------------------------------------------------------------

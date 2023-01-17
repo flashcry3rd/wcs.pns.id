@@ -186,7 +186,10 @@
                     <input id="driver" name="driver" class="form-control barcode" readonly >
                   </div>
 
-                  
+                  <div class="form-group">
+                    <h5 >Tujuan</h5>
+                    <input id="tujuan" name="tujuan" class="form-control barcode" readonly >
+                  </div>
                 
                 </div>
 
@@ -233,8 +236,8 @@
                   </div>
 
                   <div class="form-group">
-                    <h5 >Op. Alat Muat 2</h5>
-                    <input id="op_alat2" name="op_alat2" class="form-control barcode" readonly >
+                    <h5 >Tiket Barge</h5>
+                    <input id="tiket_barge" name="tiket_barge" class="form-control barcode" readonly >
                   </div>
 
                 </div>
@@ -247,8 +250,8 @@
                   </div>
 
                   <div class="form-group">
-                    <h5 >Tujuan</h5>
-                    <input id="tujuan" name="tujuan" class="form-control barcode" readonly >
+                    <h5 >Op. Alat Muat 2</h5>
+                    <input id="op_alat2" name="op_alat2" class="form-control barcode" readonly >
                   </div>
 
                 </div>
@@ -274,7 +277,7 @@
               <div class="row" >
                 <div class="col-lg-6 col-md-6 mt-4">
                   <div class="ms-auto ">
-                    <a class="btn btn-secondary" type="button" id="cetak-in" type="button" title="Cetak Barcode Timbangan In">Cetak Barcode IN &emsp;<span class="fa fa-barcode"></span></a>
+                    <a class="btn btn-secondary" target="_blank" type="button" id="cetak-in" type="button" title="Cetak Barcode Timbangan In">Cetak Barcode IN &emsp;<span class="fa fa-barcode"></span></a>
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-6 mt-4">
@@ -373,33 +376,34 @@
           $("#tipe_tiket").val(data['tipe']);
           $("#get-serial-messages").val("");
           $("#no_transaksi").val(data['rd'][1]);
-          $("#ancak").val(data['rd'][11]);
-          $("#no_tiket").val(data['rd'][2]);
-          $("#no_petak").val(data['rd'][4]);
+          $("#ancak").val(data['rd'][9]);
+          // $("#no_tiket").val(data['rd'][2]);
+          $("#no_petak").val(data['rd'][2]);
+          $("#tiket_barge").val(data['rd'][3]);
           $("#kontraktor").val(data['nama_kontraktor']);
-          $("#kode_kontraktor").val(data['rd'][5]);
+          $("#kode_kontraktor").val(data['rd'][4]);
           $("#kon_delivery").val(data['nama_kon_delivery']);
-          $("#kode_kon_delivery").val(data['rd'][6]);
-          $("#no_barge").val(data['rd'][7]);
-          $("#no_truck").val(data['rd'][8]);
-          $("#driver").val(data['rd'][9]);
-          $("#no_polisi").val(data['rd'][10]);
-          $("#ancak").val(data['rd'][11]);
-          $("#retase").val(data['rd'][12]);
-          $("#rute").val(data['rd'][13]);
-          $("#kepala_regu").val(data['rd'][15]);
-          $("#no_tug_boat").val(data['rd'][16]);
-          $("#nahkoda").val(data['rd'][17]);
-          $("#tujuan").val(data['rd'][14]);
-          $("#jenis_tebu").val(data['rd'][19]);
-          $("#no_alat1").val(data['rd'][20]);
-          $("#op_alat1").val(data['rd'][21]);
-          $("#no_alat2").val(data['rd'][22]);
-          $("#op_alat2").val(data['rd'][23]);
+          $("#kode_kon_delivery").val(data['rd'][5]);
+          $("#no_barge").val(data['rd'][6]);
+          $("#no_truck").val(data['rd'][7]);
+          $("#driver").val(data['rd'][8]);
+          // $("#no_polisi").val(data['rd'][10]);
+          $("#ancak").val(data['rd'][9]);
+          $("#retase").val(data['rd'][10]);
+          $("#rute").val(data['rd'][11]);
+          $("#tujuan").val(data['rd'][12]);
+          $("#kepala_regu").val(data['rd'][13]);
+          $("#no_tug_boat").val(data['rd'][14]);
+          $("#nahkoda").val(data['rd'][15]);
+          $("#jenis_tebu").val(data['rd'][17]);
+          $("#no_alat1").val(data['rd'][18]);
+          $("#op_alat1").val(data['rd'][19]);
+          $("#no_alat2").val(data['rd'][20]);
+          $("#op_alat2").val(data['rd'][21]);
           $("#tgl_muat").val(data['tgl_muat']);
           $("#jam_muat").val(data['jam_muat']);
           $("#tgl_tebang").val(data['tgl_tebang']);
-          $("#createby").val(data['rd'][24]);
+          $("#createby").val(data['rd'][22]);
           $("#warning").html(data['alert']);
           if(data['alert']!=''){
             $("#cetak-in").fadeOut(500);
@@ -424,8 +428,10 @@
           cache: false,
           url: '<?= base_url() ?>/home/saveTruckIn',
           success: function(data){
+            var url = "<?= base_url() ?>/barcode-in?file="+data['file']+"&no="+data['no'] ;
             alert(data['msg']);
             $("#form-wcs").trigger('reset');
+            window.open(url, '_blank');
           }
         })
     })
