@@ -65,6 +65,11 @@
                                     <td style="text-align: left;"><b><a >Jenis Tebu</a></b></td>
                                     <td style="text-align: right;"><b><a ><?= $timbang->jenis_tebu ?></a></b></td>
                                 </tr>
+                                <tr>
+                                    <td style="text-align: left;"><b><a >Berat Masuk</a></b></td>
+                                    <td style="text-align: right;"><b><a ><?= $timbang->weight_in ?></a></b></td>
+                                </tr>
+
                             </tbody>
                         </table>
                     </div>
@@ -76,7 +81,8 @@
             <td style="text-align: center;"><b><a style="font-size: 20px;">----------- Scan QR -----------</a></b></td>
         </tr>
         <tr>
-            <td style="text-align: center;"><img src="./assets/qr/<?=$file?>.png" ></td>
+            <? $runTime = date('dMYHis'); ?>
+            <td style="text-align: center;"><img src="./assets/qr/<?=$file?>.png?r=<?= $runTime ?>" ></td>
         </tr>
     </table>
 </div>

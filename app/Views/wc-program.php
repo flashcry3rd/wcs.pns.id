@@ -371,7 +371,9 @@
         type: "post",
         url: "<?= base_url() ?>/home/serialData",
         success: function(data){
-          document.querySelector("#berat-in").value = data['call'];
+
+          document.querySelector("#berat-in").value = data['timbangIn'];
+          document.querySelector("#berat-out").value = data['timbangOut'];
           
           $("#tipe_tiket").val(data['tipe']);
           $("#get-serial-messages").val("");
@@ -405,12 +407,17 @@
           $("#tgl_tebang").val(data['tgl_tebang']);
           $("#createby").val(data['rd'][22]);
           $("#warning").html(data['alert']);
-          if(data['alert']!=''){
+          if(data['timbangOut']== '0'){
+            $("#cetak-in").fadeIn(500);
+            $("#cetak-out").fadeOut(500);
+           if(data['alert']!=''){
             $("#cetak-in").fadeOut(500);
             $("#cetak-out").fadeOut(500);
-          }else{
-            $("#cetak-in").fadeIn(500);
+           }
+          }else if(data['timbangOut'] != 0){
+            $("#cetak-in").fadeOut(500);
             $("#cetak-out").fadeIn(500);
+            
           }
           
         }
@@ -435,6 +442,7 @@
           }
         })
     })
+
     
 
   </script>

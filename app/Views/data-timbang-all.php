@@ -18,14 +18,14 @@
             <div class="row">
                 <div class="card">
                     <div class="card-body">
-                        <h4>Data Timbang ( Scan Barcode )</h4>
+                        <h4>Data Timbang All</h4>
                     </div>
                     <div class="form-group">
                         <div class="table-responsive">
                             <table class="table table-striped" id="data-timbang" style="width: 100%;"> 
                                 <thead>
                                     <tr>
-                                        <td>QR</td>
+                                        <td></td>
                                         <th>No.</th>
                                         <th>No. Transaksi</th>
                                         <th>Petak</th>
@@ -33,6 +33,8 @@
                                         <th>Kontraktor</th>
                                         <th>Kontraktor Deliv.</th>
                                         <th>Berat Masuk</th>
+                                        <th>Berat Keluar</th>
+                                        <th>Nett</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -59,7 +61,8 @@
                                                 } ?>
                                             <? } ?>
                                             <td><?=number_format($ti['weight_in'], 2, ",", ".")?></td>
-                                            
+                                            <td><?=number_format($ti['weight_out'], 2, ",", ".")?></td>
+                                            <td><?=number_format($ti['weight_in']-$ti['weight_out'], 2, ",", ".")?></td>
                                         </tr>
                                     <? $i++;} ?>
                                 </tbody>

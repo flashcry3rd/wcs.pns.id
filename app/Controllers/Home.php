@@ -117,11 +117,23 @@ class Home extends BaseController
         $arr = array(
             "menu" => "/data_timbang"
         );
+        $where = array ("weight_out" => 0);
         session()->set($arr);
-        $data['timbang'] = $model->selectAll('tbl_weight_scale_temp');
+        $data['timbang'] = $model->getSelect('tbl_weight_scale_temp', $where);
         $data['vendor'] = $model->selectAll('master_vendor');
 
         echo view("data-timbang", $data);
+    }
+
+    public function data_timbang_all()
+    {
+        $model = new Home_model();
+        $arr = array(
+            "menu" => "/data_timbang_all"
+        );
+        session()->set($arr);
+        $data['timbang'] = $model->selectAll('tbl_weight_scale');
+        echo view("data-timbang-all", $data);
     }
 
     public function serialData()
@@ -172,16 +184,26 @@ class Home extends BaseController
         $data['tgl_muat'] = $day."/".$month."/".$year ;
         $data['jam_muat'] = $hour.":".$minute.":".$second; 
         $data['tgl_tebang'] = $tglTebang;
-
-        //cari no transaksi
-        $whereArrCek = array('no_transaksi' => $no_transaksi);
-        $arrCek = $model->getSelect("tbl_weight_scale_temp", $whereArrCek);
-        $numCek = count($arrCek);
-        if($numCek > 0){
-            $data['alert'] = "Data Transaksi sudah pernah di SCAN";
+        
+        $count = count($arr); 
+        if($count > 23){
+            $data['timbangOut'] = $data['call'];
+            $data['timbangIn'] = $arr[23];
         }else{
-            $data['alert'] = "";
+            $data['timbangOut'] = 0;
+            $data['timbangIn'] = $data['call'];
+            //cari no transaksi
+            $whereArrCek = array('no_transaksi' => $no_transaksi);
+            $arrCek = $model->getSelect("tbl_weight_scale_temp", $whereArrCek);
+            $numCek = count($arrCek);
+            if($numCek > 0){
+                $data['alert'] = "Data Transaksi sudah pernah di SCAN";
+            }else{
+                $data['alert'] = "";
+            }
         }
+        
+        
 
         echo json_encode($data);
 
@@ -198,6 +220,7 @@ class Home extends BaseController
         $arrM = explode("/", $this->request->getPost('tgl_muat'));
         $tglMuat = $arrM[2]."-".$arrM[1]."-".$arrM[0]." ".$this->request->getPost('jam_muat');
 
+        $beratIn = $this->request->getPost('berat_in') ;
         $b1 = str_replace("Kg", "", $this->request->getPost('berat_in'));
         $b1 = str_replace(".", "", $b1);
         $b1 = str_replace(",", ".", $b1);
@@ -278,7 +301,7 @@ class Home extends BaseController
             
             '22' => $this->request->getPost('createby'),
             //25 timbang in 
-            '25' => $b1
+            '25' => $beratIn
 
         );
 
