@@ -319,6 +319,58 @@ class Home extends BaseController
         echo json_encode($return);
     }
 
+    public function saveTruckOut()
+    {
+        $dateNow = date("Y-m-d H:i:s");
+        $no_transaksi = $this->request->getPost('no_transaksi'); 
+        $noTrans = str_replace("/","", $this->request->getPost('no_transaksi'));
+        $arrT = explode("/", $this->request->getPost('tgl_tebang'));
+        $tglTebang = $arrT[2]."-".$arrT[1]."-".$arrT[0];
+        $arrM = explode("/", $this->request->getPost('tgl_muat'));
+        $tglMuat = $arrM[2]."-".$arrM[1]."-".$arrM[0]." ".$this->request->getPost('jam_muat');
+
+        $beratIn = $this->request->getPost('berat_in') ;
+        $b1 = str_replace("Kg", "", $this->request->getPost('berat_in'));
+        $b1 = str_replace(".", "", $b1);
+        $b1 = str_replace(",", ".", $b1);
+
+        $data = [
+            
+            "no_transaksi" => $this->request->getPost('no_transaksi'),
+            "tipe" => $this->request->getPost('tipe_tiket'),
+            "no_tiket_mobil" => $this->request->getPost('no_tiket'),
+            "tiket_barge" => $this->request->getPost('tiket_barge'),
+            // "no_wo" => $this->request->getPost('no_wo'),
+            "kode_petak" => $this->request->getPost('no_petak'),
+            "ancak" => $this->request->getPost('ancak'),
+            "jenis_tebu" => $this->request->getPost('jenis_tebu'),
+            "kode_kontraktor" => $this->request->getPost('kode_kontraktor'),
+            "loading_vehicle_number" => $this->request->getPost('no_alat1'),
+            "loading_vehicle_operator" => $this->request->getPost('op_alat1'),
+            "kode_barge" => $this->request->getPost('no_barge'),
+            "kode_tugboat" => $this->request->getPost('no_tug_boat'),
+            "tugboat_captain" => $this->request->getPost('nahkoda'),
+            "tujuan_tugboat" => $this->request->getPost('rute'),
+            "kode_truck" => $this->request->getPost('no_truck'),
+            "supir" => $this->request->getPost('driver'),
+            "weight_out" => $b1,
+            "weight_out_time" => $dateNow,
+            "retase" => $this->request->getPost('retase'),
+            "kontraktor_delivery" => $this->request->getPost('kode_kon_delivery'),
+            "no_polisi" => $this->request->getPost('no_polisi'),
+            "tujuan" => $this->request->getPost('tujuan'),
+            "no_alat2" => $this->request->getPost('no_alat2'),
+            "op_alat2" => $this->request->getPost('op_alat2'),
+            "createby" => $this->request->getPost('createby'),
+            "tgl_harvesting" => $tglTebang,
+            "tgl_muat" => $tglMuat
+        ];
+        $model = new Home_model();
+        $model->dataInsert('tbl_weight_scale_temp', $data);
+        
+
+    }
+
     public function barcode_in()
     {
         $noTrans = $this->request->getGet('no');
@@ -335,6 +387,12 @@ class Home extends BaseController
         $data['kon_delivery'] = $model->getSelectRow('master_vendor', $where2);
 
         echo view('temp/barcode-print', $data);
+    }
+    
+    public function slip_timbang()
+    {
+        $model = new Home_model();
+        
     }
 
 

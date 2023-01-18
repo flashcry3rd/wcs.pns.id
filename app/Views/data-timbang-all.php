@@ -25,7 +25,7 @@
                             <table class="table table-striped" id="data-timbang" style="width: 100%;"> 
                                 <thead>
                                     <tr>
-                                        <td></td>
+                                        <td>Slip</td>
                                         <th>No.</th>
                                         <th>No. Transaksi</th>
                                         <th>Petak</th>
@@ -45,7 +45,7 @@
                                          $file = str_replace("/", "", $noTrans);
                                          ?>
                                         <tr >
-                                            <td><a href="<?= base_url()?>/barcode-in?file=<?=$file?>&no=<?= $noTrans ?>" target="_blank" title="print_barcode"><i class="fa fa-qrcode" ></i></a></td>
+                                            <td><a href="<?= base_url()?>/slip-timbang?no=<?= $noTrans ?>" target="_blank" title="print_barcode"><i class="fa fa-qrcode" ></i></a></td>
                                             <td><?=$i ?></td>
                                             <td><?=$ti['no_transaksi'] ?></td>
                                             <td><?=$ti['kode_petak'] ?></td>

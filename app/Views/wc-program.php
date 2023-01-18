@@ -443,6 +443,23 @@
         })
     })
 
+    $("#cetak-out").click(function(){
+      
+      $ajax({
+        data:  $("#form-wcs").serialize(),
+        type: "post",
+        dataType: "json",
+        cache: false,
+        url: '<?= base_url() ?>/home/saveTruckOut',
+        success: function(data){
+          var url = "<?= base_url() ?>/slip-timbang?no="+data['no'] ;
+          alert(data['msg']);
+          $("#form-wcs").trigger('reset');
+          window.open(url, '_blank');
+        }
+      })
+    })
+
     
 
   </script>

@@ -35,6 +35,7 @@ $routes->get('/', 'Home::index');
 $routes->get('/apps', 'Home::apps');
 $routes->get('/logout', 'Home::logout');
 $routes->get('/barcode-in', 'Home::barcode_in');
+$routes->get('/slip-timbang', 'Home::slip_timbang');
 
 /*
  * --------------------------------------------------------------------
