@@ -189,9 +189,11 @@ class Home extends BaseController
         if($count > 23){
             $data['timbangOut'] = $data['call'];
             $data['timbangIn'] = $arr[23];
+            $data['berat_in_time'] = $arr[24];
         }else{
             $data['timbangOut'] = 0;
             $data['timbangIn'] = $data['call'];
+            $data['berat_in_time'] = "";
             //cari no transaksi
             $whereArrCek = array('no_transaksi' => $no_transaksi);
             $arrCek = $model->getSelect("tbl_weight_scale_temp", $whereArrCek);
@@ -301,7 +303,8 @@ class Home extends BaseController
             
             '22' => $this->request->getPost('createby'),
             //25 timbang in 
-            '25' => $beratIn
+            'berat' => $beratIn, 
+            'berat_time' => $dateNow
 
         );
 
@@ -322,6 +325,7 @@ class Home extends BaseController
     public function saveTruckOut()
     {
         $dateNow = date("Y-m-d H:i:s");
+        $tglIn=$this->request->getPost('berat_in_time');
         $no_transaksi = $this->request->getPost('no_transaksi'); 
         $noTrans = str_replace("/","", $this->request->getPost('no_transaksi'));
         $arrT = explode("/", $this->request->getPost('tgl_tebang'));
@@ -333,6 +337,10 @@ class Home extends BaseController
         $b1 = str_replace("Kg", "", $this->request->getPost('berat_in'));
         $b1 = str_replace(".", "", $b1);
         $b1 = str_replace(",", ".", $b1);
+
+        $b2 = str_replace("Kg", "", $this->request->getPost('berat_out'));
+        $b2 = str_replace(".", "", $b1);
+        $b2 = str_replace(",", ".", $b1);
 
         $data = [
             
@@ -353,7 +361,9 @@ class Home extends BaseController
             "tujuan_tugboat" => $this->request->getPost('rute'),
             "kode_truck" => $this->request->getPost('no_truck'),
             "supir" => $this->request->getPost('driver'),
-            "weight_out" => $b1,
+            "weight_in" => $b1,
+            "weight_in_time" => $tglIn,
+            "weight_out" => $b2,
             "weight_out_time" => $dateNow,
             "retase" => $this->request->getPost('retase'),
             "kontraktor_delivery" => $this->request->getPost('kode_kon_delivery'),
@@ -366,7 +376,7 @@ class Home extends BaseController
             "tgl_muat" => $tglMuat
         ];
         $model = new Home_model();
-        $model->dataInsert('tbl_weight_scale_temp', $data);
+        $model->dataInsert('tbl_weight_scale', $data);
         
 
     }

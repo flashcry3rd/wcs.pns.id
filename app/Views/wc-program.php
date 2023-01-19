@@ -263,6 +263,7 @@
                   <div class="form-group">  
                     <h5>Berat Timbang In </h5>
                     <input id="berat-in" name="berat_in" class="message form-control barcode" readonly >
+                    <input id="berat-in-time" name="berat_in_time"  class="message form-control barcode" hidden>
                   </div>
 
                 </div>
@@ -407,6 +408,7 @@
           $("#tgl_tebang").val(data['tgl_tebang']);
           $("#createby").val(data['rd'][22]);
           $("#warning").html(data['alert']);
+          $("#berat-in-time").val(data['berat_in_time']);
           if(data['timbangOut']== '0'){
             $("#cetak-in").fadeIn(500);
             $("#cetak-out").fadeOut(500);
