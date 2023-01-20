@@ -18,6 +18,9 @@
 <div class="table responsive">
     <table style="width: 100%;">
         <tr>
+            <td style="text-align: center;"><b><u><a style="font-size: 23px">TIKET TIMBANG MASUK</a></u></b></td>
+        </tr>
+        <tr>
             <td style="text-align: center;"><b><a style="font-size: 23px;"> <?= $timbang->no_transaksi ?></a></b></td>
         </tr>
         <tr>

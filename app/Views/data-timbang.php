@@ -43,7 +43,7 @@
                                          $file = str_replace("/", "", $noTrans);
                                          ?>
                                         <tr >
-                                            <td><a href="<?= base_url()?>/barcode-in?file=<?=$file?>&no=<?= $noTrans ?>" target="_blank" title="print_barcode"><i class="fa fa-qrcode" ></i></a></td>
+                                            <td><a href="<?= base_url()?>/barcode-in?file=<?=$file?>&no=<?= $noTrans ?>" target="_blank" title="Print Tiket Masuk"><i class="fa fa-qrcode" ></i></a></td>
                                             <td><?=$i ?></td>
                                             <td><?=$ti['no_transaksi'] ?></td>
                                             <td><?=$ti['kode_petak'] ?></td>

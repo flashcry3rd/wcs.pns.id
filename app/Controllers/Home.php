@@ -133,6 +133,7 @@ class Home extends BaseController
         );
         session()->set($arr);
         $data['timbang'] = $model->selectAll('tbl_weight_scale');
+        $data['vendor'] = $model->selectAll('master_vendor');
         echo view("data-timbang-all", $data);
     }
 
@@ -179,7 +180,7 @@ class Home extends BaseController
         $minute = substr($tglStr, 8, 2);
         $second = substr($tglStr, 10, 2);
         $arrT = explode("/",$arr[16]);
-        $tglTebang = $arrT[1]."/".$arrT[0]."/".$arrT[2];
+        $tglTebang = $arrT[0]."/".$arrT[1]."/".$arrT[2];
         // $data['tgl_muat'] = $year."-".$month."-".$day ;
         $data['tgl_muat'] = $day."/".$month."/".$year ;
         $data['jam_muat'] = $hour.":".$minute.":".$second; 
@@ -374,6 +375,7 @@ class Home extends BaseController
             "createby" => $this->request->getPost('createby'),
             "tgl_harvesting" => $tglTebang,
             "tgl_muat" => $tglMuat
+            
         ];
         $model = new Home_model();
         $model->dataInsert('tbl_weight_scale', $data);
@@ -402,6 +404,13 @@ class Home extends BaseController
     public function slip_timbang()
     {
         $model = new Home_model();
+        $noTrans = $this->request->getGet('no');
+
+        $where = array( 'no_transaksi' => $noTrans );
+        $data['timbang'] = $model->getSelectRow('tbl_weight_scale', $where);
+        $data['kontraktor'] = $model->selectAll('master_vendor');
+        
+        echo view('temp/surat-timbang', $data);
         
     }
 

@@ -86,7 +86,7 @@
                 </div>
 
                 <input id = "tipe_tiket" name="tipe_tiket" type="text" hidden >
-                <input id = "createby" name="createby" type="text" hidden >
+                <input id = "createby" name="createby" type="text"  >
 
                 <div class="col-lg-4 col-md-4 mt-4">
                   <div class="form-group">
@@ -283,7 +283,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6 mt-4">
                   <div class="ms-auto ">
-                    <a class="btn btn-success" type="button" id="cetak-out" type="button" title="Cetak Barcode Timbangan In">Cetak Tiket OUT &emsp;<span class="fa fa-file"></span></a>
+                    <a class="btn btn-success" target="_blank" type="button" id="cetak-out" type="button" title="Cetak Barcode Timbangan In">Cetak Tiket OUT &emsp;<span class="fa fa-file"></span></a>
                   </div>
                 </div>
               </div>
@@ -447,7 +447,7 @@
 
     $("#cetak-out").click(function(){
       
-      $ajax({
+      $.ajax({
         data:  $("#form-wcs").serialize(),
         type: "post",
         dataType: "json",
