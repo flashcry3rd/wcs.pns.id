@@ -408,7 +408,12 @@ class Home extends BaseController
 
         $where = array( 'no_transaksi' => $noTrans );
         $data['timbang'] = $model->getSelectRow('tbl_weight_scale', $where);
-        $data['kontraktor'] = $model->selectAll('master_vendor');
+        $kode_kontraktor = $data['timbang']->kode_kontraktor;
+        $kode_kon_delivery = $data['timbang']->kontraktor_delivery;
+        $where1 = array( 'kode_vendor' => $kode_kontraktor );
+        $data['kontraktor'] = $model->getSelectRow('master_vendor', $where1);
+        $where2 = array( 'kode_vendor' => $kode_kon_delivery );
+        $data['kon_delivery'] = $model->getSelectRow('master_vendor', $where2);
         
         echo view('temp/surat-timbang', $data);
         

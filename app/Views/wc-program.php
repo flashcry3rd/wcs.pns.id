@@ -86,7 +86,7 @@
                 </div>
 
                 <input id = "tipe_tiket" name="tipe_tiket" type="text" hidden >
-                <input id = "createby" name="createby" type="text"  >
+                <input id = "createby" name="createby" type="text"  hidden>
 
                 <div class="col-lg-4 col-md-4 mt-4">
                   <div class="form-group">
@@ -440,7 +440,8 @@
             var url = "<?= base_url() ?>/barcode-in?file="+data['file']+"&no="+data['no'] ;
             alert(data['msg']);
             $("#form-wcs").trigger('reset');
-            window.open(url, '_blank');
+            // window.open(url, '_blank');
+            print(url);
           }
         })
     })
@@ -457,10 +458,16 @@
           var url = "<?= base_url() ?>/slip-timbang?no="+data['no'] ;
           alert(data['msg']);
           $("#form-wcs").trigger('reset');
-          window.open(url, '_blank');
+          // window.open(url, '_blank');
+          print(url);
         }
       })
     })
+    
+    function print(url){
+        var printwin = window.open(url, '_blank');
+        printwin.print();
+    }
 
     
 

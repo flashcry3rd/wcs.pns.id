@@ -79,7 +79,7 @@
 <script src="./assets/js/data-tables-bs5.min.js"></script>
 <script src="./assets/js/data-tables.min.js"></script>
 <script src="./assets/bootstrap5/js/bootstrap.bundle.min.js"></script>
-<script>
+<script type="text/javascript">
 
 $(document).ready(function () {
     $('#data-timbang').DataTable({
@@ -87,6 +87,8 @@ $(document).ready(function () {
         paging: false
     });
 });
+
+
 </script>
 
        
