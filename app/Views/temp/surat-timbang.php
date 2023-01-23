@@ -97,7 +97,37 @@
                             <tr >
                                 <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>Tgl. Timbang</a></b></td>
                                 <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a> : </a></b></td>
-                                <td style="width: 80%;  padding: 0%; padding-left: 0%;border-bottom: 0.8px; border-style: dashed"><a ><?= date_format(date_create($timbang->weight_in_time), "d  M  Y") ?></a></td>
+                                <? 
+                                $month = date_format(date_create($timbang->weight_in_time), "m");
+                                if($month=="01"){
+                                    $m = "Januari";
+                                }else if($month=="02"){
+                                    $m = "Februari";
+                                }else if($month=="03"){
+                                    $m = "Maret";
+                                }else if($month=="04"){
+                                    $m = "April";
+                                }else if($month=="05"){
+                                    $m = "Mei";
+                                }else if($month=="06"){
+                                    $m = "Juni";
+                                }else if($month=="07"){
+                                    $m = "Juli";
+                                }else if($month=="08"){
+                                    $m= "Agustus";
+                                }else if($month=="09"){
+                                    $m = "September";
+                                }else if($month=="10"){
+                                    $m = "Oktober";
+                                }else if($month=="11"){
+                                    $m = "November";
+                                }else if($month=='12'){
+                                    $m = 'Desember';
+                                }else{
+                                    $m ="";
+                                }
+                                ?>
+                                <td style="width: 80%;  padding: 0%; padding-left: 0%;border-bottom: 0.8px; border-style: dashed"><a ><?= date_format(date_create($timbang->weight_in_time), "d")." ".$m." ".date_format(date_create($timbang->weight_in_time), "Y") ?></a></td>
                             </tr>
                             <tr >
                                 <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>Kontraktor</a></b></td>
