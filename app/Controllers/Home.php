@@ -173,9 +173,9 @@ class Home extends BaseController
         $no_transaksi = $arr[1];
         $arrTrans = explode("/", $no_transaksi);
         $tglStr = $arrTrans[2];
-        $day = substr($tglStr, 0, 2);
+        $day = substr($tglStr, 4, 2);
         $month = substr($tglStr, 2, 2);
-        $year = "20".substr($tglStr, 4, 2);
+        $year = "20".substr($tglStr, 0, 2);
         $hour = substr($tglStr, 6, 2);
         $minute = substr($tglStr, 8, 2);
         $second = substr($tglStr, 10, 2);
@@ -187,13 +187,25 @@ class Home extends BaseController
         $data['tgl_tebang'] = $tglTebang;
         
         $count = count($arr); 
+        $b1 = str_replace("Kg", "", $data['call']);
+        $b1 = str_replace(".", "", $b1);
+        $b1 = str_replace(",", ".", $b1);
+        $b1 = number_format($b1, 2, ",", ".")." Kg";
         if($count > 23){
-            $data['timbangOut'] = $data['call'];
+            $whereArrCek = array('no_transaksi' => $no_transaksi);
+            $arrCek2 = $model->getSelect("tbl_weight_scale", $whereArrCek);
+            $numCek2 = count($arrCek2);
+            $data['timbangOut'] = $b1;
             $data['timbangIn'] = $arr[23];
             $data['berat_in_time'] = $arr[24];
+            if($numCek2 > 0){
+                $data['alert'] = "Data Transaksi sudah pernah di SCAN";
+            }else{
+                $data['alert'] = "";
+            }
         }else{
             $data['timbangOut'] = 0;
-            $data['timbangIn'] = $data['call'];
+            $data['timbangIn'] = $b1;
             $data['berat_in_time'] = "";
             //cari no transaksi
             $whereArrCek = array('no_transaksi' => $no_transaksi);
@@ -340,8 +352,8 @@ class Home extends BaseController
         $b1 = str_replace(",", ".", $b1);
 
         $b2 = str_replace("Kg", "", $this->request->getPost('berat_out'));
-        $b2 = str_replace(".", "", $b1);
-        $b2 = str_replace(",", ".", $b1);
+        $b2 = str_replace(".", "", $b2);
+        $b2 = str_replace(",", ".", $b2);
 
         $data = [
             
@@ -378,8 +390,15 @@ class Home extends BaseController
             
         ];
         $model = new Home_model();
-        $model->dataInsert('tbl_weight_scale', $data);
-        
+        $insert = $model->dataInsert('tbl_weight_scale', $data);
+        if($insert){
+
+            $return = array("status" => "success", "msg" => "Data timbangan berhasil di simpan !" , "no" => $no_transaksi);
+        }else{
+            $return = array("status" => "error", "msg" => "Data timbangan gagal disimpan , mohon segera menghubungi administrator !", "no" => $no_transaksi);
+        }
+
+        return json_encode($return);
 
     }
 

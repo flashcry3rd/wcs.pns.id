@@ -73,7 +73,7 @@
         <div class="row">
           <div class="card h-100 badan-read" id="badan-read" style="display: none; " >
             <div class="card-body" >
-            <div style="height: 500px; overflow-y: auto; overflow-x: hidden;">
+            <div id="badan" style="height: 500px; overflow-y: auto; overflow-x: hidden; display: none" >
               <div class="row" >
               
                 <div class="form-group">
@@ -278,12 +278,12 @@
               <div class="row" >
                 <div class="col-lg-6 col-md-6 mt-4">
                   <div class="ms-auto ">
-                    <a class="btn btn-secondary" target="_blank" type="button" id="cetak-in" type="button" title="Cetak Barcode Timbangan In">Cetak Barcode IN &emsp;<span class="fa fa-barcode"></span></a>
+                    <a style="display: none;" class="btn btn-secondary" target="_blank" type="button" id="cetak-in" type="button" title="Cetak Barcode Timbangan In">Cetak Barcode IN &emsp;<span class="fa fa-barcode"></span></a>
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-6 mt-4">
                   <div class="ms-auto ">
-                    <a class="btn btn-success" target="_blank" type="button" id="cetak-out" type="button" title="Cetak Barcode Timbangan In">Cetak Tiket OUT &emsp;<span class="fa fa-file"></span></a>
+                    <a style="display: none;" class="btn btn-success" target="_blank" type="button" id="cetak-out" type="button" title="Cetak Barcode Timbangan In">Cetak Tiket OUT &emsp;<span class="fa fa-file"></span></a>
                   </div>
                 </div>
               </div>
@@ -409,7 +409,7 @@
           $("#createby").val(data['rd'][22]);
           $("#warning").html(data['alert']);
           $("#berat-in-time").val(data['berat_in_time']);
-          if(data['timbangOut']== '0'){
+          if(data['timbangOut']== 0){
             $("#cetak-in").fadeIn(500);
             $("#cetak-out").fadeOut(500);
            if(data['alert']!=''){
@@ -419,9 +419,13 @@
           }else if(data['timbangOut'] != 0){
             $("#cetak-in").fadeOut(500);
             $("#cetak-out").fadeIn(500);
+            if(data['alert']!=''){
+              $("#cetak-in").fadeOut(500);
+              $("#cetak-out").fadeOut(500);
+            }
             
           }
-          
+          $("#badan").fadeIn(500);
         }
       })
       // document.querySelector("#serial-messages-container").value = await serialScaleController.read()
@@ -442,6 +446,7 @@
             $("#form-wcs").trigger('reset');
             // window.open(url, '_blank');
             print(url);
+            $("#badan").fadeOut(500);
           }
         })
     })
@@ -460,6 +465,7 @@
           $("#form-wcs").trigger('reset');
           // window.open(url, '_blank');
           print(url);
+          $("#badan").fadeOut(500);
         }
       })
     })

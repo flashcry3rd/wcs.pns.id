@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <style >
-   
+    @media print{
+        @page {
+            size: auto;   /* auto is the initial value */
+            size: Portrait;
+            margin: 0;  /* this affects the margin in the printer settings */
+    
+        }
+    }
     a{
         font-family: calibri;
     }
