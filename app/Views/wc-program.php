@@ -50,7 +50,7 @@
             <div class="row" style="text-align: center;" >
               <div class="center">
                 <div class="form-group">
-                <h2>Data Barcode</h2>
+                <h2>Data QR Code</h2>
                 <!-- <button class="message-button btn btn-primary" id='get-serial-messages' data-value="0" >Get Data</button> -->
                 <label><i><a style="color: red;">Arahkan kursor anda ke form input berikut *</a></i></label>
                 <br>
@@ -415,6 +415,9 @@
            if(data['alert']!=''){
             $("#cetak-in").fadeOut(500);
             $("#cetak-out").fadeOut(500);
+            if($data['tipe']=="BR"){
+              $("#warning").html(data['alert']); 
+            }
            }
           }else if(data['timbangOut'] != 0){
             $("#cetak-in").fadeOut(500);
@@ -422,6 +425,7 @@
             if(data['alert']!=''){
               $("#cetak-in").fadeOut(500);
               $("#cetak-out").fadeOut(500);
+              
             }
             
           }

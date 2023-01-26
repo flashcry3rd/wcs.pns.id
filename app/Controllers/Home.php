@@ -201,7 +201,11 @@ class Home extends BaseController
             if($numCek2 > 0){
                 $data['alert'] = "Data Transaksi sudah pernah di SCAN";
             }else{
-                $data['alert'] = "";
+                if($data['tipe']=="BR"){
+                    $data['alert'] ="Tipe tiket tidak sesuai , mohon di cek kembali tiket yang anda gunakan !" ;
+                }else{
+                    $data['alert'] = "";
+                }
             }
         }else{
             $data['timbangOut'] = 0;
@@ -214,12 +218,15 @@ class Home extends BaseController
             if($numCek > 0){
                 $data['alert'] = "Data Transaksi sudah pernah di SCAN";
             }else{
-                $data['alert'] = "";
+                if($data['tipe']=="BR"){
+                    $data['alert'] ="Tipe tiket tidak sesuai , mohon di cek kembali tiket yang anda gunakan !" ;
+                }else{
+                    $data['alert'] = "";
+                }
+                
             }
         }
         
-        
-
         echo json_encode($data);
 
     }
