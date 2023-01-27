@@ -95,7 +95,46 @@ class Home extends BaseController
         );
         session()->set($arr);
 
-        echo view("dashboard");
+        $model = new Home_model(); 
+        $date = date("Y-m-d");
+        $year = date("Y");
+        if(strtotime(date("Y-m-d H:i:s")) < strtotime(date("Y-m-d ")." 06:00:00") ){
+            $dateBefore = date("Y-m-d", strtotime('-2 day', strtotime($date)))." 06:00:00";
+            $dateNow = date("Y-m-d", strtotime('-1 day', strtotime($date)))." 06:00:00";
+            $dateNow1 = date("Y-m-d")." 06:00:00" ;
+        }else{
+            $dateBefore = date("Y-m-d", strtotime('-1 day', strtotime($date)))." 06:00:00";
+            $dateNow = date("Y-m-d")." 06:00:00" ;
+            $dateNow1 = date("Y-m-d", strtotime('+1 day', strtotime($date)))." 06:00:00";
+        }
+
+        
+        $tHariKemaren = "weight_out_time between '$dateBefore' and '$dateNow' " ;
+        $tHariIni = "weight_out_time between '$dateNow' and '$dateNow1' " ;
+        $tYear = "YEAR(weight_out_time) = '$year' ";
+
+        $timbang1 = $model->getSelect("tbl_weight_scale", $tHariKemaren);
+        $timbang2 = $model->getSelect("tbl_weight_scale", $tHariIni);
+        $timbangAll = $model->getSelect("tbl_weight_scale", $tYear);
+
+        $totalTimbang1 = 0;
+        $totalTimbang2 = 0;
+        $totalAll = 0 ;
+        foreach($timbang1 as $t1){
+            $totalTimbang1 += ($t1['weight_in'] - $t1['weight_out']);
+        }
+        foreach($timbang2 as $t2){
+            $totalTimbang2 += ($t2['weight_in'] - $t2['weight_out']);
+        }
+        foreach($timbangAll as $ta){
+            $totalAll += ($ta['weight_in'] - $ta['weight_out']); 
+        }
+        
+        $data['timbang1'] = $totalTimbang1 ;
+        $data['timbang2'] = $totalTimbang2 ;
+        $data['timbangAll'] = $totalAll ;
+
+        echo view("dashboard", $data);
     }
 
     public function wc_program()
