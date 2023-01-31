@@ -180,16 +180,17 @@ class Home extends BaseController
     {
         $model = new Home_model();
 
-        $value = $this->request->getPost('data');
-        $arr0 = explode("\r\n", $value);
-        $count0 = count($arr0);
-        $getMin10 = $count0 - 2 ;
-        $pars = $arr0[$getMin10];
+        // $value = $this->request->getPost('data');
+        // $arr0 = explode("\r\n", $value);
+        // $count0 = count($arr0);
+        // $getMin10 = $count0 - 2 ;
+        // $pars = $arr0[$getMin10];
         
-        $arr1 = explode(",", $pars);
-        $count1 = count($arr1);
-        $getMin11 = $count1 - 1;
-        $data['call'] = str_replace("+", "", $arr1[$getMin11]);
+        // $arr1 = explode(",", $pars);
+        // $count1 = count($arr1);
+        // $getMin11 = $count1 - 1;
+        // $data['call'] = str_replace("+", "", $arr1[$getMin11]);
+        $data['call'] = 1000;
        
         $value = $this->request->getPost('value');
         $data['rd'] = json_decode($value);
@@ -489,7 +490,7 @@ class Home extends BaseController
         $model = new Home_model(); 
         
         echo view('cu-interface');
-        
+
     }
 
 
