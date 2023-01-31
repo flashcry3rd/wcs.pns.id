@@ -150,6 +150,19 @@ class Home extends BaseController
         echo view("wc-program");
     }
 
+    public function wc_program_cu()
+    {
+        if(session()->get('menu')!="/wc_program_cu"){
+            echo "<script >location.reload()</script>";
+        }
+        $arr = array(
+            "menu" => "/wc_program_cu"
+        );
+        session()->set($arr);
+
+        echo view("wc-program-cu");
+    }
+
     public function data_timbang()
     {
         $model = new Home_model();
