@@ -45,7 +45,7 @@
                                          $file = str_replace("/", "", $noTrans);
                                          ?>
                                         <tr >
-                                            <td><a href="<?= base_url()?>/slip-timbang?no=<?= $noTrans ?>" target="_blank" title="Print Tiket Timbang"><i class="fa fa-drivers-license" ></i></a></td>
+                                            <td><a href="<?= base_url()?>/slip-timbang?no=<?= $noTrans ?>" target="_blank" title="Print Tiket Timbang"><i class="ni ni-single-copy-04" ></i></a></td>
                                             <td><?=$i ?></td>
                                             <td><?=$ti['no_transaksi'] ?></td>
                                             <td><?=$ti['kode_petak'] ?></td>

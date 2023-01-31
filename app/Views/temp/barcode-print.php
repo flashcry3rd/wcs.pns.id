@@ -3,7 +3,7 @@
 <style >
     @media print{
         @page {
-            size: auto;   /* auto is the initial value */
+            size: 100%;   /* auto is the initial value */
             size: Portrait;
             margin: 0;  /* this affects the margin in the printer settings */
     
