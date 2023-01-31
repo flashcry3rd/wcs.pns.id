@@ -432,7 +432,7 @@ header("Access-Control-Allow-Origin: *");
             <li class="nav-item d-flex align-items-center">
                 <!-- Status online -->
                 <a href="javascript:;" class="nav-link text-body font-weight-bold  mb-0 me-2">
-                    <i class="fa fa-user me-sm-1"></i>
+                    <i class="ni ni-circle-08 me-sm-1"></i>
                     <span class="d-sm-inline d-none"><?= session()->get('nama') ?></span>
                 </a>
               

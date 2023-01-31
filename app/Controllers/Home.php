@@ -484,6 +484,14 @@ class Home extends BaseController
         
     }
 
+    public function cu_interface()
+    {
+        $model = new Home_model(); 
+        
+        echo view('cu-interface');
+        
+    }
+
 
 
 }
