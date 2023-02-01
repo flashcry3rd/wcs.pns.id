@@ -526,9 +526,58 @@ class Home extends BaseController
             'form_params' => $get
             ,
         ]);
-        $model->dateUpdate("tbl_weight_scale", $data, $where);
-        echo "<pre>";
-        print_r($response);
+        $model->dataUpdate("tbl_weight_scale", $data, $where);
+        // echo "<pre>";
+        $array = json_decode($response->getBody());
+        // print_r($array);
+        foreach($array->data as $ar){
+            $dataAr = array(
+                "no_transaksi" => $ar->no_transaksi, 
+                "tipe" => $ar->tipe,
+                "no_tiket_mobil" => $ar->no_tiket_mobil,
+                "tiket_barge" => $ar->tiket_barge,
+                "no_wo" => $ar->no_wo,
+                "kode_petak" => $ar->kode_petak,
+                "ancak" => $ar->ancak,
+                "jenis_tebu" => $ar->jenis_tebu,
+                "tgl_harvesting" => $ar->tgl_harvesting,
+                "tgl_muat" => $ar->tgl_muat,
+                "kode_kontraktor" => $ar->kode_kontraktor,
+                "loading_vehicle_number" => $ar->loading_vehicle_number,
+                "loading_vehicle_operator" => $ar->loading_vehicle_operator,
+                "kode_barge" => $ar->kode_barge,
+                "kode_tugboat" => $ar->kode_tugboat,
+                "tugboat_captain" => $ar->tugboat_captain,
+                "tujuan_tugboat" => $ar->tujuan_tugboat,
+                "kode_truck" => $ar->kode_truck,
+                "supir" => $ar->supir,
+                "kepala_regu" => $ar->kepala_regu,
+                "weight_in" => $ar->weight_in, 
+                "weight_in_time" => $ar->weight_in_time,
+                "weight_out" => $ar->weight_out,
+                "weight_out_time" => $ar->weight_out_time,
+                "retase" => $ar->retase,
+                "kontraktor_delivery" => $ar->kontraktor_delivery,
+                "no_polisi" => $ar->no_polisi,
+                "tujuan" => $ar->tujuan,
+                "no_alat2" => $ar->no_alat2,
+                "op_alat2" => $ar->op_alat2,
+                "del" => $ar->del,
+                "createby" => $ar->createby,
+                "operator_timbang" => $ar->operator_timbang,
+                "sync" => $dateSync
+
+            );
+            $where1 = array("no_transaksi" => $ar->no_transaksi);
+            $cari = $model->getSelect("tbl_weight_scale", $where1);
+            if(count($cari) < 1){
+                $model->dataInsert("tbl_weight_scale", $dataAr, $where1);
+            }
+           
+            
+        }
+        
+
         
     }
 

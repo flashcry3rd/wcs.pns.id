@@ -34,9 +34,14 @@ class Home_model extends Model
     public function dataUpdate($table, $data, $where)
     {
         $tb = $this->db->table($table);
-        $tb->where($where);
-        $tb->update($data);
-
+        $get = $tb->where($where);
+        $set = $get->set($data);
+        $update = $set->update();
+        if($update){
+            return true;
+        }else{
+            return false;
+        }
         // return $result; 
     }
 
