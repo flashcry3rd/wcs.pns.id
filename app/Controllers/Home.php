@@ -236,19 +236,20 @@ class Home extends BaseController
         $hour = substr($tglStr, 6, 2);
         $minute = substr($tglStr, 8, 2);
         $second = substr($tglStr, 10, 2);
-        $arrT = explode("/",$arr[16]);
-        $tglTebang = $arrT[0]."/".$arrT[1]."/".$arrT[2];
+        // $arrT = explode("/",$arr[16]);
+        // $tglTebang = $arrT[0]."/".$arrT[1]."/".$arrT[2];
         // $data['tgl_muat'] = $year."-".$month."-".$day ;
         $data['tgl_muat'] = $day."/".$month."/".$year ;
         $data['jam_muat'] = $hour.":".$minute.":".$second; 
-        $data['tgl_tebang'] = $tglTebang;
+        // $data['tgl_tebang'] = $tglTebang;
+        $data['tgl_tebang'] = "00/00/0000";
         
         $count = count($arr); 
         $b1 = str_replace("Kg", "", $data['call']);
         $b1 = str_replace(".", "", $b1);
         $b1 = str_replace(",", ".", $b1);
         $b1 = number_format($b1, 2, ",", ".")." Kg";
-        if($count > 23){
+        if($count > 18){
             $whereArrCek = array('no_transaksi' => $no_transaksi);
             $arrCek2 = $model->getSelect("tbl_weight_scale", $whereArrCek);
             $numCek2 = count($arrCek2);
@@ -258,7 +259,7 @@ class Home extends BaseController
             if($numCek2 > 0){
                 $data['alert'] = "Data Transaksi sudah pernah di SCAN";
             }else{
-                if($data['tipe']=="BR"){
+                if($data['tipe']=="BP"){
                     $data['alert'] ="Tipe tiket tidak sesuai , mohon di cek kembali tiket yang anda gunakan !" ;
                 }else{
                     $data['alert'] = "";
@@ -275,7 +276,7 @@ class Home extends BaseController
             if($numCek > 0){
                 $data['alert'] = "Data Transaksi sudah pernah di SCAN";
             }else{
-                if($data['tipe']=="BR"){
+                if($data['tipe']=="BP"){
                     $data['alert'] ="Tipe tiket tidak sesuai , mohon di cek kembali tiket yang anda gunakan !" ;
                 }else{
                     $data['alert'] = "";

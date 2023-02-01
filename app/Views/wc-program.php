@@ -71,9 +71,9 @@
     <div class="col-12">
       <form id="form-wcs" method="post">
         <div class="row">
-          <div class="card h-100 badan-read" id="badan-read" style="display: none; " >
+          <div class="card h-100 badan-read" id="badan-read" style="display: block; " >
             <div class="card-body" >
-            <div id="badan" style="height: 500px; overflow-y: auto; overflow-x: hidden; display: none" >
+            <div id="badan" style="height: 500px; overflow-y: auto; overflow-x: hidden; display: block" >
               <div class="row" >
               
                 <div class="form-group">
@@ -82,7 +82,7 @@
                 </div>
 
                 <div class="col-lg-12 col-md-12 ">
-                  <h4>Detail WO : </h4>
+                  <h4>Detail Muat : </h4>
                 </div>
 
                 <input id = "tipe_tiket" name="tipe_tiket" type="text" hidden >
@@ -100,8 +100,8 @@
                   </div>
 
                   <div class="form-group">
-                    <h5 >Kepala Regu </h5>
-                    <input id="kepala_regu" name="kepala_regu" class="form-control barcode" readonly >
+                    <h5 >No Alat Muat 1</h5>
+                    <input id="no_alat1" name="no_alat1" class="form-control barcode" readonly >
                   </div>
 
                   <div class="form-group">
@@ -125,11 +125,6 @@
                   </div>
 
                   <div class="form-group">
-                    <h5 >Retase </h5>
-                    <input id="retase" name="retase" class="form-control barcode" readonly >
-                  </div>
-
-                  <div class="form-group">
                     <h5 >Jam Muat </h5>
                     <input id="jam_muat" name="jam_muat" class="form-control barcode" readonly >
                   </div>
@@ -146,11 +141,11 @@
                     <h5 >Tanggal Tebang</h5>
                     <input id="tgl_tebang" name="tgl_tebang" class="form-control barcode" readonly >
                   </div>
-
+<!-- 
                   <div class="form-group">
                     <h5 >No Tiket</h5>
                     <input id="no_tiket" name="no_tiket" class="form-control barcode" readonly >
-                  </div>
+                  </div> -->
                   
                   <div class="form-group">
                     <h5 >Kontraktor Delivery </h5>
@@ -216,19 +211,12 @@
                     <input id="no_tug_boat" name="no_tug_boat" class="form-control barcode" readonly >
                   </div>
 
-                  <div class="form-group">
-                    <h5 >No Alat Muat 2</h5>
-                    <input id="no_alat2" name="no_alat2" class="form-control barcode" readonly >
-                  </div>
-
+                  
                 </div>
 
                 <div class="col-lg-4 col-md-4 mt-4">
 
-                  <div class="form-group">
-                    <h5 >No Alat Muat 1</h5>
-                    <input id="no_alat1" name="no_alat1" class="form-control barcode" readonly >
-                  </div>
+                  
 
                   <div class="form-group">
                     <h5 >Nahkoda</h5>
@@ -245,6 +233,12 @@
                 <div class="col-lg-4 col-md-4 mt-4">
 
                   <div class="form-group">
+                    <h5 >No Alat Muat 2</h5>
+                    <input id="no_alat2" name="no_alat2" class="form-control barcode" readonly >
+                  </div>
+
+<!-- 
+                  <div class="form-group">
                     <h5 >Op. Alat Muat 1</h5>
                     <input id="op_alat1" name="op_alat1" class="form-control barcode" readonly >
                   </div>
@@ -252,7 +246,7 @@
                   <div class="form-group">
                     <h5 >Op. Alat Muat 2</h5>
                     <input id="op_alat2" name="op_alat2" class="form-control barcode" readonly >
-                  </div>
+                  </div> -->
 
                 </div>
 
@@ -392,21 +386,19 @@
           $("#driver").val(data['rd'][8]);
           // $("#no_polisi").val(data['rd'][10]);
           $("#ancak").val(data['rd'][9]);
-          $("#retase").val(data['rd'][10]);
-          $("#rute").val(data['rd'][11]);
-          $("#tujuan").val(data['rd'][12]);
-          $("#kepala_regu").val(data['rd'][13]);
-          $("#no_tug_boat").val(data['rd'][14]);
-          $("#nahkoda").val(data['rd'][15]);
-          $("#jenis_tebu").val(data['rd'][17]);
-          $("#no_alat1").val(data['rd'][18]);
-          $("#op_alat1").val(data['rd'][19]);
-          $("#no_alat2").val(data['rd'][20]);
-          $("#op_alat2").val(data['rd'][21]);
+          $("#rute").val(data['rd'][10]);
+          $("#tujuan").val(data['rd'][11]);
+          $("#no_tug_boat").val(data['rd'][12]);
+          $("#nahkoda").val(data['rd'][13]);
+          $("#jenis_tebu").val(data['rd'][14]);
+          $("#no_alat1").val(data['rd'][15]);
+          // $("#op_alat1").val(data['rd'][19]);
+          $("#no_alat2").val(data['rd'][16]);
+          // $("#op_alat2").val(data['rd'][21]);
           $("#tgl_muat").val(data['tgl_muat']);
           $("#jam_muat").val(data['jam_muat']);
           $("#tgl_tebang").val(data['tgl_tebang']);
-          $("#createby").val(data['rd'][22]);
+          $("#createby").val(data['rd'][17]);
           $("#warning").html(data['alert']);
           $("#berat-in-time").val(data['berat_in_time']);
           if(data['timbangOut']== 0){
@@ -415,7 +407,7 @@
            if(data['alert']!=''){
             $("#cetak-in").fadeOut(500);
             $("#cetak-out").fadeOut(500);
-            if($data['tipe']=="BR"){
+            if($data['tipe']=="BP"){
               $("#warning").html(data['alert']); 
             }
            }
