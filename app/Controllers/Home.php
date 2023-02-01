@@ -180,17 +180,21 @@ class Home extends BaseController
     {
         $model = new Home_model();
 
-        // $value = $this->request->getPost('data');
-        // $arr0 = explode("\r\n", $value);
-        // $count0 = count($arr0);
-        // $getMin10 = $count0 - 2 ;
-        // $pars = $arr0[$getMin10];
+        $value = $this->request->getPost('data');
+        $arr0 = explode("\r\n", $value);
+        $count0 = count($arr0);
+        $getMin10 = $count0 - 2 ;
+        $pars = $arr0[$getMin10];
         
-        // $arr1 = explode(",", $pars);
-        // $count1 = count($arr1);
-        // $getMin11 = $count1 - 1;
-        // $data['call'] = str_replace("+", "", $arr1[$getMin11]);
-        $data['call'] = 1000;
+        $arr1 = explode(",", $pars);
+        $count1 = count($arr1);
+        $getMin11 = $count1 - 1;
+        $data['call'] = str_replace("KG", "", $arr1[$getMin11]);
+        $arr2 = explode(" ", $data['call']);
+        $data['call'] = $arr2[1];
+        // $data['call'] = 1000;
+        // echo json_encode($data['call']);
+        // exit();
        
         $value = $this->request->getPost('value');
         $data['rd'] = json_decode($value);

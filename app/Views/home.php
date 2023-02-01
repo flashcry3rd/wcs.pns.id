@@ -44,6 +44,7 @@ header("Access-Control-Allow-Origin: *");
   <!-- CSS Files -->
   <link id="pagestyle" href="./assets/css/soft-ui-dashboard.css?v=1.0.6" rel="stylesheet" />
 </head>
+
 <style>
 
 #loading-menu{
@@ -470,11 +471,14 @@ header("Access-Control-Allow-Origin: *");
       
       
       </div>
-      
+      <div id="root"></div>
+
+      <file-formats-modal id="files-requeriments"></file-formats-modal>
     </div>
   </main>
   
   <!--   Core JS Files   -->
+  <script src="./scripts/JSPrintManager.js"></script>
   <script src="./assets/js/core/popper.min.js"></script>
   <script src="./assets/js/core/bootstrap.min.js"></script>
   <script src="./assets/js/plugins/perfect-scrollbar.min.js"></script>
@@ -491,7 +495,7 @@ header("Access-Control-Allow-Origin: *");
             
     </script>
     <!-- Github buttons -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- <script async defer src="https://buttons.github.io/buttons.js"></script> -->
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="./assets/js/soft-ui-dashboard.min.js?v=1.0.6"></script>
     <script src="./js/jquery.min.js"></script>
@@ -554,6 +558,7 @@ header("Access-Control-Allow-Origin: *");
         
         
     </script>
+    
 </body>
 
 </html>

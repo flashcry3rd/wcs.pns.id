@@ -45,7 +45,7 @@
   <div class="row mt-4">
     <div class="col-12">
       <div class="row">
-        <div class="card h-100 badan-read" style="display: none" >
+        <div class="card h-100 badan-read" style="display: none;" >
           <div class="card-body">
             <div class="row" style="text-align: center;" >
               <div class="center">
@@ -482,4 +482,5 @@
     
 
   </script>
+  
 

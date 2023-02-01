@@ -31,7 +31,8 @@
               <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Timbang Hari ini</p>
               <h5 class="font-weight-bolder mb-0">
                 <?= number_format($timbang2, 2,",", ".")  ?> Kg
-                <span class="text-<? if(($timbang2 - $timbang1) < 0){echo "danger";}else{ echo "success";} ?> text-sm font-weight-bolder"><? if($timbang1==0 && $timbang2==0){echo '+0%';}else{ echo round(($timbang2-$timbang1)/$timbang1,2)." %" ;};?> </span>
+                <? if($timbang1 == 0) ?>
+                <span class="text-<? if(($timbang2 - $timbang1) < 0){echo "danger";}else{ echo "success";} ?> text-sm font-weight-bolder"><? if($timbang1==0 && $timbang2==0){echo '+0%';}else{ if($timbang1!=0){ echo round(($timbang2-$timbang1)/$timbang1,2)." %" ;}else{ echo "+100%"; }};?> </span>
               </h5>
             </div>
           </div>
