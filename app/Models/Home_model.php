@@ -31,6 +31,15 @@ class Home_model extends Model
         return $result;
     }
 
+    public function dataUpdate($table, $data, $where)
+    {
+        $tb = $this->db->table($table);
+        $tb->where($where);
+        $tb->update($data);
+
+        // return $result; 
+    }
+
     public function getMenu($id)
     {
         $query = "SELECT b.* FROM master_menu_user as a 
@@ -40,6 +49,8 @@ class Home_model extends Model
 
         return $result;
     }
+
+   
 
     public function dataInsert($table, $data)
     {

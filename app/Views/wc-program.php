@@ -471,8 +471,6 @@
         printwin.print();
     }
 
-    
-
   </script>
   
 

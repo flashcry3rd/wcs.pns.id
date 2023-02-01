@@ -511,6 +511,27 @@ class Home extends BaseController
 
     }
 
+    public function autoSync()
+    {
+        $client = \Config\Services::curlrequest();
+
+        $model = new Home_model();
+        $dateSync = date('Y-m-d H:i:s');
+        $where = "sync IS NULL";
+        $data = array("sync" => $dateSync);
+        $get = $model->getSelect("tbl_weight_scale", $where);
+        // print_r($get);
+        // $response = $client->request('post', 'http://api.pns.co.id/index.php/wcs/autoSync1', ['body' => $get]);
+        $response = $client->request('POST', 'http://api.pns.co.id/index.php/wcs/autoSync1', [
+            'form_params' => $get
+            ,
+        ]);
+        $model->dateUpdate("tbl_weight_scale", $data, $where);
+        echo "<pre>";
+        print_r($response);
+        
+    }
+
 
 
 }

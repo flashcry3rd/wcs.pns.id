@@ -550,6 +550,9 @@ header("Access-Control-Allow-Origin: *");
             $(".status-online-btn").removeClass("btn-outline-danger");
             $(".status-online-btn").addClass("btn-outline-success");
             $(".status-online-btn").html("Online");
+            $.ajax({
+              url: "<?=base_url()?>/home/autoSync"
+            })
           }
         }, 3000);
         
