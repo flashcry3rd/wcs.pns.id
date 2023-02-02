@@ -58,10 +58,10 @@ class Database extends Config
      */
     public $db2 = [
         'DSN'      => '',
-        'hostname' => '10.156.9.40',
-        'username' => 'pnshris',
-        'password' => 'pnshris2022',
-        'database' => 'pns_hris',
+        'hostname' => '10.157.64.5',
+        'username' => 'itjkt',
+        'password' => 'itjkt',
+        'database' => 'wcs_pns',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
         'pConnect' => false,
@@ -95,6 +95,8 @@ class Database extends Config
         'failover' => [],
         'port'     => 5432,
     ];
+
+    
 
     public function __construct()
     {
