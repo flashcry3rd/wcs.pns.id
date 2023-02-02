@@ -163,6 +163,71 @@ class Home extends BaseController
         echo view("wc-program-cu");
     }
 
+    public function ListDataCU()
+    {
+        $DataPost = $this->request->getVar();
+        $modul  = $this->request->getPost("modul");
+        $class  = $this->request->getPost("class");
+        $db_cu = \Config\Database::connect('db_cu');
+        $tb = $db_cu->table("tbl_wmntdata");
+        $tb->limit('10');
+        $tb->orderBy('txn_no', 'DESC');
+        $get = $tb->get();
+        $resultCU = $get->getResult('array');
+        $list = $resultCU;
+        $list = json_decode(json_encode($list));
+        $data   = array();
+        $no     = $this->request->getPost("start");
+        $i      = 1;
+        function item($val, $data = "", $modul = "", $class = "")
+        {
+            $data = (object) $data;
+            $id   = $data->txn_no;
+            $no_ticket = $data->entry1;
+            $tgl = $data->date1.' '.$data->time1;
+            $gross = $data->weight1;
+            $tare = $data->weight2;
+            $nett = $gross-$tare;
+            // $dd   = 'data-id="' . $id . '" data-no_ticket="' . $no_ticket . '" data-class="' . $class . '';
+            // $dd   .= 'data-gross="' . $gross . '"';
+            // $dd   .= 'data-tare="' . $tare . '"';
+            // $dd   .= 'data-nett="' . $nett . '"';
+
+            // if ($class != "none") :
+            //     $val = '<span href="javascript:void(0)" ' . $dd . '>' . $val . '</span>';
+            // endif;
+            $val = '<div class="checkbox checkbox-primary" style="margin:0px;text-align:left;">
+                <input name="Checkbox[]" class="item-checked" type="checkbox" onclick="calculation_total_weight()" data-rowid="item-detail-'.$id.'" data-trx_no="'.$id.'" data-no_ticket="'.$no_ticket.'" data-gross="'.$gross.'" data-tare="'.$tare.'" data-nett="'.$nett.'" id="'.$id.'" value="'.$id.'" tab-index="-1">
+                <input type="hidden" name="no_ticket[]" value="'.$no_ticket.'">
+                <input type="hidden" name="gross[]" value="'.$gross.'">
+                <input type="hidden" name="tare[]" value="'.$tare.'">
+                <input type="hidden" name="nett[]" value="'.$nett.'">
+            </div>';
+            return $val;
+        }
+        foreach ($list as $a) {
+                $row    = array();
+                // $row[]  = $i++;
+                $row[]  = item($a->txn_no, $a, $modul, $class);
+                $row[]  = $a->entry1;
+                $row[]  = $a->date1.' '.$a->time1;
+                $row[]  = $a->weight1;
+                // $row[]  = date("d-m-Y", strtotime($a->Date));
+                $row[]  = $a->weight2;
+                $row[]  = $a->weight1-$a->weight2;
+                $data[] = $row;
+        }
+        $output = array(
+            "class"           => $class,
+            "draw"            => '1',
+            "recordsTotal"    => 10, // $this->api->count_all($page),
+            "recordsFiltered" => 10, //$this->api->count_filtered($page),
+            "data"            => $data,
+        );
+        header('Content-Type: application/json');
+        echo json_encode($output);
+    }
+
     public function data_timbang()
     {
         $model = new Home_model();
@@ -393,6 +458,76 @@ class Home extends BaseController
         }
    
         echo json_encode($return);
+    }
+
+    public function saveTruckCU()
+    {
+        // $DataPost = $this->request->getVar();
+        // print_r($DataPost);
+        // exit;
+        $dateNow = date("Y-m-d H:i:s");
+        $tglIn=$this->request->getPost('berat_in_time');
+        $no_transaksi = $this->request->getPost('no_transaksi'); 
+        $noTrans = str_replace("/","", $this->request->getPost('no_transaksi'));
+        $arrT = explode("/", $this->request->getPost('tgl_tebang'));
+        $tglTebang = $arrT[2]."-".$arrT[1]."-".$arrT[0];
+        $arrM = explode("/", $this->request->getPost('tgl_muat'));
+        $tglMuat = $arrM[2]."-".$arrM[1]."-".$arrM[0]." ".$this->request->getPost('jam_muat');
+
+        $beratIn = $this->request->getPost('berat_in') ;
+        $b1 = str_replace("Kg", "", $this->request->getPost('berat_in'));
+        $b1 = str_replace(".", "", $b1);
+        $b1 = str_replace(",", ".", $b1);
+
+        $b2 = str_replace("Kg", "", $this->request->getPost('berat_out'));
+        $b2 = str_replace(".", "", $b2);
+        $b2 = str_replace(",", ".", $b2);
+
+        $data = [
+            
+            "no_transaksi" => $this->request->getPost('no_transaksi'),
+            "tipe" => $this->request->getPost('tipe_tiket'),
+            "no_tiket_mobil" => $this->request->getPost('no_tiket'),
+            "tiket_barge" => $this->request->getPost('tiket_barge'),
+            // "no_wo" => $this->request->getPost('no_wo'),
+            "kode_petak" => $this->request->getPost('no_petak'),
+            "ancak" => $this->request->getPost('ancak'),
+            "jenis_tebu" => $this->request->getPost('jenis_tebu'),
+            "kode_kontraktor" => $this->request->getPost('kode_kontraktor'),
+            "loading_vehicle_number" => $this->request->getPost('no_alat1'),
+            "loading_vehicle_operator" => $this->request->getPost('op_alat1'),
+            "kode_barge" => $this->request->getPost('no_barge'),
+            "kode_tugboat" => $this->request->getPost('no_tug_boat'),
+            "tugboat_captain" => $this->request->getPost('nahkoda'),
+            "tujuan_tugboat" => $this->request->getPost('rute'),
+            "kode_truck" => $this->request->getPost('no_truck'),
+            "supir" => $this->request->getPost('driver'),
+            "weight_in" => $b1,
+            "weight_in_time" => $tglIn,
+            "weight_out" => $b2,
+            "weight_out_time" => $dateNow,
+            "retase" => $this->request->getPost('retase'),
+            "kontraktor_delivery" => $this->request->getPost('kode_kon_delivery'),
+            "no_polisi" => $this->request->getPost('no_polisi'),
+            "tujuan" => $this->request->getPost('tujuan'),
+            "no_alat2" => $this->request->getPost('no_alat2'),
+            "op_alat2" => $this->request->getPost('op_alat2'),
+            "createby" => $this->request->getPost('createby'),
+            "tgl_harvesting" => $tglTebang,
+            "tgl_muat" => $tglMuat
+            
+        ];
+        $model = new Home_model();
+        $insert = $model->dataInsert('tbl_weight_scale', $data);
+        if($insert){
+
+            $return = array("status" => "success", "msg" => "Data timbangan berhasil di simpan !" , "no" => $no_transaksi);
+        }else{
+            $return = array("status" => "error", "msg" => "Data timbangan gagal disimpan , mohon segera menghubungi administrator !", "no" => $no_transaksi);
+        }
+
+        return json_encode($return);
+
     }
 
     public function saveTruckOut()

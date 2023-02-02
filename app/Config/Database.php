@@ -77,12 +77,12 @@ class Database extends Config
     ];
 
     public $db_cu = [
-        'DSN'      => '',
+        'DSN'      => 'Postgre://postgres:password@localhost:5432/wms100_db',
         'hostname' => 'localhost',
-        'username' => 'root',
-        'password' => '',
+        'username' => 'postgres',
+        'password' => 'password',
         'database' => 'wms100_db',
-        'DBDriver' => 'postgre',
+        'DBDriver' => 'Postgre',
         'DBPrefix' => '',
         'pConnect' => false,
         'DBDebug'  => (ENVIRONMENT !== 'production'),
