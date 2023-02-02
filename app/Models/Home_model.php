@@ -67,5 +67,36 @@ class Home_model extends Model
         }
     }
 
-   
+    public function check_conn()
+    {
+        $db = \Config\Database::connect('db2');
+        $tb = $db->table("master_user");
+        $get = $tb->get();
+        $result = $get->getResult('array');
+
+        return $result; 
+    }
+
+   public function sync2($data)
+   {
+        $db = \Config\Database::connect('db2');
+        
+        foreach($data as $d){
+            $qCek = $db->query("SELECT * FROM tbl_weight_scale WHERE no_transaksi = '".$d['no_transaksi']."'");
+            $row = $qCek->getResult('array');  
+            // print_r($d['no_transaksi']);
+            if(count($row) < 1){
+                $tb = $db->table("tbl_weight_scale");
+                $tb->insert($d);
+            }
+        }
+        $qCari = $db->query("SELECT * FROM tbl_weight_scale WHERE sync IS NULL");
+        $cari = $qCari->getResult('array');
+        $count = count($cari);
+        $arr = array("data" => $cari, "count" => $count);
+        $dateSync = date("Y-m-d H:i:s");
+        // $db->query("UPDATE tbl_weight_scale SET sync = '$dateSync' WHERE sync IS NULL");
+        return $arr ;
+
+   }
 }

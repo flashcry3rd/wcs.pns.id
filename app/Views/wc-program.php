@@ -71,9 +71,9 @@
     <div class="col-12">
       <form id="form-wcs" method="post">
         <div class="row">
-          <div class="card h-100 badan-read" id="badan-read" style="display: block; " >
+          <div class="card h-100 badan-read" id="badan-read" style="display: none; " >
             <div class="card-body" >
-            <div id="badan" style="height: 500px; overflow-y: auto; overflow-x: hidden; display: block" >
+            <div id="badan" style="height: 500px; overflow-y: auto; overflow-x: hidden; display: none" >
               <div class="row" >
               
                 <div class="form-group">

@@ -530,7 +530,8 @@ header("Access-Control-Allow-Origin: *");
               }
           }
           try {
-              const online = await fetch("http://api.pns.co.id/index.php/android/check2");
+              // const online = await fetch("http://api.pns.co.id/index.php/android/check2");
+              const online = await fetch("<?=base_url() ?>/home/check2");
               return online.status >= 200 && online.status < 300; // either true or false
           } catch (err) {
               return false; // definitely offline
@@ -551,7 +552,7 @@ header("Access-Control-Allow-Origin: *");
             $(".status-online-btn").addClass("btn-outline-success");
             $(".status-online-btn").html("Online");
             $.ajax({
-              url: "<?=base_url()?>/home/autoSync"
+              url: "<?=base_url()?>/home/sync2"
             })
           }
         }, 3000);

@@ -254,8 +254,8 @@ class Home extends BaseController
             $arrCek2 = $model->getSelect("tbl_weight_scale", $whereArrCek);
             $numCek2 = count($arrCek2);
             $data['timbangOut'] = $b1;
-            $data['timbangIn'] = $arr[23];
-            $data['berat_in_time'] = $arr[24];
+            $data['timbangIn'] = $arr[18];
+            $data['berat_in_time'] = $arr[19];
             if($numCek2 > 0){
                 $data['alert'] = "Data Transaksi sudah pernah di SCAN";
             }else{
@@ -309,15 +309,15 @@ class Home extends BaseController
             
             "no_transaksi" => $this->request->getPost('no_transaksi'),
             "tipe" => $this->request->getPost('tipe_tiket'),
-            "no_tiket_mobil" => $this->request->getPost('no_tiket'),
+            // "no_tiket_mobil" => $this->request->getPost('no_tiket'),
             "tiket_barge" => $this->request->getPost('tiket_barge'),
             // "no_wo" => $this->request->getPost('no_wo'),
             "kode_petak" => $this->request->getPost('no_petak'),
-            "ancak" => $this->request->getPost('ancak'),
+            // "ancak" => $this->request->getPost('ancak'),
             "jenis_tebu" => $this->request->getPost('jenis_tebu'),
             "kode_kontraktor" => $this->request->getPost('kode_kontraktor'),
             "loading_vehicle_number" => $this->request->getPost('no_alat1'),
-            "loading_vehicle_operator" => $this->request->getPost('op_alat1'),
+            // "loading_vehicle_operator" => $this->request->getPost('op_alat1'),
             "kode_barge" => $this->request->getPost('no_barge'),
             "kode_tugboat" => $this->request->getPost('no_tug_boat'),
             "tugboat_captain" => $this->request->getPost('nahkoda'),
@@ -326,12 +326,12 @@ class Home extends BaseController
             "supir" => $this->request->getPost('driver'),
             "weight_in" => $b1,
             "weight_in_time" => $dateNow,
-            "retase" => $this->request->getPost('retase'),
+            // "retase" => $this->request->getPost('retase'),
             "kontraktor_delivery" => $this->request->getPost('kode_kon_delivery'),
             "no_polisi" => $this->request->getPost('no_polisi'),
             "tujuan" => $this->request->getPost('tujuan'),
             "no_alat2" => $this->request->getPost('no_alat2'),
-            "op_alat2" => $this->request->getPost('op_alat2'),
+            // "op_alat2" => $this->request->getPost('op_alat2'),
             "createby" => $this->request->getPost('createby'),
             "tgl_harvesting" => $tglTebang,
             "tgl_muat" => $tglMuat
@@ -357,29 +357,20 @@ class Home extends BaseController
             
             '8' => $this->request->getPost('driver'),
             '9' => $this->request->getPost('ancak'),
-            '10' => $this->request->getPost('retase'),
-            '11' => $this->request->getPost('rute'),
-            '12' => $this->request->getPost('tujuan'),
+            '10' => $this->request->getPost('rute'),
+            '11' => $this->request->getPost('tujuan'),
             
-            '13' => $this->request->getPost('kepala_regu'),
+            '12' => $this->request->getPost('no_tug_boat'),
             
-            '14' => $this->request->getPost('no_tug_boat'),
+            '13' => $this->request->getPost('nahkoda'),
             
-            '15' => $this->request->getPost('nahkoda'),
+            '14' => $this->request->getPost('jenis_tebu'),
             
-            '16' => $this->request->getPost('tgl_tebang'),
+            '15' => $this->request->getPost('no_alat1'),
             
-            '17' => $this->request->getPost('jenis_tebu'),
+            '16' => $this->request->getPost('no_alat2'),
             
-            '18' => $this->request->getPost('no_alat1'),
-            
-            '19' => $this->request->getPost('op_alat1'),
-            
-            '20' => $this->request->getPost('no_alat2'),
-            
-            '21' => $this->request->getPost('op_alat2'),
-            
-            '22' => $this->request->getPost('createby'),
+            '17' => $this->request->getPost('createby'),
             //25 timbang in 
             'berat' => $beratIn, 
             'berat_time' => $dateNow
@@ -424,7 +415,7 @@ class Home extends BaseController
             
             "no_transaksi" => $this->request->getPost('no_transaksi'),
             "tipe" => $this->request->getPost('tipe_tiket'),
-            "no_tiket_mobil" => $this->request->getPost('no_tiket'),
+            // "no_tiket_mobil" => $this->request->getPost('no_tiket'),
             "tiket_barge" => $this->request->getPost('tiket_barge'),
             // "no_wo" => $this->request->getPost('no_wo'),
             "kode_petak" => $this->request->getPost('no_petak'),
@@ -432,7 +423,7 @@ class Home extends BaseController
             "jenis_tebu" => $this->request->getPost('jenis_tebu'),
             "kode_kontraktor" => $this->request->getPost('kode_kontraktor'),
             "loading_vehicle_number" => $this->request->getPost('no_alat1'),
-            "loading_vehicle_operator" => $this->request->getPost('op_alat1'),
+            // "loading_vehicle_operator" => $this->request->getPost('op_alat1'),
             "kode_barge" => $this->request->getPost('no_barge'),
             "kode_tugboat" => $this->request->getPost('no_tug_boat'),
             "tugboat_captain" => $this->request->getPost('nahkoda'),
@@ -443,12 +434,12 @@ class Home extends BaseController
             "weight_in_time" => $tglIn,
             "weight_out" => $b2,
             "weight_out_time" => $dateNow,
-            "retase" => $this->request->getPost('retase'),
+            // "retase" => $this->request->getPost('retase'),
             "kontraktor_delivery" => $this->request->getPost('kode_kon_delivery'),
             "no_polisi" => $this->request->getPost('no_polisi'),
             "tujuan" => $this->request->getPost('tujuan'),
             "no_alat2" => $this->request->getPost('no_alat2'),
-            "op_alat2" => $this->request->getPost('op_alat2'),
+            // "op_alat2" => $this->request->getPost('op_alat2'),
             "createby" => $this->request->getPost('createby'),
             "tgl_harvesting" => $tglTebang,
             "tgl_muat" => $tglMuat
@@ -566,19 +557,36 @@ class Home extends BaseController
                 "createby" => $ar->createby,
                 "operator_timbang" => $ar->operator_timbang,
                 "sync" => $dateSync
-
             );
             $where1 = array("no_transaksi" => $ar->no_transaksi);
             $cari = $model->getSelect("tbl_weight_scale", $where1);
             if(count($cari) < 1){
                 $model->dataInsert("tbl_weight_scale", $dataAr, $where1);
-            }
-           
-            
+            }   
         }
-        
+    }
+
+    public function check2()
+    {
+        $model = new Home_model(); 
+        $check = $model->check_conn();
+        echo json_encode($check);
+    }
+
+    public function sync2()
+    {
+        $model = new Home_model();
+
+        $dateSync = date('Y-m-d H:i:s');
+        $where = "sync IS NULL";
+        $get = $model->getSelect("tbl_weight_scale", $where);
+        // echo json_encode($get);
+        // exit();
+        $runSync = $model->sync2($get);
 
         
+        echo json_encode($runSync) ;
+
     }
 
 

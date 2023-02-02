@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 20, 2023 at 07:25 PM
+-- Generation Time: Feb 02, 2023 at 10:55 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.3.29
 
@@ -40,10 +40,11 @@ CREATE TABLE `master_menu` (
 --
 
 INSERT INTO `master_menu` (`id`, `nama_menu`, `link_menu`, `parent`, `icon`) VALUES
-(1, 'Dashboard', '/dashboard', 0, 'fa fa-television'),
-(2, 'Weight Scale Program', '/wc_program', 0, 'fa fa-cogs'),
-(3, 'Data Timbang In', '/data_timbang', 0, 'fa fa-truck'),
-(4, 'Data Timbang All', '/data_timbang_all', 0, 'fa fa-balance-scale');
+(1, 'Dashboard', '/dashboard', 0, 'ni ni-sound-wave'),
+(2, 'Weight Scale Program', '/wc_program', 0, 'ni ni-atom'),
+(3, 'Data Timbang In', '/data_timbang', 0, 'ni ni-ambulance'),
+(4, 'Data Timbang All', '/data_timbang_all', 0, 'ni ni-archive-2'),
+(5, 'CU Interface', '/cu_interface', 0, 'ni ni-controller');
 
 -- --------------------------------------------------------
 
@@ -65,7 +66,12 @@ INSERT INTO `master_menu_user` (`id`, `id_user`, `id_menu`) VALUES
 (1, 1, 1),
 (2, 1, 2),
 (3, 1, 3),
-(4, 1, 4);
+(4, 1, 4),
+(5, 2, 1),
+(6, 2, 2),
+(7, 2, 3),
+(8, 2, 4),
+(9, 1, 5);
 
 -- --------------------------------------------------------
 
@@ -88,7 +94,7 @@ CREATE TABLE `master_user` (
 
 INSERT INTO `master_user` (`id`, `username`, `password`, `nama`, `posisi`, `status`) VALUES
 (1, 'superhero', '9eac2777d64d5b0b57b0fc7a2acbe337', 'Administrator', 'ADM', 1),
-(2, '0000000KG ', NULL, NULL, NULL, 0);
+(2, 'admin_harvesting', '7f809524d261b7cf52306a2c3fb18c6c', 'Admin Harvesing', 'HAV', 1);
 
 -- --------------------------------------------------------
 
@@ -3084,15 +3090,20 @@ CREATE TABLE `tbl_weight_scale` (
   `no_alat2` varchar(50) NOT NULL,
   `op_alat2` varchar(50) NOT NULL,
   `del` int(11) NOT NULL DEFAULT 0,
-  `createby` varchar(35) NOT NULL
+  `createby` varchar(35) NOT NULL,
+  `operator_timbang` varchar(250) NOT NULL,
+  `sync` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_weight_scale`
 --
 
-INSERT INTO `tbl_weight_scale` (`no_transaksi`, `tipe`, `no_tiket_mobil`, `tiket_barge`, `no_wo`, `kode_petak`, `ancak`, `jenis_tebu`, `tgl_harvesting`, `tgl_muat`, `kode_kontraktor`, `loading_vehicle_number`, `loading_vehicle_operator`, `kode_barge`, `kode_tugboat`, `tugboat_captain`, `tujuan_tugboat`, `kode_truck`, `supir`, `kepala_regu`, `weight_in`, `weight_in_time`, `weight_out`, `weight_out_time`, `retase`, `kontraktor_delivery`, `no_polisi`, `tujuan`, `no_alat2`, `op_alat2`, `del`, `createby`) VALUES
-('HL/388BE9/190123150529', 'HL', '', '', '', 'PNS023602A', 'AN123', 'Tebu Bakar', '2023-01-19', '2023-01-19 15:05:29', 'K-0043', '', '', '', '', '', 'JETTY 2', 'NT123', 'DR123', '', 2251, '2023-01-19 15:07:44', 2251, '2023-01-20 15:18:56', 'RT123', 'A-0018', '', 'TJ123', '', '', 0, '0');
+INSERT INTO `tbl_weight_scale` (`no_transaksi`, `tipe`, `no_tiket_mobil`, `tiket_barge`, `no_wo`, `kode_petak`, `ancak`, `jenis_tebu`, `tgl_harvesting`, `tgl_muat`, `kode_kontraktor`, `loading_vehicle_number`, `loading_vehicle_operator`, `kode_barge`, `kode_tugboat`, `tugboat_captain`, `tujuan_tugboat`, `kode_truck`, `supir`, `kepala_regu`, `weight_in`, `weight_in_time`, `weight_out`, `weight_out_time`, `retase`, `kontraktor_delivery`, `no_polisi`, `tujuan`, `no_alat2`, `op_alat2`, `del`, `createby`, `operator_timbang`, `sync`) VALUES
+('HL/388BE9/190123150529', 'HL', '', '', '', 'PNS023602A', 'AN123', 'Tebu Bakar', '2023-01-19', '2023-01-19 15:05:29', 'K-0043', '', '', '', '', '', 'JETTY 2', 'NT123', 'DR123', '', 2251, '2023-01-25 15:07:44', 1115, '2023-01-27 02:18:56', 'RT123', 'A-0018', '', 'TJ123', '', '', 0, '0', '', NULL),
+('HL/388BE9/230124103743', 'HL', '', '', '', 'PNS023602B', '10', 'Tebu Bakar', '2023-01-20', '2023-01-24 10:37:43', 'K-0043', '', '', '', '', '', 'JETTY 4', 'BM04', 'HENDRIK', '', 1115, '2023-01-24 15:47:57', 89, '2023-01-27 15:48:39', '-', 'A-0043', '', '', '', '', 0, 'Administrator', '', NULL),
+('HL/388BE9/230126143951', 'HL', '', '', '', 'PNS023602', 'A9', 'Tebu Bakar', '2023-01-24', '2023-01-26 14:39:51', 'XXX', '', '', '', '', '', 'JETTY 7', 'DT777', 'DRIV', '', 1000, '2023-01-31 20:00:55', 1000, '2023-01-31 20:20:52', '-', 'A-0087', '', 'KAT', '', '', 0, 'User Mobile 2', '', NULL),
+('TP/388BE9/230202011126', 'TP', '', '', '', 'PNS023602', '1', 'Tebu Bakar', '0000-00-00', '2023-02-02 01:11:26', 'A-0087', 'NOA12', '', '', '', '', 'JETTY 4', 'TEST123', 'SUPIX', '', 0, '2023-02-02 10:45:48', 0, '2023-02-02 10:48:00', '', 'A-0018', '', 'TJUA', '', '', 0, 'User Mobile 2', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -3142,7 +3153,10 @@ CREATE TABLE `tbl_weight_scale_temp` (
 INSERT INTO `tbl_weight_scale_temp` (`no_transaksi`, `tipe`, `no_tiket_mobil`, `tiket_barge`, `no_wo`, `kode_petak`, `ancak`, `jenis_tebu`, `tgl_harvesting`, `tgl_muat`, `kode_kontraktor`, `loading_vehicle_number`, `loading_vehicle_operator`, `kode_barge`, `kode_tugboat`, `tugboat_captain`, `tujuan_tugboat`, `kode_truck`, `supir`, `kepala_regu`, `weight_in`, `weight_in_time`, `weight_out`, `weight_out_time`, `retase`, `kontraktor_delivery`, `no_polisi`, `tujuan`, `no_alat2`, `op_alat2`, `del`, `createby`) VALUES
 ('DH/52E32E/060123145631', 'DH', 'TIKET/01', '', '', 'PNS000101', 'ANCAK/01', 'Tebu Bakar', '2023-06-01', '2023-01-06 14:56:31', 'A-0114', 'ALAT/01', 'OP/01', 'BARGE/01', 'TUG/01', 'NAHKODA/01', 'JETTY 1', 'TRUCK/01', 'DRIVER/01', '', 5858.00, '2023-01-11 10:11:19', 0.00, '0000-00-00 00:00:00', 'RETASE/01', 'A-0114', 'POL/01', 'TUJUAN01', 'ALAT/02', 'OP/02', 0, 'User Mobile 2'),
 ('HL/388BE9/170123143935', 'HL', '', '', '', 'CRC70203', 'A2636363', 'Tebu Bakar', '2023-01-17', '2023-01-17 14:39:35', 'G-0070', '', '', '', '', '', 'JETTY 3', 'NT2737373', 'DR27373', '', 1116.00, '2023-01-19 10:57:53', 0.00, '0000-00-00 00:00:00', 'R37373', 'A-0043', '', 'TH282828', '', '', 0, 'User Mobile 1'),
-('HL/388BE9/190123150529', 'HL', '', '', '', 'PNS023602A', 'AN123', 'Tebu Bakar', '2023-01-19', '2023-01-19 15:05:29', 'K-0043', '', '', '', '', '', 'JETTY 2', 'NT123', 'DR123', '', 2251.00, '2023-01-19 15:07:44', 0.00, '0000-00-00 00:00:00', 'RT123', 'A-0018', '', 'TJ123', '', '', 0, 'User Mobile 2');
+('HL/388BE9/190123150529', 'HL', '', '', '', 'PNS023602A', 'AN123', 'Tebu Bakar', '2023-01-19', '2023-01-19 15:05:29', 'K-0043', '', '', '', '', '', 'JETTY 2', 'NT123', 'DR123', '', 2251.00, '2023-01-19 15:07:44', 0.00, '0000-00-00 00:00:00', 'RT123', 'A-0018', '', 'TJ123', '', '', 0, 'User Mobile 2'),
+('HL/388BE9/230124103743', 'HL', '', '', '', 'PNS023602B', '10', 'Tebu Bakar', '2023-01-20', '2023-01-24 10:37:43', 'K-0043', '', '', '', '', '', 'JETTY 4', 'BM04', 'HENDRIK', '', 1115.00, '2023-01-24 15:47:57', 0.00, '0000-00-00 00:00:00', '-', 'A-0043', '', '', '', '', 0, 'Administrator'),
+('HL/388BE9/230126143951', 'HL', '', '', '', 'PNS023602', 'A9', 'Tebu Bakar', '2023-01-24', '2023-01-26 14:39:51', 'XXX', '', '', '', '', '', 'JETTY 7', 'DT777', 'DRIV', '', 1000.00, '2023-01-31 20:00:55', 0.00, '0000-00-00 00:00:00', '-', 'A-0087', '', 'KAT', '', '', 0, 'User Mobile 2'),
+('TP/388BE9/230202011126', 'TP', '', '', '', 'PNS023602', '', 'Tebu Bakar', '0000-00-00', '2023-02-02 01:11:26', 'A-0087', 'NOA12', '', '', '', '', 'JETTY 4', 'TEST123', 'SUPIX', '', 0.00, '2023-02-02 10:45:48', 0.00, '0000-00-00 00:00:00', '', 'A-0018', '', 'TJUA', '', '', 0, 'User Mobile 2');
 
 --
 -- Indexes for dumped tables
@@ -3193,13 +3207,13 @@ ALTER TABLE `tbl_weight_scale_temp`
 -- AUTO_INCREMENT for table `master_menu`
 --
 ALTER TABLE `master_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `master_menu_user`
 --
 ALTER TABLE `master_menu_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `master_user`
