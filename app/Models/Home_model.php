@@ -102,4 +102,37 @@ class Home_model extends Model
         return $arr ;
 
    }
+
+   public function selectAllDb2($table)
+   {
+        $db = \Config\Database::connect('db2'); 
+        $table = $db->table($table);
+        $get = $table->get();
+        $result = $get->getResult('array');
+
+        return $result; 
+   }
+
+   public function getSelectDb2($table, $where)
+   {   
+        $db = \Config\Database::connect('db2');
+        $table = $db->table($table);
+        $get = $table->getWhere($where);
+        $result = $get->getResult('array');
+
+        return $result ;
+     
+   }
+
+   public function insertDB2($table, $data)
+   {
+        $db = \Config\Database::connect('db2');
+        $table = $db->table($table);
+        if($table->insert($data)){
+            return true;
+        }else{
+            return false;
+        }
+        
+   }
 }
