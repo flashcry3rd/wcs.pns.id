@@ -11,6 +11,7 @@ use function PHPSTORM_META\map;
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
 use PhpParser\Lexer\TokenEmulator\ExplicitOctalEmulator;
+use PhpParser\Node\Expr\Cast\Array_;
 
 // use App\ThirdParty\phpSerial;
 
@@ -161,6 +162,20 @@ class Home extends BaseController
         session()->set($arr);
 
         echo view("wc-program-cu");
+    }
+
+    public function master_user()
+    {
+        $model = new Home_model();
+        $data['user'] = $model->selectAllDb2("master_user");
+        $data['menu'] = $model->selectAllDb2("master_menu");
+
+        $arr = array(
+            "menu" => "/master_user"
+        );
+        session()->set($arr);
+
+        echo view("master-user", $data);
     }
 
     public function ListDataCU()
@@ -813,6 +828,54 @@ class Home extends BaseController
         echo json_encode($runSync) ;
 
     }
+
+    public function createUser()
+    {
+        $model = new Home_model();
+
+        $data1 = array(
+            'username' => $this->request->getPost('username'),
+            'password' => md5($this->request->getPost('password')),
+            'nama' => $this->request->getPost('nama'),
+            'posisi' => $this->request->getPost('posisi'),
+            'status' => 1 
+        );
+        if($model->insertDB2("master_user", $data1)){
+            $where = array('username' => $this->request->getPost('username'));
+            $id = $model->getSelectDb2("master_user", $where);
+            $menu = $this->request->getPost('menu');
+            $cc = count($menu);
+            for($i=0;$i<$cc;$i++){
+                $data2 = array('id_user' => $id[0]['id'], 'id_menu' => $menu[$i]);
+                $model->insertDB2("master_menu_user", $data2);
+                $i++;
+            }
+            $arr = array('status' => 'success', 'msg' => 'Akun berhasil dibuat !'); 
+        }else{
+            $arr = array('status' => 'error', 'msg' => 'Error !'); 
+        }
+        echo json_encode($arr);
+        
+    }
+
+    public function checkUsername()
+    {
+        $model = new Home_model();
+
+        $where = array(
+            'username' => $this->request->getPost('txt')
+        );
+        $get = $model->getSelectDb2("master_user", $where) ;
+        $cnt = count($get);
+        if($cnt > 0){
+            $arr = array('status' => 'error', 'color' => 'red', 'msg' => 'Username sudah terdaftar !');
+        }else{
+            $arr = array('status' => 'success', 'color' => 'green', 'msg' => 'Username bisa digunakan');
+        }
+
+        echo json_encode($arr); 
+    }
+    
 
 
 
