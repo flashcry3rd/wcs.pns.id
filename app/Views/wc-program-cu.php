@@ -347,7 +347,7 @@
                 <div class="row">
                   <div class="col-lg-6 col-md-6 mt-4">
                     <div class="ms-auto ">
-                      <a class="btn btn-secondary" target="_blank" type="button" id="submit-cu" type="button" title="Simpan">Simpan &emsp;<span class="fa fa-save"></span></a>
+                      <a class="btn btn-secondary" target="_blank" style="display:none;" type="button" id="submit-cu" type="button" title="Simpan">Simpan &emsp;<span class="fa fa-save"></span></a>
                     </div>
                   </div>
                   <!-- <div class="col-lg-6 col-md-6 mt-4">
@@ -406,7 +406,7 @@
       cache: false,
       dataType: "json",
       type: "post",
-      url: "<?= base_url() ?>/home/serialData",
+      url: "<?= base_url() ?>/home/serialData/cu",
       success: function(data) {
 
         document.querySelector("#berat-in").value = data['timbangIn'];
@@ -428,33 +428,37 @@
         $("#driver").val(data['rd'][8]);
         // $("#no_polisi").val(data['rd'][10]);
         $("#ancak").val(data['rd'][9]);
-        $("#retase").val(data['rd'][10]);
-        $("#rute").val(data['rd'][11]);
-        $("#tujuan").val(data['rd'][12]);
-        $("#kepala_regu").val(data['rd'][13]);
-        $("#no_tug_boat").val(data['rd'][14]);
-        $("#nahkoda").val(data['rd'][15]);
-        $("#jenis_tebu").val(data['rd'][17]);
-        $("#no_alat1").val(data['rd'][18]);
-        $("#op_alat1").val(data['rd'][19]);
-        $("#no_alat2").val(data['rd'][20]);
-        $("#op_alat2").val(data['rd'][21]);
+        $("#rute").val(data['rd'][10]);
+        $("#tujuan").val(data['rd'][11]);
+        $("#no_tug_boat").val(data['rd'][12]);
+        $("#nahkoda").val(data['rd'][13]);
+        $("#jenis_tebu").val(data['rd'][14]);
+        $("#no_alat1").val(data['rd'][15]);
+        // $("#op_alat1").val(data['rd'][19]);
+        $("#no_alat2").val(data['rd'][16]);
+        // $("#op_alat2").val(data['rd'][21]);
         $("#tgl_muat").val(data['tgl_muat']);
         $("#jam_muat").val(data['jam_muat']);
         $("#tgl_tebang").val(data['tgl_tebang']);
-        $("#createby").val(data['rd'][22]);
+        $("#createby").val(data['rd'][17]);
         $("#warning").html(data['alert']);
         $("#berat-in-time").val(data['berat_in_time']);
         if (data['timbangOut'] == 0) {
+          $("#submit-cu").show(500);
           $("#cetak-in").fadeIn(500);
           $("#cetak-out").fadeOut(500);
           if (data['alert'] != '') {
             $("#cetak-in").fadeOut(500);
             $("#cetak-out").fadeOut(500);
-            if ($data['tipe'] == "BR") {
-              $("#warning").html(data['alert']);
-            }
+            $("#submit-cu").hide(500);
+            // if ($data['tipe'] == "BP") {
+            //   $("#warning").html(data['alert']);
+            // }
+            $("#warning").html(data['alert']);
+          }else{
+            $("#submit-in").show(500);
           }
+          console.log(data);
         } else if (data['timbangOut'] != 0) {
           $("#cetak-in").fadeOut(500);
           $("#cetak-out").fadeIn(500);
@@ -531,6 +535,7 @@
         var url = "<?= base_url() ?>/barcode-in?file=" + data['file'] + "&no=" + data['no'];
         alert(data['msg']);
         $("#form-wcs").trigger('reset');
+        load_data_cu();
         // window.open(url, '_blank');
         // print(url);
         // $("#badan").fadeOut(500);
@@ -598,20 +603,11 @@
       } else {
         $("[name=CekAll]").prop("checked", false);
       }
-      // $(".table-data-detail tfoot .item-total").text(number_format(total));
     } else {
-      // $(".table-data-detail tfoot .item-total").text(number_format(total));
-      // $("#form [name=Name]").val("");
-      // $("#form [name=City]").val("");
-      // $("#form [name=Address]").val("");
+      $("#berat-in").val(total_gross);
+      $("#berat-out").val(total_tare);
+      $("#berat-nett").val(total);
     }
-    // totaldp = $("[name=TotalDownPayment]").val();
-    // if(totaldp.length > 0){
-    //     totaldp = totaldp.replace(/\,/g,'');
-    //     totaldp = parseInt(totaldp);
-    //     total   = (total - totaldp);
-    // }
-    // $("[name=Pricex]").val(number_format(total));
   }
 
   $(document).ready(function() {

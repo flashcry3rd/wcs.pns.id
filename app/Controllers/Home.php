@@ -166,10 +166,20 @@ class Home extends BaseController
     public function ListDataCU()
     {
         $DataPost = $this->request->getVar();
+        $model = new Home_model();
+        $list_detail_db = $model->selectAll('tbl_wcs_detail', "no_ticket");
+        // print_r(json_encode($list_detail_db));
+        $list_arr = array();
+        foreach($list_detail_db as $vv){
+            array_push($list_arr, $vv['no_ticket']);
+        }
+        // print_r($list_arr);
+        // exit;
         $modul  = $this->request->getPost("modul");
         $class  = $this->request->getPost("class");
         $db_cu = \Config\Database::connect('db_cu');
         $tb = $db_cu->table("tbl_wmntdata");
+        $tb->whereNotIn('entry1', $list_arr);
         $tb->limit('10');
         $tb->orderBy('txn_no', 'DESC');
         $get = $tb->get();
@@ -254,22 +264,25 @@ class Home extends BaseController
         echo view("data-timbang-all", $data);
     }
 
-    public function serialData()
+    public function serialData($method = "")
     {
         $model = new Home_model();
 
         $value = $this->request->getPost('data');
-        $arr0 = explode("\r\n", $value);
-        $count0 = count($arr0);
-        $getMin10 = $count0 - 2 ;
-        $pars = $arr0[$getMin10];
+        if($method != "cu"){
+            $arr0 = explode("\r\n", $value);
+            $count0 = count($arr0);
+            $getMin10 = $count0 - 2 ;
+            $pars = $arr0[$getMin10];
+            
+            $arr1 = explode(",", $pars);
+            $count1 = count($arr1);
+            $getMin11 = $count1 - 1;
+            $data['call'] = str_replace("KG", "", $arr1[$getMin11]);
+            $arr2 = explode(" ", $data['call']);
+            $data['call'] = $arr2[1];
+        }
         
-        $arr1 = explode(",", $pars);
-        $count1 = count($arr1);
-        $getMin11 = $count1 - 1;
-        $data['call'] = str_replace("KG", "", $arr1[$getMin11]);
-        $arr2 = explode(" ", $data['call']);
-        $data['call'] = $arr2[1];
         // $data['call'] = 1000;
         // echo json_encode($data['call']);
         // exit();
@@ -310,43 +323,66 @@ class Home extends BaseController
         $data['tgl_tebang'] = "00/00/0000";
         
         $count = count($arr); 
-        $b1 = str_replace("Kg", "", $data['call']);
-        $b1 = str_replace(".", "", $b1);
-        $b1 = str_replace(",", ".", $b1);
-        $b1 = number_format($b1, 2, ",", ".")." Kg";
+        if($method != "cu"){
+            $b1 = str_replace("Kg", "", $data['call']);
+            $b1 = str_replace(".", "", $b1);
+            $b1 = str_replace(",", ".", $b1);
+            $b1 = number_format($b1, 2, ",", ".")." Kg";
+        }
         if($count > 18){
             $whereArrCek = array('no_transaksi' => $no_transaksi);
             $arrCek2 = $model->getSelect("tbl_weight_scale", $whereArrCek);
             $numCek2 = count($arrCek2);
-            $data['timbangOut'] = $b1;
-            $data['timbangIn'] = $arr[18];
+            if($method != "cu"){
+                $data['timbangOut'] = $b1;
+                $data['timbangIn'] = $arr[18];
+            }else{
+                $data['timbangOut'] = 0;
+                $data['timbangIn'] = 0;
+            }
             $data['berat_in_time'] = $arr[19];
+            $data['alert'] = "";
             if($numCek2 > 0){
                 $data['alert'] = "Data Transaksi sudah pernah di SCAN";
             }else{
-                if($data['tipe']=="BP"){
-                    $data['alert'] ="Tipe tiket tidak sesuai , mohon di cek kembali tiket yang anda gunakan !" ;
+                if($method != "cu") {
+                    if($data['tipe']=="BP"){
+                        $data['alert'] ="Tipe tiket tidak sesuai , mohon di cek kembali tiket yang anda gunakan !" ;
+                    }else{
+                        $data['alert'] = "";
+                    }
                 }else{
-                    $data['alert'] = "";
+                    
                 }
             }
         }else{
-            $data['timbangOut'] = 0;
-            $data['timbangIn'] = $b1;
+            if($method != "cu") {
+                $data['timbangOut'] = 0;
+                $data['timbangIn'] = $b1;
+            }else{
+                $data['timbangOut'] = 0;
+                $data['timbangIn'] = 0;
+            }
             $data['berat_in_time'] = "";
             //cari no transaksi
             $whereArrCek = array('no_transaksi' => $no_transaksi);
-            $arrCek = $model->getSelect("tbl_weight_scale_temp", $whereArrCek);
+            if($method == "cu"){
+                $arrCek = $model->getSelect("tbl_weight_scale", $whereArrCek);
+            }else{
+                $arrCek = $model->getSelect("tbl_weight_scale_temp", $whereArrCek);
+            }
             $numCek = count($arrCek);
+            $data['alert'] = "";
             if($numCek > 0){
                 $data['alert'] = "Data Transaksi sudah pernah di SCAN";
             }else{
-                if($data['tipe']=="BP"){
-                    $data['alert'] ="Tipe tiket tidak sesuai , mohon di cek kembali tiket yang anda gunakan !" ;
-                }else{
-                    $data['alert'] = "";
+                if($method != "cu") {
+                    if($data['tipe']=="BP"){
+                        $data['alert'] ="Tipe tiket tidak sesuai , mohon di cek kembali tiket yang anda gunakan !" ;
+                    }else{
+                        $data['alert'] = "";
+                    }
                 }
-                
             }
         }
         
@@ -465,19 +501,20 @@ class Home extends BaseController
         $tglIn=$this->request->getPost('berat_in_time');
         $no_transaksi = $this->request->getPost('no_transaksi'); 
         $noTrans = str_replace("/","", $this->request->getPost('no_transaksi'));
-        $arrT = explode("/", $this->request->getPost('tgl_tebang'));
-        $tglTebang = $arrT[2]."-".$arrT[1]."-".$arrT[0];
+        // $arrT = explode("/", $this->request->getPost('tgl_tebang'));
+        // $tglTebang = $arrT[2]."-".$arrT[1]."-".$arrT[0];
         $arrM = explode("/", $this->request->getPost('tgl_muat'));
         $tglMuat = $arrM[2]."-".$arrM[1]."-".$arrM[0]." ".$this->request->getPost('jam_muat');
 
         $beratIn = $this->request->getPost('berat_in') ;
-        $b1 = str_replace("Kg", "", $this->request->getPost('berat_in'));
-        $b1 = str_replace(".", "", $b1);
-        $b1 = str_replace(",", ".", $b1);
+        $beratOut = $this->request->getPost('berat_out') ;
+        // $b1 = str_replace("Kg", "", $this->request->getPost('berat_in'));
+        // $b1 = str_replace(".", "", $b1);
+        // $b1 = str_replace(",", ".", $b1);
 
-        $b2 = str_replace("Kg", "", $this->request->getPost('berat_out'));
-        $b2 = str_replace(".", "", $b2);
-        $b2 = str_replace(",", ".", $b2);
+        // $b2 = str_replace("Kg", "", $this->request->getPost('berat_out'));
+        // $b2 = str_replace(".", "", $b2);
+        // $b2 = str_replace(",", ".", $b2);
 
         $data = [
             
@@ -498,9 +535,9 @@ class Home extends BaseController
             "tujuan_tugboat" => $this->request->getPost('rute'),
             "kode_truck" => $this->request->getPost('no_truck'),
             "supir" => $this->request->getPost('driver'),
-            "weight_in" => $b1,
-            "weight_in_time" => $tglIn,
-            "weight_out" => $b2,
+            "weight_in" => $beratIn,
+            "weight_in_time" => $dateNow,
+            "weight_out" => $beratOut,
             "weight_out_time" => $dateNow,
             "retase" => $this->request->getPost('retase'),
             "kontraktor_delivery" => $this->request->getPost('kode_kon_delivery'),
@@ -509,15 +546,38 @@ class Home extends BaseController
             "no_alat2" => $this->request->getPost('no_alat2'),
             "op_alat2" => $this->request->getPost('op_alat2'),
             "createby" => $this->request->getPost('createby'),
-            "tgl_harvesting" => $tglTebang,
+            // "tgl_harvesting" => $tglTebang,
             "tgl_muat" => $tglMuat
             
         ];
         $model = new Home_model();
         $insert = $model->dataInsert('tbl_weight_scale', $data);
         if($insert){
+            $CheckBox = $this->request->getPost('Checkbox');
+            $NoTicket = $this->request->getPost('no_ticket');
+            $Gross = $this->request->getPost('gross');
+            $Tare = $this->request->getPost('tare');
+            $Nett = $this->request->getPost('nett');
+            foreach($CheckBox as $i => $v){
+                $det_no_ticket = $NoTicket[$i];
+                $det_gross = $Gross[$i];
+                $det_tare = $Tare[$i];
+                $det_nett = $Nett[$i];
 
-            $return = array("status" => "success", "msg" => "Data timbangan berhasil di simpan !" , "no" => $no_transaksi);
+                $data_detail = array(
+                    'no_transaksi' => $no_transaksi,
+                    'no_ticket' => $det_no_ticket,
+                    'gross' => $det_gross,
+                    'tare' => $det_tare,
+                    'nett' => $det_nett,
+                );
+                $insert_detail = $model->dataInsert('tbl_wcs_detail', $data_detail);
+            }
+            if($insert_detail) {
+                $return = array("status" => "success", "msg" => "Data timbangan berhasil di simpan !" , "no" => $no_transaksi);
+            }else{
+                $return = array("status" => "error", "msg" => "Data detail timbangan gagal disimpan , mohon segera menghubungi administrator !", "no" => $no_transaksi);
+            }
         }else{
             $return = array("status" => "error", "msg" => "Data timbangan gagal disimpan , mohon segera menghubungi administrator !", "no" => $no_transaksi);
         }

@@ -22,9 +22,12 @@ class Home_model extends Model
         return $row;
     }
 
-    public function selectAll($table)
+    public function selectAll($table, $select = "")
     {
         $tb = $this->db->table($table);
+        if($select != ""){
+            $tb->select($select);
+        }
         $get = $tb->get();
         $result = $get->getResult('array');
          
