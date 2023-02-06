@@ -13,6 +13,10 @@
     font-size: large;
     width: 80%;
   }
+
+  div#data-timbang-cu_filter {
+    float: right;
+  }
 </style>
 <div class="container-fluid">
   <div class="row mt-4">
@@ -63,39 +67,6 @@
     </div>
   </div>
 </div>
-
-<!-- <div class="col-12">
-  <div class="row">
-    <div class="card">
-      <div class="card-body">
-        <h4>List Timbang CU</h4>
-      </div>
-      <div class="form-group">
-        <div class="table-responsive">
-          <table class="table table-striped" id="data-timbang-cu" style="width: 100%; text-align: center;">
-            <thead>
-              <tr>
-                <td>
-                  <div class="checkbox checkbox-primary div-check-all" style="margin:0px;text-align:left;">
-                    <input type="checkbox" name="CekAll" value="">
-                    <label for="CekAll"></label>
-                  </div>
-                </td>
-                <th>No. Ticket</th>
-                <th>Date & Time</th>
-                <th>Gross (Kg)</th>
-                <th>Tare (Kg)</th>
-                <th>Nett Weight (Kg)</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
 
 <div class="container-fluid">
   <div class="row mt-4">
@@ -347,7 +318,7 @@
                 <div class="row">
                   <div class="col-lg-6 col-md-6 mt-4">
                     <div class="ms-auto ">
-                      <a class="btn btn-secondary" target="_blank" style="display:none;" type="button" id="submit-cu" type="button" title="Simpan">Simpan &emsp;<span class="fa fa-save"></span></a>
+                      <a class="btn btn-secondary" style="display:none;" target="_blank" type="button" id="submit-cu" type="button" title="Simpan">Simpan &emsp;<span class="fa fa-save"></span></a>
                     </div>
                   </div>
                   <!-- <div class="col-lg-6 col-md-6 mt-4">
@@ -376,7 +347,7 @@
 </div>
 <!-- <script src="./dist/serial-handler.js" type="module"></script>
   <script src="./dist/app.js" type="module"></script> -->
-<!-- <script src="./assets/js/jquery-3.5.1.js"></script> -->
+<script src="./assets/js/jquery-3.5.1.js"></script>
 <script src="./assets/js/data-tables.min.js"></script>
 <script src="./assets/js/data-tables-bs5.min.js"></script>
 <script src="./assets/bootstrap5/js/bootstrap.bundle.min.js"></script>
@@ -455,7 +426,7 @@
             //   $("#warning").html(data['alert']);
             // }
             $("#warning").html(data['alert']);
-          }else{
+          } else {
             $("#submit-in").show(500);
           }
           console.log(data);
@@ -624,36 +595,38 @@
 
   function load_data_cu() {
     var host = window.location.origin + "/";
-    var url = host + "wcs.pns.id/home/ListDataCU/";
-    var data_post = {
-      modul: "cu",
-    };
-    var table_cu = $("#data-timbang-cu").DataTable({
-      destroy: true,
-      processing: true,
-      serverSide: true,
-      order: [],
-      pageLength: false,
-      paging: false,
-      ajax: {
-        url: url,
-        type: "POST",
-        data: data_post,
-        dataSrc: function(json) {
-          console.log('test json');
-          console.log(json);
-          // $(".div-loader").hide();
-          // $("#data-timbang-cu tbody tr").prop('disabled', false);
-          return json.data;
-        },
+    var url_list = host + "wcs.pns.id/home/ListDataCU/";
+    table_cu = $('#data-timbang-cu').DataTable({
+      "pageLength": false,
+      "paging": false,
+      // "processing": true, //Feature control the processing indicator.
+      // "serverSide": true, //Feature control DataTables' server-side processing mode.
+      //"order": [], //Initial no order.
+      // Load data for the table's content from an Ajax source
+      "ajax": {
+        "url": url_list,
+        "type": "POST",
         error: function(jqXHR, textStatus, errorThrown) {
           console.log(jqXHR.responseText);
-        },
+        }
       },
-      columnDefs: [{
-        targets: [],
-        orderable: false,
-      }, ],
+      //Set column definition initialisation properties.
+      "columnDefs": [{
+          "targets": 0, // first column
+          "className": "text-center",
+        },
+        {
+          "targets": [-1], //last column
+          "orderable": false, //set not orderable
+        },
+      ],
+      "initComplete": function() {
+        $("#data-timbang-cu_filter").append('&nbsp;&nbsp;<button type="button" class="btn btn-secondary btn-md" onclick="reloadTable()" style="margin: auto;"><i class="fa fa-refresh" aria-hidden="true"></i></button>');
+      },
     });
+  }
+
+  function reloadTable() {
+    table_cu.ajax.reload();
   }
 </script>

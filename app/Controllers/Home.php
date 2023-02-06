@@ -180,6 +180,26 @@ class Home extends BaseController
         $db_cu = \Config\Database::connect('db_cu');
         $tb = $db_cu->table("tbl_wmntdata");
         $tb->whereNotIn('entry1', $list_arr);
+        // Search
+        // $i = 0;
+        // $column = array("entry1","date1","time1","weight1","weight2");
+        // if (isset($DataPost['search'])) {
+        //     foreach ($column as $item) {
+        //         if ($DataPost['search']) {
+        //             if ($i === 0) {
+        //                 $tb->groupStart();
+        //                 $tb->like($item, $DataPost['search']['value']);
+        //             } else {
+        //                 $tb->orLike($item, $DataPost['search']['value']);
+        //             }
+        //             if (count($column) - 1 == $i)
+        //                 $tb->groupEnd();
+        //         }
+        //         $column[$i] = $item;
+        //         $i++;
+        //     }
+        // }
+        // End Search
         $tb->limit('10');
         $tb->orderBy('txn_no', 'DESC');
         $get = $tb->get();
@@ -208,6 +228,7 @@ class Home extends BaseController
             // endif;
             $val = '<div class="checkbox checkbox-primary" style="margin:0px;text-align:left;">
                 <input name="Checkbox[]" class="item-checked" type="checkbox" onclick="calculation_total_weight()" data-rowid="item-detail-'.$id.'" data-trx_no="'.$id.'" data-no_ticket="'.$no_ticket.'" data-gross="'.$gross.'" data-tare="'.$tare.'" data-nett="'.$nett.'" id="'.$id.'" value="'.$id.'" tab-index="-1">
+                <input type="hidden" name="det_id[]" value="'.$id.'">
                 <input type="hidden" name="no_ticket[]" value="'.$no_ticket.'">
                 <input type="hidden" name="gross[]" value="'.$gross.'">
                 <input type="hidden" name="tare[]" value="'.$tare.'">
@@ -233,6 +254,7 @@ class Home extends BaseController
             "recordsTotal"    => 10, // $this->api->count_all($page),
             "recordsFiltered" => 10, //$this->api->count_filtered($page),
             "data"            => $data,
+            "dp"            => $this->request->getPost(),
         );
         header('Content-Type: application/json');
         echo json_encode($output);
@@ -493,7 +515,12 @@ class Home extends BaseController
     }
 
     public function saveTruckCU()
-    {
+    {   
+        if(!$this->request->getPost('Checkbox')):
+            $return = array("status" => "error", "msg" => "Silahkan pilih berat timbang CU", "no" => $this->request->getPost('no_transaksi'));
+            return json_encode($return);
+            exit;
+        endif;
         // $DataPost = $this->request->getVar();
         // print_r($DataPost);
         // exit;
@@ -553,25 +580,28 @@ class Home extends BaseController
         $model = new Home_model();
         $insert = $model->dataInsert('tbl_weight_scale', $data);
         if($insert){
+            $det_id = $this->request->getPost('det_id');
             $CheckBox = $this->request->getPost('Checkbox');
             $NoTicket = $this->request->getPost('no_ticket');
             $Gross = $this->request->getPost('gross');
             $Tare = $this->request->getPost('tare');
             $Nett = $this->request->getPost('nett');
-            foreach($CheckBox as $i => $v){
-                $det_no_ticket = $NoTicket[$i];
-                $det_gross = $Gross[$i];
-                $det_tare = $Tare[$i];
-                $det_nett = $Nett[$i];
-
-                $data_detail = array(
-                    'no_transaksi' => $no_transaksi,
-                    'no_ticket' => $det_no_ticket,
-                    'gross' => $det_gross,
-                    'tare' => $det_tare,
-                    'nett' => $det_nett,
-                );
-                $insert_detail = $model->dataInsert('tbl_wcs_detail', $data_detail);
+            foreach($det_id as $i => $v){
+                if($v == $CheckBox[$i]) {
+                    $det_no_ticket = $NoTicket[$i];
+                    $det_gross = $Gross[$i];
+                    $det_tare = $Tare[$i];
+                    $det_nett = $Nett[$i];
+    
+                    $data_detail = array(
+                        'no_transaksi' => $no_transaksi,
+                        'no_ticket' => $det_no_ticket,
+                        'gross' => $det_gross,
+                        'tare' => $det_tare,
+                        'nett' => $det_nett,
+                    );
+                    $insert_detail = $model->dataInsert('tbl_wcs_detail', $data_detail);
+                }
             }
             if($insert_detail) {
                 $return = array("status" => "success", "msg" => "Data timbangan berhasil di simpan !" , "no" => $no_transaksi);
