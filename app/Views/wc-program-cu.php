@@ -591,6 +591,16 @@
       }
       calculation_total_weight(null);
     });
+    $("body").on("keydown", function(e) {
+      var keyCode = e.keyCode || e.which;
+      if (keyCode == 117) {
+        e.preventDefault();
+        $("#get-serial-messages").focus();
+        $("#get-serial-messages").stop().animate({
+            scrollTop: target.offset().top
+        }, 1000);
+      }
+    });
   });
 
   function load_data_cu() {
