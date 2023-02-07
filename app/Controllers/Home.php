@@ -99,6 +99,7 @@ class Home extends BaseController
         $model = new Home_model(); 
         $date = date("Y-m-d");
         $year = date("Y");
+    
         if(strtotime(date("Y-m-d H:i:s")) < strtotime(date("Y-m-d ")." 06:00:00") ){
             $dateBefore = date("Y-m-d", strtotime('-2 day', strtotime($date)))." 06:00:00";
             $dateNow = date("Y-m-d", strtotime('-1 day', strtotime($date)))." 06:00:00";
@@ -114,13 +115,21 @@ class Home extends BaseController
         $tHariIni = "weight_out_time between '$dateNow' and '$dateNow1' " ;
         $tYear = "YEAR(weight_out_time) = '$year' ";
 
+        //perjam 
+        
+        $hourNow = date("Y-m-d H:i:s");
+        $hourLimit = date("Y-m-d H:")."59:59" ;
+        $tPerJam = "weight_out_time between '$hourNow' and '$hourLimit'";
+
         $timbang1 = $model->getSelect("tbl_weight_scale", $tHariKemaren);
         $timbang2 = $model->getSelect("tbl_weight_scale", $tHariIni);
         $timbangAll = $model->getSelect("tbl_weight_scale", $tYear);
+        $timbangHour = $model->getSelect("tbl_weight_scale", $tPerJam);
 
         $totalTimbang1 = 0;
         $totalTimbang2 = 0;
         $totalAll = 0 ;
+        $totalHour = 0;
         foreach($timbang1 as $t1){
             $totalTimbang1 += ($t1['weight_in'] - $t1['weight_out']);
         }
@@ -130,11 +139,15 @@ class Home extends BaseController
         foreach($timbangAll as $ta){
             $totalAll += ($ta['weight_in'] - $ta['weight_out']); 
         }
+        foreach($timbangHour as $th){
+            $totalHour += ($th['weight_in'] - $th['weight_out']);
+        }
         
         $data['timbang1'] = $totalTimbang1 ;
         $data['timbang2'] = $totalTimbang2 ;
         $data['timbangAll'] = $totalAll ;
-
+        $data['timbangHour'] = $totalHour ;
+        
         echo view("dashboard", $data);
     }
 
@@ -830,6 +843,44 @@ class Home extends BaseController
 
     }
 
+    public function sinkron_user()
+    {
+        $model = new Home_model();
+        $getUser = $model->selectAllDb2("master_user"); 
+        foreach($getUser as $gu){
+            $data = array(
+                'id' => $gu['id'],
+                'username' => $gu['username'],
+                'password' => $gu['password'],
+                'nama' => $gu['nama'],
+                'posisi' => $gu['posisi'],
+                'status' => $gu['status']
+            );
+            $where1 = array(
+                'username' => $gu['username']
+            );
+            $where2 = array(
+                'id_user' => $gu['id']
+            );
+            $getCek = $model->getSelect("master_user", $where1);
+            if(count($getCek) < 1){
+                $model->dataInsert("master_user", $data); 
+                $cariMenu = $model->getSelectDb2("master_menu_user", $where2);
+                foreach($cariMenu as $cm){
+                    $data1 = array(
+                        'id_user' => $gu['id'],
+                        'id_menu' => $cm['id_menu']
+                    );
+                    $model->dataInsert("master_menu_user", $data1);
+                }
+            }
+        }
+        $arr = array("status" => "success", "color" => "green", "msg" => "User berhasil disinkron !") ;
+
+        echo json_encode($arr);
+        
+    }
+
     public function createUser()
     {
         $model = new Home_model();
@@ -849,7 +900,6 @@ class Home extends BaseController
             for($i=0;$i<$cc;$i++){
                 $data2 = array('id_user' => $id[0]['id'], 'id_menu' => $menu[$i]);
                 $model->insertDB2("master_menu_user", $data2);
-                $i++;
             }
             $arr = array('status' => 'success', 'msg' => 'Akun berhasil dibuat !'); 
         }else{

@@ -142,7 +142,7 @@
             success: function(msg){
                 alert(msg['msg']);
                 if($msg['status']=='success'){
-                    $("#form-user")[0].reset();
+                    $("#form-user").reset();
                 }
             }
         })

@@ -403,7 +403,7 @@ header("Access-Control-Allow-Origin: *");
           <div class="row align-items-center justify-content-lg-between">
             <div class="col-lg-12 md-2">
               <div class="copyright text-center text-sm text-muted text-lg-start">
-                © 2022, 
+                © 2023, 
                 <a class="font-weight-bold" target="_blank">Patama Nusantara Sakti</a>
                
               </div>
