@@ -95,8 +95,15 @@ class Home_model extends Model
         }
         $qCari = $db->query("SELECT * FROM tbl_weight_scale WHERE sync IS NULL");
         $cari = $qCari->getResult('array');
-        $count = count($cari);
-        $arr = array("data" => $cari, "count" => $count);
+        foreach($cari as $c){
+            $qCek = $this->db->query("SELECT * FROM tbl_weight_scale WHERE no_transaksi = '".$c['no_transaksi']."'");
+            $res = $qCek->getResult('array');
+            if(count($res) < 1){
+                $table = $this->db->table("tbl_weight_scale");
+                $table->insert($c);
+            }
+        }
+        $arr = array("data" => $cari);
         $dateSync = date("Y-m-d H:i:s");
         // $db->query("UPDATE tbl_weight_scale SET sync = '$dateSync' WHERE sync IS NULL");
         return $arr ;
