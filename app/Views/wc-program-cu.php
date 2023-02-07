@@ -506,7 +506,7 @@
         var url = "<?= base_url() ?>/barcode-in?file=" + data['file'] + "&no=" + data['no'];
         alert(data['msg']);
         $("#form-wcs").trigger('reset');
-        load_data_cu();
+        reloadTable();
         // window.open(url, '_blank');
         // print(url);
         // $("#badan").fadeOut(500);
@@ -597,7 +597,7 @@
         e.preventDefault();
         $("#get-serial-messages").focus();
         $("#get-serial-messages").stop().animate({
-            scrollTop: target.offset().top
+            scrollTop: $("#get-serial-messages").offset().top
         }, 1000);
       }
     });
