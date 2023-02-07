@@ -121,6 +121,24 @@ class Home extends BaseController
         $hourLimit = date("Y-m-d H:")."59:59" ;
         $tPerJam = "weight_out_time between '$hourNow' and '$hourLimit'";
 
+        //weekly
+
+        $tglTerakhir = date('Y-m-D', strtotime(date('Y-m-t'))) ;
+        // Hari pertama bulan dalam angka PHP
+        $isoTglAwal = date('N', strtotime(date('Y-m-01'))) ;
+        $totalHariAwal = 0;
+        for($i=$isoTglAwal;$i<=7;$i++){
+            $totalHariAwal = $totalHariAwal + 1 ; 
+            // echo $totalHariAwal." / ".$i."<br />";
+        }
+
+        // echo $totalHariAwal ; 
+        
+
+
+
+        ///////////////////////////
+
         $timbang1 = $model->getSelect("tbl_weight_scale", $tHariKemaren);
         $timbang2 = $model->getSelect("tbl_weight_scale", $tHariIni);
         $timbangAll = $model->getSelect("tbl_weight_scale", $tYear);
@@ -147,6 +165,8 @@ class Home extends BaseController
         $data['timbang2'] = $totalTimbang2 ;
         $data['timbangAll'] = $totalAll ;
         $data['timbangHour'] = $totalHour ;
+
+        // echo $tglTerakhir;
         
         echo view("dashboard", $data);
     }
