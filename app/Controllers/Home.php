@@ -829,6 +829,44 @@ class Home extends BaseController
 
     }
 
+    public function sinkron_user()
+    {
+        $model = new Home_model();
+        $getUser = $model->selectAllDb2("master_user"); 
+        foreach($getUser as $gu){
+            $data = array(
+                'id' => $gu['id'],
+                'username' => $gu['username'],
+                'password' => $gu['password'],
+                'nama' => $gu['nama'],
+                'posisi' => $gu['posisi'],
+                'status' => $gu['status']
+            );
+            $where1 = array(
+                'username' => $gu['username']
+            );
+            $where2 = array(
+                'id_user' => $gu['id']
+            );
+            $getCek = $model->getSelect("master_user", $where1);
+            if(count($getCek) < 1){
+                $model->dataInsert("master_user", $data); 
+                $cariMenu = $model->getSelectDb2("master_menu_user", $where2);
+                foreach($cariMenu as $cm){
+                    $data1 = array(
+                        'id_user' => $gu['id'],
+                        'id_menu' => $cm['id_menu']
+                    );
+                    $model->dataInsert("master_menu_user", $data1);
+                }
+            }
+        }
+        $arr = array("status" => "success", "color" => "green", "msg" => "User berhasil disinkron !") ;
+
+        echo json_encode($arr);
+        
+    }
+
     public function createUser()
     {
         $model = new Home_model();
@@ -848,7 +886,6 @@ class Home extends BaseController
             for($i=0;$i<$cc;$i++){
                 $data2 = array('id_user' => $id[0]['id'], 'id_menu' => $menu[$i]);
                 $model->insertDB2("master_menu_user", $data2);
-                $i++;
             }
             $arr = array('status' => 'success', 'msg' => 'Akun berhasil dibuat !'); 
         }else{
