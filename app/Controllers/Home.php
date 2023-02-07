@@ -559,7 +559,6 @@ class Home extends BaseController
         // $b2 = str_replace(",", ".", $b2);
 
         $data = [
-            
             "no_transaksi" => $this->request->getPost('no_transaksi'),
             "tipe" => $this->request->getPost('tipe_tiket'),
             "no_tiket_mobil" => $this->request->getPost('no_tiket'),
@@ -601,21 +600,23 @@ class Home extends BaseController
             $Gross = $this->request->getPost('gross');
             $Tare = $this->request->getPost('tare');
             $Nett = $this->request->getPost('nett');
-            foreach($det_id as $i => $v){
-                if($v == $CheckBox[$i]) {
-                    $det_no_ticket = $NoTicket[$i];
-                    $det_gross = $Gross[$i];
-                    $det_tare = $Tare[$i];
-                    $det_nett = $Nett[$i];
-    
-                    $data_detail = array(
-                        'no_transaksi' => $no_transaksi,
-                        'no_ticket' => $det_no_ticket,
-                        'gross' => $det_gross,
-                        'tare' => $det_tare,
-                        'nett' => $det_nett,
-                    );
-                    $insert_detail = $model->dataInsert('tbl_wcs_detail', $data_detail);
+            foreach($CheckBox as $i => $v){
+                foreach($det_id as $ii => $vv){
+                    if($v == $vv){
+                        $det_no_ticket = $NoTicket[$ii];
+                        $det_gross = $Gross[$ii];
+                        $det_tare = $Tare[$ii];
+                        $det_nett = $Nett[$ii];
+        
+                        $data_detail = array(
+                            'no_transaksi' => $no_transaksi,
+                            'no_ticket' => $det_no_ticket,
+                            'gross' => $det_gross,
+                            'tare' => $det_tare,
+                            'nett' => $det_nett,
+                        );
+                        $insert_detail = $model->dataInsert('tbl_wcs_detail', $data_detail);
+                    }
                 }
             }
             if($insert_detail) {
