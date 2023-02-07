@@ -3041,13 +3041,14 @@ CREATE TABLE IF NOT EXISTS `tbl_weight_scale` (
   `op_alat2` varchar(50) NOT NULL,
   `del` int(11) NOT NULL DEFAULT 0,
   `createby` varchar(35) NOT NULL,
+  `sync` datetime DEFAULT NULL,
   UNIQUE KEY `no_transaksi` (`no_transaksi`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Dumping data for table wcs_pns.tbl_weight_scale: ~2 rows (approximately)
-INSERT INTO `tbl_weight_scale` (`no_transaksi`, `tipe`, `no_tiket_mobil`, `tiket_barge`, `no_wo`, `kode_petak`, `ancak`, `jenis_tebu`, `tgl_harvesting`, `tgl_muat`, `kode_kontraktor`, `loading_vehicle_number`, `loading_vehicle_operator`, `kode_barge`, `kode_tugboat`, `tugboat_captain`, `tujuan_tugboat`, `kode_truck`, `supir`, `kepala_regu`, `weight_in`, `weight_in_time`, `weight_out`, `weight_out_time`, `retase`, `kontraktor_delivery`, `no_polisi`, `tujuan`, `no_alat2`, `op_alat2`, `del`, `createby`) VALUES
-	('BP/388BE9/020223013433', 'BP', '', '', '', 'PNS023602', '3', 'Tebu Bakar', '0000-00-00', '2002-02-23 01:34:33', 'T-0007', 'A12', '', 'NB5', 'TGB1', 'NHR', '', '', '', '', 2488, '2023-02-02 15:52:30', 60, '2023-02-02 15:52:30', '', 'A-0055', '', 'Mill', '', '', 0, 'User Mobile 2'),
-	('HL/388BE9/190123150529', 'HL', '', '', '', 'PNS023602A', 'AN123', 'Tebu Bakar', '2023-01-19', '2023-01-19 15:05:29', 'K-0043', '', '', '', '', '', 'JETTY 2', 'NT123', 'DR123', '', 2251, '2023-01-19 15:07:44', 2251, '2023-01-20 15:18:56', 'RT123', 'A-0018', '', 'TJ123', '', '', 0, '0');
+INSERT INTO `tbl_weight_scale` (`no_transaksi`, `tipe`, `no_tiket_mobil`, `tiket_barge`, `no_wo`, `kode_petak`, `ancak`, `jenis_tebu`, `tgl_harvesting`, `tgl_muat`, `kode_kontraktor`, `loading_vehicle_number`, `loading_vehicle_operator`, `kode_barge`, `kode_tugboat`, `tugboat_captain`, `tujuan_tugboat`, `kode_truck`, `supir`, `kepala_regu`, `weight_in`, `weight_in_time`, `weight_out`, `weight_out_time`, `retase`, `kontraktor_delivery`, `no_polisi`, `tujuan`, `no_alat2`, `op_alat2`, `del`, `createby`, `sync`) VALUES
+	('BP/388BE9/020223013433', 'BP', '', '', '', 'PNS023602', '3', 'Tebu Bakar', '0000-00-00', '2002-02-23 01:34:33', 'T-0007', 'A12', '', 'NB5', 'TGB1', 'NHR', '', '', '', '', 2488, '2023-02-02 15:52:30', 60, '2023-02-02 15:52:30', '', 'A-0055', '', 'Mill', '', '', 0, 'User Mobile 2', NULL),
+	('HL/388BE9/190123150529', 'HL', '', '', '', 'PNS023602A', 'AN123', 'Tebu Bakar', '2023-01-19', '2023-01-19 15:05:29', 'K-0043', '', '', '', '', '', 'JETTY 2', 'NT123', 'DR123', '', 2251, '2023-01-19 15:07:44', 2251, '2023-01-20 15:18:56', 'RT123', 'A-0018', '', 'TJ123', '', '', 0, '0', NULL);
 
 -- Dumping structure for table wcs_pns.tbl_weight_scale_temp
 CREATE TABLE IF NOT EXISTS `tbl_weight_scale_temp` (
