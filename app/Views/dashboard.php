@@ -106,7 +106,7 @@
             <div class="numbers">
               <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Timbang Week 1</p>
               <h5 class="font-weight-bolder mb-0">
-                <?= number_format($timbangHour, 2,",", ".")  ?> Kg
+                <?= number_format($timbangMinggu1, 2,",", ".")  ?> Kg
                 <span class="text-success text-sm font-weight-bolder"></span>
               </h5>
             </div>
@@ -128,7 +128,7 @@
             <div class="numbers">
               <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Timbang Week 2</p>
               <h5 class="font-weight-bolder mb-0">
-                <?= number_format($timbangHour, 2,",", ".")  ?> Kg
+                <?= number_format($timbangMinggu2, 2,",", ".")  ?> Kg
                 <span class="text-success text-sm font-weight-bolder"></span>
               </h5>
             </div>
