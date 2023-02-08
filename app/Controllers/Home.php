@@ -123,7 +123,7 @@ class Home extends BaseController
 
         //weekly
 
-        $tglTerakhir = date('Y-m-D', strtotime(date('Y-m-t'))) ;
+        $tglTerakhir = date('Y-m-d', strtotime(date('Y-m-t'))) ;
         $tglAwalBulan = date('Y-m-01')." 06:00:00" ;
         // Hari pertama bulan dalam angka PHP
         $isoTglAwal = date('N', strtotime(date('Y-m-01'))) ;
@@ -149,7 +149,15 @@ class Home extends BaseController
         $tglAwalMinggu4 = $tglAkhirMinggu3;
         $tglAkhirMinggu4 = date("Y-m-d H:i:s", strtotime("+7 day", strtotime($tglAkhirMinggu3))) ;
         $whereMinggu4 = "weight_out_time between '$tglAwalMinggu4' and '$tglAkhirMinggu4'" ;
-
+        //Minggu 5
+        $tglAwalMinggu5 = $tglAkhirMinggu4 ;
+        $tglAkhirMinggu5 = date("Y-m-d H:i:s", strtotime("+7 day", strtotime($tglAkhirMinggu4))) ;
+        if($tglAkhirMinggu5 > $tglTerakhir){
+            $tglAkhirMinggu5 = date("Y-m-d", strtotime("+1 day", strtotime($tglTerakhir)))." 06:00:00" ;
+        }else{
+            $tglAkhirMinggu5 = $tglAkhirMinggu5 ;
+        }
+        $whereMinggu5 = "weight_out_time between '$tglAwalMinggu5' and '$tglAkhirMinggu5'" ;
 
         ///////////////////////////
 
@@ -161,6 +169,7 @@ class Home extends BaseController
         $timbangMinggu2 = $model->getSelect("tbl_weight_scale", $whereMinggu2);
         $timbangMinggu3 = $model->getSelect("tbl_weight_scale", $whereMinggu3);
         $timbangMinggu4 = $model->getSelect("tbl_weight_scale", $whereMinggu4);
+        $timbangMinggu5 = $model->getSelect("tbl_weight_scale", $whereMinggu5);
 
         $totalTimbang1 = 0;
         $totalTimbang2 = 0;
@@ -170,6 +179,7 @@ class Home extends BaseController
         $totalMinggu2 = 0;
         $totalMinggu3 = 0;
         $totalMinggu4 = 0;
+        $totalMinggu5 = 0;
 
         foreach($timbang1 as $t1){
             $totalTimbang1 += ($t1['weight_in'] - $t1['weight_out']);
@@ -195,6 +205,9 @@ class Home extends BaseController
         foreach($timbangMinggu4 as $tm4){
             $totalMinggu4 += ($tm4['weight_in'] - $tm4['weight_out']);
         }
+        foreach($timbangMinggu5 as $tm5){
+            $totalMinggu5 += ($tm5['weight_in'] - $tm5['weight_out']);
+        }
         
         $data['timbang1'] = $totalTimbang1 ;
         $data['timbang2'] = $totalTimbang2 ;
@@ -204,8 +217,9 @@ class Home extends BaseController
         $data['timbangMinggu2'] = $totalMinggu2 ;
         $data['timbangMinggu3'] = $totalMinggu3 ;
         $data['timbangMinggu4'] = $totalMinggu4 ;
+        $data['timbangMinggu5'] = $totalMinggu5 ;
 
-        echo $whereMinggu4;
+        echo $tglAkhirMinggu5;
         
         echo view("dashboard", $data);
     }
