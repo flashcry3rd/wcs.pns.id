@@ -1,4 +1,10 @@
-
+<style> 
+  .garis_panjang {
+    border-bottom: solid 0.8px;
+    border-color: grey;
+  
+  }
+</style>
 <div class="row">
   <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
     <div class="card">
@@ -105,7 +111,9 @@
           <div class="col-8">
             <div class="numbers">
               <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Timbang Week 1</p>
-              <h5 class="font-weight-bolder mb-0">
+              <p class="text-sm mb-0 text-capitalize font-weight-bold">( <?= $whereMinggu1 ?> )</p>
+              <div class="garis_panjang"></div>
+              <h5 class="font-weight-bolder mb-0" style="padding: 2%;">
                 <?= number_format($timbangMinggu1, 2,",", ".")  ?> Kg
                 <span class="text-success text-sm font-weight-bolder"></span>
               </h5>
@@ -126,8 +134,10 @@
         <div class="row">
           <div class="col-8">
             <div class="numbers">
-              <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Timbang Week 2</p>
-              <h5 class="font-weight-bolder mb-0">
+            <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Timbang Week 2</p>
+              <p class="text-sm mb-0 text-capitalize font-weight-bold">( <?= $whereMinggu2 ?> )</p>
+              <div class="garis_panjang"></div>
+              <h5 class="font-weight-bolder mb-0" style="padding: 2%;">
                 <?= number_format($timbangMinggu2, 2,",", ".")  ?> Kg
                 <span class="text-success text-sm font-weight-bolder"></span>
               </h5>
@@ -148,9 +158,11 @@
         <div class="row">
           <div class="col-8">
             <div class="numbers">
-              <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Timbang Week 3</p>
-              <h5 class="font-weight-bolder mb-0">
-                <?= number_format($timbangHour, 2,",", ".")  ?> Kg
+            <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Timbang Week 3</p>
+              <p class="text-sm mb-0 text-capitalize font-weight-bold">( <?= $whereMinggu3 ?> )</p>
+              <div class="garis_panjang"></div>
+              <h5 class="font-weight-bolder mb-0" style="padding: 2%;">
+                <?= number_format($timbangMinggu3, 2,",", ".")  ?> Kg
                 <span class="text-success text-sm font-weight-bolder"></span>
               </h5>
             </div>
@@ -170,9 +182,38 @@
         <div class="row">
           <div class="col-8">
             <div class="numbers">
-              <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Timbang Week 4</p>
-              <h5 class="font-weight-bolder mb-0">
-                <?= number_format($timbangHour, 2,",", ".")  ?> Kg
+            <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Timbang Week 4</p>
+              <p class="text-sm mb-0 text-capitalize font-weight-bold">( <?= $whereMinggu4 ?> )</p>
+              <div class="garis_panjang"></div>
+              <h5 class="font-weight-bolder mb-0" style="padding: 2%;">
+                <?= number_format($timbangMinggu4, 2,",", ".")  ?> Kg
+                <span class="text-success text-sm font-weight-bolder"></span>
+              </h5>
+            </div>
+          </div>
+          <div class="col-4 text-end">
+            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+              <i class="ni ni-notification-70 text-lg opacity-10" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+<div class="row mt-4">
+  <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+    <div class="card">
+      <div class="card-body p-3">
+        <div class="row">
+          <div class="col-8">
+            <div class="numbers">
+            <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Timbang Week 5</p>
+              <p class="text-sm mb-0 text-capitalize font-weight-bold">( <?= $whereMinggu5 ?> )</p>
+              <div class="garis_panjang"></div>
+              <h5 class="font-weight-bolder mb-0" style="padding: 2%;">
+                <?= number_format($timbangMinggu5, 2,",", ".")  ?> Kg
                 <span class="text-success text-sm font-weight-bolder"></span>
               </h5>
             </div>
