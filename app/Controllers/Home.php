@@ -142,7 +142,13 @@ class Home extends BaseController
         $tglAkhirMinggu2 = date("Y-m-d H:i:s", strtotime("+7 day", strtotime($tglMinggu))) ;
         $whereMinggu2 =  "weight_out_time between '$tglAwalMinggu2' and '$tglAkhirMinggu2'" ;
         //Minggu 3
-
+        $tglAwalMinggu3 = $tglAkhirMinggu2 ;
+        $tglAkhirMinggu3 = date("Y-m-d H:i:s", strtotime("+7 day", strtotime($tglAkhirMinggu2))) ;
+        $whereMinggu3 = "weight_out_time between '$tglAwalMinggu3' and '$tglAkhirMinggu3'" ;
+        //Minggu 4
+        $tglAwalMinggu4 = $tglAkhirMinggu3;
+        $tglAkhirMinggu4 = date("Y-m-d H:i:s", strtotime("+7 day", strtotime($tglAkhirMinggu3))) ;
+        $whereMinggu4 = "weight_out_time between '$tglAwalMinggu4' and '$tglAkhirMinggu4'" ;
 
 
         ///////////////////////////
@@ -153,6 +159,8 @@ class Home extends BaseController
         $timbangHour = $model->getSelect("tbl_weight_scale", $tPerJam);
         $timbangMinggu1 = $model->getSelect("tbl_weight_scale", $whereMinggu1);
         $timbangMinggu2 = $model->getSelect("tbl_weight_scale", $whereMinggu2);
+        $timbangMinggu3 = $model->getSelect("tbl_weight_scale", $whereMinggu3);
+        $timbangMinggu4 = $model->getSelect("tbl_weight_scale", $whereMinggu4);
 
         $totalTimbang1 = 0;
         $totalTimbang2 = 0;
@@ -160,7 +168,9 @@ class Home extends BaseController
         $totalHour = 0;
         $totalMinggu1 = 0;
         $totalMinggu2 = 0;
-        
+        $totalMinggu3 = 0;
+        $totalMinggu4 = 0;
+
         foreach($timbang1 as $t1){
             $totalTimbang1 += ($t1['weight_in'] - $t1['weight_out']);
         }
@@ -179,6 +189,12 @@ class Home extends BaseController
         foreach($timbangMinggu2 as $tm2){
             $totalMinggu2 += ($tm2['weight_in'] - $tm2['weight_out']);
         }
+        foreach($timbangMinggu3 as $tm3){
+            $totalMinggu3 += ($tm3['weight_in'] - $tm3['weight_out']);
+        }
+        foreach($timbangMinggu4 as $tm4){
+            $totalMinggu4 += ($tm4['weight_in'] - $tm4['weight_out']);
+        }
         
         $data['timbang1'] = $totalTimbang1 ;
         $data['timbang2'] = $totalTimbang2 ;
@@ -186,8 +202,10 @@ class Home extends BaseController
         $data['timbangHour'] = $totalHour ;
         $data['timbangMinggu1'] = $totalMinggu1 ;
         $data['timbangMinggu2'] = $totalMinggu2 ;
+        $data['timbangMinggu3'] = $totalMinggu3 ;
+        $data['timbangMinggu4'] = $totalMinggu4 ;
 
-        echo $tglAkhirMinggu2;
+        echo $whereMinggu4;
         
         echo view("dashboard", $data);
     }
