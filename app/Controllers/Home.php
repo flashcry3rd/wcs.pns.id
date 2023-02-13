@@ -117,7 +117,7 @@ class Home extends BaseController
 
         //perjam 
         
-        $hourNow = date("Y-m-d H:i:s");
+        $hourNow = date("Y-m-d H:")."00:00";
         $hourLimit = date("Y-m-d H:")."59:59" ;
         $tPerJam = "weight_out_time between '$hourNow' and '$hourLimit'";
 

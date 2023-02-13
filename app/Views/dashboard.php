@@ -84,8 +84,10 @@
         <div class="row">
           <div class="col-8">
             <div class="numbers">
-              <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Timbang Per Jam</p>
-              <h5 class="font-weight-bolder mb-0">
+              <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Timbang Per Jam </p>
+              <p class="text-sm mb-0 text-capitalize font-weight-bold">( <?= date("H").":00 s/d ".date("H").":59" ?> )</p>
+              <div class="garis_panjang"></div>
+              <h5 class="font-weight-bolder mb-0" style="padding: 2%;">
                 <?= number_format($timbangHour, 2,",", ".")  ?> Kg
                 <span class="text-success text-sm font-weight-bolder"></span>
               </h5>
