@@ -406,6 +406,7 @@ class Home extends BaseController
             $count1 = count($arr1);
             $getMin11 = $count1 - 1;
             $data['call'] = str_replace("KG", "", $arr1[$getMin11]);
+            $data['call'] = str_replace("+", "+ ", $data['call']);
             $arr2 = explode(" ", $data['call']);
             $data['call'] = $arr2[1];
         }
@@ -541,7 +542,7 @@ class Home extends BaseController
             "tiket_barge" => $this->request->getPost('tiket_barge'),
             // "no_wo" => $this->request->getPost('no_wo'),
             "kode_petak" => $this->request->getPost('no_petak'),
-            // "ancak" => $this->request->getPost('ancak'),
+            "ancak" => $this->request->getPost('ancak'),
             "jenis_tebu" => $this->request->getPost('jenis_tebu'),
             "kode_kontraktor" => $this->request->getPost('kode_kontraktor'),
             "loading_vehicle_number" => $this->request->getPost('no_alat1'),

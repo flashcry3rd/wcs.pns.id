@@ -45,8 +45,8 @@
                         <table style="width: 249px;">
                             <tbody>
                                 <tr>
-                                    <td style="text-align: left;"><b><a >Tgl Harvesting</a></b></td>
-                                    <td style="text-align: right;"><b><a ><?= date_format(date_create($timbang->tgl_harvesting), "d/m/Y") ?></a></b></td>
+                                    <td style="text-align: left;"><b><a >Tgl Muat</a></b></td>
+                                    <td style="text-align: right;"><b><a ><?= date_format(date_create($timbang->tgl_muat), "d/m/Y") ?></a></b></td>
                                 </tr>
                                 <tr>
                                     <td style="text-align: left;"><b><a >Kode Petak</a></b></td>
