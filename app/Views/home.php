@@ -393,7 +393,7 @@ header("Access-Control-Allow-Origin: *");
           <div class="docs-info">
             <h6 class="text-white up mb-0">Butuh bantuan ?</h6>
             <p class="text-xs font-weight-bold">Silahkan download manual berikut</p>
-            <a href="#" target="_blank" class="btn btn-white btn-sm w-100 mb-0">Buku Panduan</a>
+            <a href="<?= base_url() ?>/assets/Buku Panduan.pdf" target="_blank" class="btn btn-white btn-sm w-100 mb-0">Buku Panduan</a>
           </div>
         </div>
       </div>
