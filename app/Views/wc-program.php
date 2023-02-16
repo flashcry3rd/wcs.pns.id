@@ -237,7 +237,7 @@
                     <input id="no_alat2" name="no_alat2" class="form-control barcode" readonly >
                   </div>
 
-<!-- 
+
                   <div class="form-group">
                     <h5 >Op. Alat Muat 1</h5>
                     <input id="op_alat1" name="op_alat1" class="form-control barcode" readonly >
@@ -246,7 +246,7 @@
                   <div class="form-group">
                     <h5 >Op. Alat Muat 2</h5>
                     <input id="op_alat2" name="op_alat2" class="form-control barcode" readonly >
-                  </div> -->
+                  </div>
 
                 </div>
 
@@ -392,13 +392,13 @@
           $("#nahkoda").val(data['rd'][13]);
           $("#jenis_tebu").val(data['rd'][14]);
           $("#no_alat1").val(data['rd'][15]);
-          // $("#op_alat1").val(data['rd'][19]);
           $("#no_alat2").val(data['rd'][16]);
-          // $("#op_alat2").val(data['rd'][21]);
+          $("#op_alat1").val(data['rd'][17]);
+          $("#op_alat2").val(data['rd'][18]);
           $("#tgl_muat").val(data['tgl_muat']);
           $("#jam_muat").val(data['jam_muat']);
           $("#tgl_tebang").val(data['tgl_tebang']);
-          $("#createby").val(data['rd'][17]);
+          $("#createby").val(data['rd'][19]);
           $("#warning").html(data['alert']);
           $("#berat-in-time").val(data['berat_in_time']);
           if(data['timbangOut']== 0){
