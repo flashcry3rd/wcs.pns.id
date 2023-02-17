@@ -546,7 +546,7 @@ class Home extends BaseController
             "jenis_tebu" => $this->request->getPost('jenis_tebu'),
             "kode_kontraktor" => $this->request->getPost('kode_kontraktor'),
             "loading_vehicle_number" => $this->request->getPost('no_alat1'),
-            // "loading_vehicle_operator" => $this->request->getPost('op_alat1'),
+            "loading_vehicle_operator" => $this->request->getPost('op_alat1'),
             "kode_barge" => $this->request->getPost('no_barge'),
             "kode_tugboat" => $this->request->getPost('no_tug_boat'),
             "tugboat_captain" => $this->request->getPost('nahkoda'),
@@ -560,7 +560,7 @@ class Home extends BaseController
             "no_polisi" => $this->request->getPost('no_polisi'),
             "tujuan" => $this->request->getPost('tujuan'),
             "no_alat2" => $this->request->getPost('no_alat2'),
-            // "op_alat2" => $this->request->getPost('op_alat2'),
+            "op_alat2" => $this->request->getPost('op_alat2'),
             "createby" => $this->request->getPost('createby'),
             "tgl_harvesting" => $tglTebang,
             "tgl_muat" => $tglMuat
