@@ -57,16 +57,18 @@
                 <td style=" padding-left: 1%; padding-right: 1%">
                     <div class="col-12">
                         <div class="row">
-                            <div class="col-2" style="text-align: center;"><img src="assets/img/logo.png" style="height: 120px;width: 140px;"></div>
+                            <div class="col-2" style="text-align: center;"><img src="assets/img/logo.png" style="height: 100px;width: 120px;"></div>
                             <div class="col-10 tengah" style="text-align: center;">
-                                <b><a style="font-size: 29px;">PT. PRATAMA NUSANTARA SAKTI</a>
-                                    <br />
-                                    <a style="font-size: 18;">Taman Perkantoran Kuningan - Wisma GAWI</a>
-                                    <br />
-                                    <a style="font-size: 18;">Bumi Pratama Mandiri, Kec. Sungai Menang OKI Sumsel</a>
-                                    <br />
-                                    <a style="font-size: 18;">Telp: , FAX: , </a>
-                                </b>
+                                <div class="form-control" style="border: none;">
+                                    <b><a style="font-size: 29px;">PT. PRATAMA NUSANTARA SAKTI</a>
+                                        <br />
+                                        <a style="font-size: 18;">Taman Perkantoran Kuningan - Wisma GAWI</a>
+                                        <br />
+                                        <a style="font-size: 18;">Bumi Pratama Mandiri, Kec. Sungai Menang OKI Sumsel</a>
+                                        <br />
+                                        <a style="font-size: 18;">Telp: , FAX: , </a>
+                                    </b>
+                                </div>
                             </div>
                         </div>
                         <div class="garis-panjang"></div>
