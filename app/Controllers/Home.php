@@ -284,7 +284,9 @@ class Home extends BaseController
         $class  = $this->request->getPost("class");
         $db_cu = \Config\Database::connect('db_cu');
         $tb = $db_cu->table("tbl_wmntdata");
-        $tb->whereNotIn('entry1', $list_arr);
+        if(count($list_arr) > 0) :
+            $tb->whereNotIn('entry1', $list_arr);
+        endif;
         // Search
         // $i = 0;
         // $column = array("entry1","date1","time1","weight1","weight2");
