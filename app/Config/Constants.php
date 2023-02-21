@@ -80,3 +80,7 @@ defined('EXIT__AUTO_MAX')      || define('EXIT__AUTO_MAX', 125); // highest auto
 
 $base_url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['SERVER_NAME'] . '/';
 define('BASE_URL', $base_url);
+
+$sistem_app = 'CU';
+// $sistem_app = 'TRUCK';
+define('sistem_app', $sistem_app);

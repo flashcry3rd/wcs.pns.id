@@ -22,6 +22,15 @@ class Home_model extends Model
         return $row;
     }
 
+    public function getSelectList($table, $where)
+    {
+        $tb = $this->db->table($table);
+        $get = $tb->getWhere($where);
+        $result = $get->getResult('array');
+
+        return $result;
+    }
+
     public function selectAll($table, $select = "")
     {
         $tb = $this->db->table($table);

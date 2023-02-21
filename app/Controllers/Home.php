@@ -383,12 +383,24 @@ class Home extends BaseController
 
     public function data_timbang_all()
     {
+        $filter = $this->request->getGet('filter');
+        // print_r($filter);
         $model = new Home_model();
         $arr = array(
             "menu" => "/data_timbang_all"
         );
         session()->set($arr);
-        $data['timbang'] = $model->selectAll('tbl_weight_scale');
+        if($filter):
+            if($filter == 'cu'):
+                $where = array('tipe' => 'BP');
+            else:
+                $where = array('tipe !=' => 'BP');
+            endif;
+            $data['timbang'] = $model->getSelectList('tbl_weight_scale',$where);
+        else:
+            $data['timbang'] = $model->selectAll('tbl_weight_scale');
+        endif;
+        $data['filter_module'] = $filter;
         $data['vendor'] = $model->selectAll('master_vendor');
         echo view("data-timbang-all", $data);
     }
@@ -818,6 +830,7 @@ class Home extends BaseController
     {
         $model = new Home_model();
         $noTrans = $this->request->getGet('no');
+        $arrTrans = explode("/", $noTrans);
 
         $where = array( 'no_transaksi' => $noTrans );
         $data['timbang'] = $model->getSelectRow('tbl_weight_scale', $where);
@@ -827,8 +840,14 @@ class Home extends BaseController
         $data['kontraktor'] = $model->getSelectRow('master_vendor', $where1);
         $where2 = array( 'kode_vendor' => $kode_kon_delivery );
         $data['kon_delivery'] = $model->getSelectRow('master_vendor', $where2);
-        
-        echo view('temp/surat-timbang', $data);
+
+        if($arrTrans[0] == 'BP'){
+            $where = array( 'no_transaksi' => $noTrans );
+            $data['timbang_detail'] = $model->getSelectlist('tbl_wcs_detail', $where);
+            echo view('temp/surat-timbang-cu', $data);
+        }else{
+            echo view('temp/surat-timbang', $data);
+        }
         
     }
 

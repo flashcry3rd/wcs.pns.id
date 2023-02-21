@@ -1,10 +1,10 @@
-
 <style>
-    th{
+    th {
         text-align: center;
     }
-    td{
-        text-align: center;  
+
+    td {
+        text-align: center;
         cursor: pointer;
     }
 </style>
@@ -18,11 +18,19 @@
             <div class="row">
                 <div class="card">
                     <div class="card-body">
-                        <h4>Data Timbang All</h4>
+                        <h4>Data Timbang</h4>
+                    </div>
+                    <div class="form-group">
+                        <h5>Modul</h5>
+                        <select class="form-control" name="ModuleFilter" title="Pilih Module" onchange="load_filter();">
+                            <option value="none">All</option>
+                            <option value="truck" <?=$filter_module=='truck'?'selected':''?> >Truk</option>
+                            <option value="cu" <?=$filter_module=='cu'?'selected':''?> >CU</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <div class="table-responsive">
-                            <table class="table table-striped" id="data-timbang" style="width: 100%;"> 
+                            <table class="table table-striped" id="data-timbang" style="width: 100%;">
                                 <thead>
                                     <tr>
                                         <td>Slip</td>
@@ -39,32 +47,33 @@
                                 </thead>
                                 <tbody>
                                     <?
-                                    $i=1 ;
-                                     foreach($timbang as $ti){ 
-                                         $noTrans = $ti['no_transaksi'];
-                                         $file = str_replace("/", "", $noTrans);
-                                         ?>
-                                        <tr >
-                                            <td><a href="<?= base_url()?>/slip-timbang?no=<?= $noTrans ?>" target="_blank" title="Print Tiket Timbang"><i class="ni ni-single-copy-04" ></i></a></td>
-                                            <td><?=$i ?></td>
-                                            <td><?=$ti['no_transaksi'] ?></td>
-                                            <td><?=$ti['kode_petak'] ?></td>
-                                            <td><?=$ti['ancak'] ?></td>
-                                            <? foreach($vendor as $v){ 
-                                                if($v['kode_vendor']==$ti['kode_kontraktor']){
-                                                    echo "<td>".$v['nama_vendor']."</td>";
+                                    $i = 1;
+                                    foreach ($timbang as $ti) {
+                                        $noTrans = $ti['no_transaksi'];
+                                        $file = str_replace("/", "", $noTrans);
+                                    ?>
+                                        <tr>
+                                            <td><a href="<?= base_url() ?>/slip-timbang?no=<?= $noTrans ?>" target="_blank" title="Print Tiket Timbang"><i class="ni ni-single-copy-04"></i></a></td>
+                                            <td><?= $i ?></td>
+                                            <td><?= $ti['no_transaksi'] ?></td>
+                                            <td><?= $ti['kode_petak'] ?></td>
+                                            <td><?= $ti['ancak'] ?></td>
+                                            <? foreach ($vendor as $v) {
+                                                if ($v['kode_vendor'] == $ti['kode_kontraktor']) {
+                                                    echo "<td>" . $v['nama_vendor'] . "</td>";
                                                 } ?>
                                             <? } ?>
-                                            <? foreach($vendor as $v2){ 
-                                                if($v2['kode_vendor']==$ti['kontraktor_delivery']){
-                                                    echo "<td>".$v['nama_vendor']."</td>";
+                                            <? foreach ($vendor as $v2) {
+                                                if ($v2['kode_vendor'] == $ti['kontraktor_delivery']) {
+                                                    echo "<td>" . $v['nama_vendor'] . "</td>";
                                                 } ?>
                                             <? } ?>
-                                            <td><?=number_format($ti['weight_in'], 2, ",", ".")?></td>
-                                            <td><?=number_format($ti['weight_out'], 2, ",", ".")?></td>
-                                            <td><?=number_format($ti['weight_in']-$ti['weight_out'], 2, ",", ".")?></td>
+                                            <td><?= number_format($ti['weight_in'], 2, ",", ".") ?></td>
+                                            <td><?= number_format($ti['weight_out'], 2, ",", ".") ?></td>
+                                            <td><?= number_format($ti['weight_in'] - $ti['weight_out'], 2, ",", ".") ?></td>
                                         </tr>
-                                    <? $i++;} ?>
+                                    <? $i++;
+                                    } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -80,15 +89,24 @@
 <script src="./assets/js/data-tables.min.js"></script>
 <script src="./assets/bootstrap5/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
-
-$(document).ready(function () {
-    $('#data-timbang').DataTable({
-        pageLength: false,
-        paging: false
+    $(document).ready(function() {
+        $('#data-timbang').DataTable({
+            pageLength: false,
+            paging: false
+        });
     });
-});
 
-
+    function load_filter() {
+        filter = $("[name=ModuleFilter]").val();
+        var ses_menu = "<? if(null !== session()->get('menu')){ echo session()->get('menu') ; }else{ echo "";} ?>";
+        if(ses_menu==""){
+          $("#page-item").load("home/dashboard");
+        }else{
+            if(filter != 'none') {
+                $("#page-item").load("home"+ses_menu+'?filter='+filter);
+            }else{
+                $("#page-item").load("home"+ses_menu);
+            }
+        }
+    }
 </script>
-
-       
