@@ -156,21 +156,21 @@
                         <tbody>
                             <?php foreach($timbang_detail as $td) : ?>
                                 <tr style="border: 1px solid black;">
-                                    <td style="text-align: center;border: 1px solid black"><a><?= $td->no_ticket ?></a></td>
-                                    <td style="text-align: center;border: 1px solid black"><a><?= number_format($td->gross, 2, ",", ".") ?></a></td>
-                                    <td style="text-align: center;border: 1px solid black"><a><?= number_format($td->tare, 2, ",", ".") ?></a></td>
-                                    <td style="text-align: center;border: 1px solid black"><a><?= number_format($td->nett, 2, ",", ".") ?></a></td>
+                                    <td style="text-align: center;border: 1px solid black"><a><?= $td['no_ticket'] ?></a></td>
+                                    <td style="text-align: center;border: 1px solid black"><a><?= number_format($td['gross'], 2, ",", ".") ?></a></td>
+                                    <td style="text-align: center;border: 1px solid black"><a><?= number_format($td['tare'], 2, ",", ".") ?></a></td>
+                                    <td style="text-align: center;border: 1px solid black"><a><?= number_format($td['nett'], 2, ",", ".") ?></a></td>
                                 </tr>
                             <?php endforeach;?>
                             <tr>
                                 <td colspan="3" style="text-align: right;border-bottom: 0;border-right: 1px solid black; padding: 0%;">
-                                    <strong><a>Timbang Masuk</a> &emsp;</strong>
+                                    <strong><a>Gross</a> &emsp;</strong>
                                 </td>
                                 <td style=" padding: 0% ;"><strong><a>  &emsp; <?= number_format($timbang->weight_in, 2, ",", ".") ?> Kg</a></strong></td>
                             </tr>
                             <tr style="border: none; padding: 0%;">
                                 <td colspan="3" style="text-align: right;border-bottom: 0; padding: 0%;border-right: 1px solid black">
-                                    <strong><a>Timbang Keluar</a> &emsp;</strong>
+                                    <strong><a>Tare</a> &emsp;</strong>
                                 </td>
                                 <td style="padding-left: 3%;padding: 0% ;"><strong><a> &emsp; <?= number_format($timbang->weight_out, 2, ",", ".") ?> Kg</a></strong></td>
                             </tr>
