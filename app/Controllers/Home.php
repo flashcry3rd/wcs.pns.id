@@ -334,7 +334,7 @@ class Home extends BaseController
             //     $val = '<span href="javascript:void(0)" ' . $dd . '>' . $val . '</span>';
             // endif;
             $val = '<div class="checkbox checkbox-primary" style="margin:0px;text-align:left;">
-                <input name="Checkbox[]" class="item-checked" type="checkbox" onclick="calculation_total_weight()" data-rowid="item-detail-'.$id.'" data-trx_no="'.$id.'" data-no_ticket="'.$no_ticket.'" data-gross="'.$gross.'" data-tare="'.$tare.'" data-nett="'.$nett.'" id="'.$id.'" value="'.$id.'" tab-index="-1">
+                <input name="Checkbox[]" class="item-checked" type="checkbox" onclick="calculation_total_weight(this)" data-rowid="item-detail-'.$id.'" data-trx_no="'.$id.'" data-no_ticket="'.$no_ticket.'" data-gross="'.$gross.'" data-tare="'.$tare.'" data-nett="'.$nett.'" id="'.$id.'" value="'.$id.'" tab-index="-1">
                 <input type="hidden" name="det_id[]" value="'.$id.'">
                 <input type="hidden" name="no_ticket[]" value="'.$no_ticket.'">
                 <input type="hidden" name="gross[]" value="'.$gross.'">

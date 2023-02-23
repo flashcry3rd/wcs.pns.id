@@ -84,10 +84,10 @@
                     <thead>
                       <tr>
                         <td>
-                          <div class="checkbox checkbox-primary div-check-all" style="margin:0px;text-align:left;">
+                          <!-- <div class="checkbox checkbox-primary div-check-all" style="margin:0px;text-align:left;">
                             <input type="checkbox" name="CekAll" value="">
                             <label for="CekAll"></label>
-                          </div>
+                          </div> -->
                         </td>
                         <th>No. Ticket</th>
                         <th>Date & Time</th>
@@ -517,67 +517,77 @@
     })
   })
 
-  function calculation_total_weight(method_cal) {
+  function calculation_total_weight(selector) {
+    max_select = 2;
     total_gross = 0;
     total_tare = 0;
     total = 0;
     list = $("#data-timbang-cu tbody tr");
+    total_selected = $("#data-timbang-cu tbody input[name='Checkbox[]']:checked").length;
     console.log(list);
     total_weight = 0;
-    if (list.length > 0) {
-      checkedcount = 0;
-      $.each(list, function(i, v) {
-        tr = $(v).children()[0];
-        first_td = $(tr).children()[0];
-        row = $(first_td).children()[0];
-        data_input = $(row).data();
-        id = data_input.id;
-        no_ticket = data_input.no_ticket;
-        gross = data_input.gross;
-        tare = data_input.tare;
-        nett = data_input.nett;
-
-        if (gross.length > 0) {
-          gross = gross.replace(/\,/g, '');
+    if(total_selected > max_select) {
+      $(selector).prop("checked", false);
+      alert('Maximal '+max_select+' data timbang cu yang dapat dipilih.');
+    } else {
+      if (list.length > 0) {
+        checkedcount = 0;
+        $.each(list, function(i, v) {
+          tr = $(v).children()[0];
+          first_td = $(tr).children()[0];
+          row = $(first_td).children()[0];
+          data_input = $(row).data();
+          id = data_input.id;
+          no_ticket = data_input.no_ticket;
+          gross = data_input.gross;
+          tare = data_input.tare;
+          nett = data_input.nett;
+  
+          if (gross.length > 0) {
+            gross = gross.replace(/\,/g, '');
+          }
+          if (tare.length > 0) {
+            tare = tare.replace(/\,/g, '');
+          }
+          if (nett.length > 0) {
+            nett = nett.replace(/\,/g, '');
+          }
+          if (gross == "") {
+            gross = 0;
+          }
+          if (tare == "") {
+            tare = 0;
+          }
+          if (nett == "") {
+            nett = 0;
+          }
+          gross = parseInt(gross);
+          tare = parseInt(tare);
+          tare = parseInt(tare);
+          if ($(row).is(":checked")) {
+            $(v).attr('style','background: khaki;');
+            total_gross += gross;
+            total_tare += tare;
+            total += nett;
+            checkedcount++;
+          }else{
+            $(v).removeAttr('style');
+          }
+          $("#berat-in").val(total_gross);
+          $("#berat-out").val(total_tare);
+          $("#berat-nett").val(total);
+  
+        });
+        if (list.length == checkedcount) {
+          $("[name=CekAll]").prop("checked", true);
+        } else {
+          $("[name=CekAll]").prop("checked", false);
         }
-        if (tare.length > 0) {
-          tare = tare.replace(/\,/g, '');
-        }
-        if (nett.length > 0) {
-          nett = nett.replace(/\,/g, '');
-        }
-        if (gross == "") {
-          gross = 0;
-        }
-        if (tare == "") {
-          tare = 0;
-        }
-        if (nett == "") {
-          nett = 0;
-        }
-        gross = parseInt(gross);
-        tare = parseInt(tare);
-        tare = parseInt(tare);
-        if ($(row).is(":checked")) {
-          total_gross += gross;
-          total_tare += tare;
-          total += nett;
-          checkedcount++;
-        }
+      } else {
         $("#berat-in").val(total_gross);
         $("#berat-out").val(total_tare);
         $("#berat-nett").val(total);
-
-      });
-      if (list.length == checkedcount) {
-        $("[name=CekAll]").prop("checked", true);
-      } else {
-        $("[name=CekAll]").prop("checked", false);
       }
-    } else {
-      $("#berat-in").val(total_gross);
-      $("#berat-out").val(total_tare);
-      $("#berat-nett").val(total);
     }
   }
 
@@ -589,7 +599,7 @@
       } else {
         $("#data-timbang-cu tbody .item-checked[type=checkbox]").prop("checked", false);
       }
-      calculation_total_weight(null);
+      calculation_total_weight();
     });
     $("body").on("keydown", function(e) {
       var keyCode = e.keyCode || e.which;
