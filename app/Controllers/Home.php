@@ -165,15 +165,15 @@ class Home extends BaseController
         $data['whereMinggu5'] = date("d", strtotime($tglAwalMinggu5))." s/d ".date("d F Y", strtotime($tglAkhirMinggu5))  ;
         ///////////////////////////
 
-        $timbang1 = $model->getSelect("tbl_weight_scale", $tHariKemaren);
-        $timbang2 = $model->getSelect("tbl_weight_scale", $tHariIni);
-        $timbangAll = $model->getSelect("tbl_weight_scale", $tYear);
-        $timbangHour = $model->getSelect("tbl_weight_scale", $tPerJam);
-        $timbangMinggu1 = $model->getSelect("tbl_weight_scale", $whereMinggu1);
-        $timbangMinggu2 = $model->getSelect("tbl_weight_scale", $whereMinggu2);
-        $timbangMinggu3 = $model->getSelect("tbl_weight_scale", $whereMinggu3);
-        $timbangMinggu4 = $model->getSelect("tbl_weight_scale", $whereMinggu4);
-        $timbangMinggu5 = $model->getSelect("tbl_weight_scale", $whereMinggu5);
+        $timbang1 = $model->getSelectDb2("tbl_weight_scale", $tHariKemaren);
+        $timbang2 = $model->getSelectDb2("tbl_weight_scale", $tHariIni);
+        $timbangAll = $model->getSelectDb2("tbl_weight_scale", $tYear);
+        $timbangHour = $model->getSelectDb2("tbl_weight_scale", $tPerJam);
+        $timbangMinggu1 = $model->getSelectDb2("tbl_weight_scale", $whereMinggu1);
+        $timbangMinggu2 = $model->getSelectDb2("tbl_weight_scale", $whereMinggu2);
+        $timbangMinggu3 = $model->getSelectDb2("tbl_weight_scale", $whereMinggu3);
+        $timbangMinggu4 = $model->getSelectDb2("tbl_weight_scale", $whereMinggu4);
+        $timbangMinggu5 = $model->getSelectDb2("tbl_weight_scale", $whereMinggu5);
 
         $totalTimbang1 = 0;
         $totalTimbang2 = 0;
@@ -1111,15 +1111,15 @@ class Home extends BaseController
         $data['whereMinggu5'] = date("d", strtotime($tglAwalMinggu5))." s/d ".date("d F Y", strtotime($tglAkhirMinggu5))  ;
         ///////////////////////////
 
-        $timbang1 = $model->getSelect("tbl_weight_scale", $tHariKemaren);
-        $timbang2 = $model->getSelect("tbl_weight_scale", $tHariIni);
-        $timbangAll = $model->getSelect("tbl_weight_scale", $tYear);
-        $timbangHour = $model->getSelect("tbl_weight_scale", $tPerJam);
-        $timbangMinggu1 = $model->getSelect("tbl_weight_scale", $whereMinggu1);
-        $timbangMinggu2 = $model->getSelect("tbl_weight_scale", $whereMinggu2);
-        $timbangMinggu3 = $model->getSelect("tbl_weight_scale", $whereMinggu3);
-        $timbangMinggu4 = $model->getSelect("tbl_weight_scale", $whereMinggu4);
-        $timbangMinggu5 = $model->getSelect("tbl_weight_scale", $whereMinggu5);
+        $timbang1 = $model->getSelectDb2("tbl_weight_scale", $tHariKemaren);
+        $timbang2 = $model->getSelectDb2("tbl_weight_scale", $tHariIni);
+        $timbangAll = $model->getSelectDb2("tbl_weight_scale", $tYear);
+        $timbangHour = $model->getSelectDb2("tbl_weight_scale", $tPerJam);
+        $timbangMinggu1 = $model->getSelectDb2("tbl_weight_scale", $whereMinggu1);
+        $timbangMinggu2 = $model->getSelectDb2("tbl_weight_scale", $whereMinggu2);
+        $timbangMinggu3 = $model->getSelectDb2("tbl_weight_scale", $whereMinggu3);
+        $timbangMinggu4 = $model->getSelectDb2("tbl_weight_scale", $whereMinggu4);
+        $timbangMinggu5 = $model->getSelectDb2("tbl_weight_scale", $whereMinggu5);
 
         $totalTimbang1 = 0;
         $totalTimbang2 = 0;
