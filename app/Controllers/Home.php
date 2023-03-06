@@ -640,11 +640,11 @@ class Home extends BaseController
 
     public function saveTruckCU()
     {   
-        if(!$this->request->getPost('Checkbox')):
-            $return = array("status" => "error", "msg" => "Silahkan pilih berat timbang CU", "no" => $this->request->getPost('no_transaksi'));
-            return json_encode($return);
-            exit;
-        endif;
+        // if(!$this->request->getPost('Checkbox')):
+        //     $return = array("status" => "error", "msg" => "Silahkan pilih berat timbang CU", "no" => $this->request->getPost('no_transaksi'));
+        //     return json_encode($return);
+        //     exit;
+        // endif;
         // $DataPost = $this->request->getVar();
         // print_r($DataPost);
         // exit;
@@ -702,37 +702,42 @@ class Home extends BaseController
         ];
         $model = new Home_model();
         $insert = $model->dataInsert('tbl_weight_scale', $data);
-        if($insert){
-            $det_id = $this->request->getPost('det_id');
-            $CheckBox = $this->request->getPost('Checkbox');
-            $NoTicket = $this->request->getPost('no_ticket');
-            $Gross = $this->request->getPost('gross');
-            $Tare = $this->request->getPost('tare');
-            $Nett = $this->request->getPost('nett');
-            foreach($CheckBox as $i => $v){
-                foreach($det_id as $ii => $vv){
-                    if($v == $vv){
-                        $det_no_ticket = $NoTicket[$ii];
-                        $det_gross = $Gross[$ii];
-                        $det_tare = $Tare[$ii];
-                        $det_nett = $Nett[$ii];
+        // if($insert){
+        //     $det_id = $this->request->getPost('det_id');
+        //     $CheckBox = $this->request->getPost('Checkbox');
+        //     $NoTicket = $this->request->getPost('no_ticket');
+        //     $Gross = $this->request->getPost('gross');
+        //     $Tare = $this->request->getPost('tare');
+        //     $Nett = $this->request->getPost('nett');
+        //     foreach($CheckBox as $i => $v){
+        //         foreach($det_id as $ii => $vv){
+        //             if($v == $vv){
+        //                 $det_no_ticket = $NoTicket[$ii];
+        //                 $det_gross = $Gross[$ii];
+        //                 $det_tare = $Tare[$ii];
+        //                 $det_nett = $Nett[$ii];
         
-                        $data_detail = array(
-                            'no_transaksi' => $no_transaksi,
-                            'no_ticket' => $det_no_ticket,
-                            'gross' => $det_gross,
-                            'tare' => $det_tare,
-                            'nett' => $det_nett,
-                        );
-                        $insert_detail = $model->dataInsert('tbl_wcs_detail', $data_detail);
-                    }
-                }
-            }
-            if($insert_detail) {
-                $return = array("status" => "success", "msg" => "Data timbangan berhasil di simpan !" , "no" => $no_transaksi);
-            }else{
-                $return = array("status" => "error", "msg" => "Data detail timbangan gagal disimpan , mohon segera menghubungi administrator !", "no" => $no_transaksi);
-            }
+        //                 $data_detail = array(
+        //                     'no_transaksi' => $no_transaksi,
+        //                     'no_ticket' => $det_no_ticket,
+        //                     'gross' => $det_gross,
+        //                     'tare' => $det_tare,
+        //                     'nett' => $det_nett,
+        //                 );
+        //                 $insert_detail = $model->dataInsert('tbl_wcs_detail', $data_detail);
+        //             }
+        //         }
+        //     }
+        //     if($insert_detail) {
+        //         $return = array("status" => "success", "msg" => "Data timbangan berhasil di simpan !" , "no" => $no_transaksi);
+        //     }else{
+        //         $return = array("status" => "error", "msg" => "Data detail timbangan gagal disimpan , mohon segera menghubungi administrator !", "no" => $no_transaksi);
+        //     }
+        // }else{
+        //     $return = array("status" => "error", "msg" => "Data timbangan gagal disimpan , mohon segera menghubungi administrator !", "no" => $no_transaksi);
+        // }
+        if($insert){
+            $return = array("status" => "success", "msg" => "Data timbangan berhasil di simpan !" , "no" => $no_transaksi);
         }else{
             $return = array("status" => "error", "msg" => "Data timbangan gagal disimpan , mohon segera menghubungi administrator !", "no" => $no_transaksi);
         }

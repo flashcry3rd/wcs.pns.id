@@ -17,6 +17,27 @@
   div#data-timbang-cu_filter {
     float: right;
   }
+
+  label.card-timbang {
+    width: 100%;
+  }
+
+  .card-input-element {
+    display: none;
+  }
+
+  .card-input {
+    margin: 10px;
+    padding: 0px;
+  }
+
+  .card-input:hover {
+    cursor: pointer;
+  }
+
+  .card-input-element:checked+.card-input {
+    box-shadow: 0 0 1px 1px #2ecc71;
+  }
 </style>
 <div class="container-fluid">
   <div class="row mt-4">
@@ -68,11 +89,180 @@
   </div>
 </div>
 
+<!-- <div class="container-fluid">
+  <div class="row mt-4">
+    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+      <div class="card">
+        <div class="card-body p-3">
+          <div class="row">
+            <div class="col-8">
+              <div class="numbers">
+                <p class="text-sm mb-0 text-capitalize font-weight-bold">Table 1</p>
+                <h5 class="font-weight-bolder mb-0" id="table-1">
+                  <span class="text-success text-sm font-weight-bolder"></span>
+                </h5>
+              </div>
+            </div>
+            <div class="col-4 text-end">
+              <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+      <div class="card">
+        <div class="card-body p-3">
+          <div class="row">
+            <div class="col-8">
+              <div class="numbers">
+                <p class="text-sm mb-0 text-capitalize font-weight-bold">Table 2</p>
+                <h5 class="font-weight-bolder mb-0" id="table-2">
+                  <span class="text-success text-sm font-weight-bolder"></span>
+                </h5>
+              </div>
+            </div>
+            <div class="col-4 text-end">
+              <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+      <div class="card">
+        <div class="card-body p-3">
+          <div class="row">
+            <div class="col-8">
+              <div class="numbers">
+                <p class="text-sm mb-0 text-capitalize font-weight-bold">Table 3</p>
+                <h5 class="font-weight-bolder mb-0" id="table-3">
+                  <span class="text-success text-sm font-weight-bolder"></span>
+                </h5>
+              </div>
+            </div>
+            <div class="col-4 text-end">
+              <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+      <div class="card">
+        <div class="card-body p-3">
+          <div class="row">
+            <div class="col-8">
+              <div class="numbers">
+                <p class="text-sm mb-0 text-capitalize font-weight-bold">Table 4</p>
+                <h5 class="font-weight-bolder mb-0" id="table-4">
+                  <span class="text-success text-sm font-weight-bolder"></span>
+                </h5>
+              </div>
+            </div>
+            <div class="col-4 text-end">
+              <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+      <div class="card">
+        <div class="card-body p-3">
+          <div class="row">
+            <div class="col-8">
+              <div class="numbers">
+                <p class="text-sm mb-0 text-capitalize font-weight-bold">Table 5</p>
+                <h5 class="font-weight-bolder mb-0" id="table-5">
+                  <span class="text-success text-sm font-weight-bolder"></span>
+                </h5>
+              </div>
+            </div>
+            <div class="col-4 text-end">
+              <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
 <div class="container-fluid">
   <div class="row mt-4">
     <div class="col-12">
       <form id="form-wcs" method="post">
         <div class="col-12">
+          <div class="row">
+            <div class="col-md-3 col-lg-3 col-sm-3">
+              <label class="card-timbang" id="table-1">
+                <input type="radio" name="berat_timbang" selected checked class="card-input-element" />
+                <div class="card card-default card-input">
+                  <div class="card-header">Table 1</div>
+                  <div class="card-body">
+                    <h5 class="font-weight-bolder mb-0"></h5>
+                  </div>
+                </div>
+              </label>
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-3">
+              <label class="card-timbang" id="table-2">
+                <input type="radio" name="berat_timbang" class="card-input-element" />
+                <div class="card card-default card-input">
+                  <div class="card-header">Table 2</div>
+                  <div class="card-body">
+                    <h5 class="font-weight-bolder mb-0"></h5>
+                  </div>
+                </div>
+              </label>
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-3">
+              <label class="card-timbang" id="table-3">
+                <input type="radio" name="berat_timbang" class="card-input-element" />
+                <div class="card card-default card-input">
+                  <div class="card-header">Table 3</div>
+                  <div class="card-body">
+                    <h5 class="font-weight-bolder mb-0"></h5>
+                  </div>
+                </div>
+              </label>
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-3" id="table-4">
+              <label class="card-timbang">
+                <input type="radio" name="berat_timbang" class="card-input-element" />
+                <div class="card card-default card-input">
+                  <div class="card-header">Table 4</div>
+                  <div class="card-body">
+                    <h5 class="font-weight-bolder mb-0"></h5>
+                  </div>
+                </div>
+              </label>
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-3" id="table-5">
+              <label class="card-timbang">
+                <input type="radio" name="berat_timbang" class="card-input-element" />
+                <div class="card card-default card-input">
+                  <div class="card-header">Table 5</div>
+                  <div class="card-body">
+                    <h5 class="font-weight-bolder mb-0"></h5>
+                  </div>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="col-12">
           <div class="row">
             <div class="card">
               <div class="card-body">
@@ -84,10 +274,10 @@
                     <thead>
                       <tr>
                         <td>
-                          <!-- <div class="checkbox checkbox-primary div-check-all" style="margin:0px;text-align:left;">
+                          <div class="checkbox checkbox-primary div-check-all" style="margin:0px;text-align:left;">
                             <input type="checkbox" name="CekAll" value="">
                             <label for="CekAll"></label>
-                          </div> -->
+                          </div>
                         </td>
                         <th>No. Ticket</th>
                         <th>Date & Time</th>
@@ -103,7 +293,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="row">
           <div class="card h-100 badan-read" id="badan-read">
             <div class="card-body">
@@ -384,36 +574,36 @@
         document.querySelector("#berat-out").value = data['timbangOut'];
 
         $("#tipe_tiket").val(data['tipe']);
-          $("#get-serial-messages").val("");
-          $("#no_transaksi").val(data['rd'][1]);
-          $("#ancak").val(data['rd'][9]);
-          // $("#no_tiket").val(data['rd'][2]);
-          $("#no_petak").val(data['rd'][2]);
-          $("#tiket_barge").val(data['rd'][3]);
-          $("#kontraktor").val(data['nama_kontraktor']);
-          $("#kode_kontraktor").val(data['rd'][4]);
-          $("#kon_delivery").val(data['nama_kon_delivery']);
-          $("#kode_kon_delivery").val(data['rd'][5]);
-          $("#no_barge").val(data['rd'][6]);
-          $("#no_truck").val(data['rd'][7]);
-          $("#driver").val(data['rd'][8]);
-          // $("#no_polisi").val(data['rd'][10]);
-          $("#ancak").val(data['rd'][9]);
-          $("#rute").val(data['rd'][10]);
-          $("#tujuan").val(data['rd'][11]);
-          $("#no_tug_boat").val(data['rd'][12]);
-          $("#nahkoda").val(data['rd'][13]);
-          $("#jenis_tebu").val(data['rd'][14]);
-          $("#no_alat1").val(data['rd'][15]);
-          $("#no_alat2").val(data['rd'][16]);
-          $("#op_alat1").val(data['rd'][17]);
-          $("#op_alat2").val(data['rd'][18]);
-          $("#tgl_muat").val(data['tgl_muat']);
-          $("#jam_muat").val(data['jam_muat']);
-          $("#tgl_tebang").val(data['tgl_tebang']);
-          $("#createby").val(data['rd'][19]);
-          $("#warning").html(data['alert']);
-          $("#berat-in-time").val(data['berat_in_time']);
+        $("#get-serial-messages").val("");
+        $("#no_transaksi").val(data['rd'][1]);
+        $("#ancak").val(data['rd'][9]);
+        // $("#no_tiket").val(data['rd'][2]);
+        $("#no_petak").val(data['rd'][2]);
+        $("#tiket_barge").val(data['rd'][3]);
+        $("#kontraktor").val(data['nama_kontraktor']);
+        $("#kode_kontraktor").val(data['rd'][4]);
+        $("#kon_delivery").val(data['nama_kon_delivery']);
+        $("#kode_kon_delivery").val(data['rd'][5]);
+        $("#no_barge").val(data['rd'][6]);
+        $("#no_truck").val(data['rd'][7]);
+        $("#driver").val(data['rd'][8]);
+        // $("#no_polisi").val(data['rd'][10]);
+        $("#ancak").val(data['rd'][9]);
+        $("#rute").val(data['rd'][10]);
+        $("#tujuan").val(data['rd'][11]);
+        $("#no_tug_boat").val(data['rd'][12]);
+        $("#nahkoda").val(data['rd'][13]);
+        $("#jenis_tebu").val(data['rd'][14]);
+        $("#no_alat1").val(data['rd'][15]);
+        $("#no_alat2").val(data['rd'][16]);
+        $("#op_alat1").val(data['rd'][17]);
+        $("#op_alat2").val(data['rd'][18]);
+        $("#tgl_muat").val(data['tgl_muat']);
+        $("#jam_muat").val(data['jam_muat']);
+        $("#tgl_tebang").val(data['tgl_tebang']);
+        $("#createby").val(data['rd'][19]);
+        $("#warning").html(data['alert']);
+        $("#berat-in-time").val(data['berat_in_time']);
         if (data['timbangOut'] == 0) {
           $("#submit-cu").show(500);
           $("#cetak-in").fadeIn(500);
@@ -447,6 +637,7 @@
       },
     })
     // document.querySelector("#serial-messages-container").value = await serialScaleController.read()
+    $("html, body").animate({ scrollTop: $(document).height() }, 1000);
   }
 
 
@@ -506,6 +697,30 @@
         var url = "<?= base_url() ?>/barcode-in?file=" + data['file'] + "&no=" + data['no'];
         alert(data['msg']);
         $("#form-wcs").trigger('reset');
+        // reloadTable();
+        // window.open(url, '_blank');
+        // print(url);
+        // $("#badan").fadeOut(500);
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log(jqXHR.responseText);
+      },
+    })
+  })
+
+  $("#submit-cu").click(function() {
+    var data = $("#form-wcs").serialize();
+    $.ajax({
+      data: $("#form-wcs").serialize(),
+      type: 'post',
+      dataType: 'json',
+      cache: false,
+      url: '<?= base_url() ?>/home/saveTruckCU',
+      success: function(data) {
+        console.log(data);
+        var url = "<?= base_url() ?>/barcode-in?file=" + data['file'] + "&no=" + data['no'];
+        alert(data['msg']);
+        $("#form-wcs").trigger('reset');
         reloadTable();
         // window.open(url, '_blank');
         // print(url);
@@ -526,9 +741,9 @@
     total_selected = $("#data-timbang-cu tbody input[name='Checkbox[]']:checked").length;
     console.log(list);
     total_weight = 0;
-    if(total_selected > max_select) {
+    if (total_selected > max_select) {
       $(selector).prop("checked", false);
-      alert('Maximal '+max_select+' data timbang cu yang dapat dipilih.');
+      alert('Maximal ' + max_select + ' data timbang cu yang dapat dipilih.');
     } else {
       if (list.length > 0) {
         checkedcount = 0;
@@ -542,7 +757,7 @@
           gross = data_input.gross;
           tare = data_input.tare;
           nett = data_input.nett;
-  
+
           if (gross.length > 0) {
             gross = gross.replace(/\,/g, '');
           }
@@ -563,20 +778,20 @@
           }
           gross = parseInt(gross);
           tare = parseInt(tare);
-          tare = parseInt(tare);
+          nett = parseInt(nett);
           if ($(row).is(":checked")) {
-            $(v).attr('style','background: khaki;');
+            $(v).attr('style', 'background: khaki;');
             total_gross += gross;
             total_tare += tare;
             total += nett;
             checkedcount++;
-          }else{
+          } else {
             $(v).removeAttr('style');
           }
           $("#berat-in").val(total_gross);
           $("#berat-out").val(total_tare);
           $("#berat-nett").val(total);
-  
+
         });
         if (list.length == checkedcount) {
           $("[name=CekAll]").prop("checked", true);
@@ -607,7 +822,7 @@
         e.preventDefault();
         $("#get-serial-messages").focus();
         $("#get-serial-messages").stop().animate({
-            scrollTop: $("#get-serial-messages").offset().top
+          scrollTop: $("#get-serial-messages").offset().top
         }, 1000);
       }
     });
@@ -649,4 +864,56 @@
   function reloadTable() {
     table_cu.ajax.reload();
   }
+
+  function getData() {
+    fetch("http://localhost:3000/data").then(res => res.json().then(data => {
+      console.log(data);
+      num = 1;
+      $.each(data.data_weight, function(i, v) {
+        if (v != 0) {
+          if (v.includes("Opening")) {
+            full_text = v;
+            v = 0;
+          } else {
+            split_text = v.split(",");
+            slice_text = split_text[2];
+            slice_text = slice_text.replace("+", "");
+            slice_text = slice_text.replace("Kg", "");
+            if (slice_text != "000.000") {
+              full_text = slice_text + " Kg";
+              v = parseFloat(slice_text);
+            } else {
+              v = 0;
+              full_text = v + " Kg";
+            }
+          }
+        } else {
+          full_text = v + " Kg";
+        }
+        $("#table-" + num + " input").val(v).trigger('change');
+        $("#table-" + num + " .card-body h5").text(full_text);
+        // console.log($('input[name="berat_timbang"]:checked').val());
+        num++;
+      });
+      // $("#table-2").text(data.data2);
+    }))
+  }
+  setInterval("getData()", 500);
+
+  $('[name="berat_timbang"]').change(function() {
+    // console.log(this);
+    // val = $(this).val();
+    val = $("input[name=berat_timbang]:checked").val();
+    // console.log(val);
+    tare = 0;
+    // gross = parseInt(val);
+    tare = parseInt(tare);
+    if (val != 0) {
+      tare = 30;
+    }
+    total = val - tare;
+    $("#berat-in").val(val);
+    $("#berat-out").val(tare);
+    $("#berat-nett").val(total);
+  })
 </script>
