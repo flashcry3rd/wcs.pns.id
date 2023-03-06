@@ -37,7 +37,7 @@ const SerialPort1 = require('serialport').SerialPort,
 }).setEncoding('utf8');
 
 const SerialPort2 = require('serialport').SerialPort,
-      port2 = new SerialPort2({path: "COM8", baudRate: 9600,  dataBits: 7, stopBits: 1, bufferSize: '16777216'}, err => {
+      port2 = new SerialPort2({path: "COM6", baudRate: 9600,  dataBits: 7, stopBits: 1, bufferSize: '16777216'}, err => {
     if(err != null) {
         console.log(err)
         err2 = err.message;
@@ -46,7 +46,7 @@ const SerialPort2 = require('serialport').SerialPort,
 }).setEncoding('utf8');
 
 const SerialPort3 = require('serialport').SerialPort,
-      port3 = new SerialPort3({path: "COM8", baudRate: 9600,  dataBits: 7, stopBits: 1, bufferSize: '16777216'}, err => {
+      port3 = new SerialPort3({path: "COM7", baudRate: 9600,  dataBits: 7, stopBits: 1, bufferSize: '16777216'}, err => {
     if(err != null) {
         console.log(err)
         err3 = err.message;
@@ -64,7 +64,7 @@ const SerialPort4 = require('serialport').SerialPort,
 }).setEncoding('utf8');
 
 const SerialPort5 = require('serialport').SerialPort,
-      port5 = new SerialPort5({path: "COM8", baudRate: 9600,  dataBits: 7, stopBits: 1, bufferSize: '16777216'}, err => {
+      port5 = new SerialPort5({path: "COM9", baudRate: 9600,  dataBits: 7, stopBits: 1, bufferSize: '16777216'}, err => {
     if(err != null) {
         console.log(err)
         err5 = err.message;
