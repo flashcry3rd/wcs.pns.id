@@ -19,7 +19,7 @@
 
     <div class="col-12">
       <div class="row">
-        <div class="card" id="badan-connect">
+        <div class="card" id="badan-connect" hidden>
           <div class="card-body">
             <div class="row" style="text-align: center;">
               <div class="center">
@@ -45,7 +45,7 @@
   <div class="row mt-4">
     <div class="col-12">
       <div class="row">
-        <div class="card h-100 badan-read" style="display: none;" >
+        <div class="card h-100 badan-read" >
           <div class="card-body">
             <div class="row" style="text-align: center;" >
               <div class="center">
@@ -71,9 +71,9 @@
     <div class="col-12">
       <form id="form-wcs" method="post">
         <div class="row">
-          <div class="card h-100 badan-read" id="badan-read" style="display: none; " >
+          <div class="card h-100 badan-read" id="badan-read" >
             <div class="card-body" >
-            <div id="badan" style="height: 500px; overflow-y: auto; overflow-x: hidden; display: none" >
+            <div id="badan" style="height: 500px; overflow-y: auto; overflow-x: hidden;" >
               <div class="row" >
               
                 <div class="form-group">
@@ -316,8 +316,8 @@
                     await port.open({ baudRate: 9600, dataBits: 7, stopBits: 1, bufferSize: '16777216' });
                     this.reader = port.readable.getReader();
                     let signals = await port.getSignals();
-                    $("#badan-connect").fadeOut(500); 
-                    $(".badan-read").fadeIn(500);
+                    // $("#badan-connect").fadeOut(500); 
+                    // $(".badan-read").fadeIn(500);
                 }
                 catch (err) {
                     console.error('There was an error opening the serial port:', err);
@@ -470,6 +470,42 @@
         var printwin = window.open(url, '_blank');
         printwin.print();
     }
+
+
+    function getData() {
+    fetch("http://localhost:3000/data").then(res => res.json().then(data => {
+      console.log(data);
+      num = 1;
+      $.each(data.data_weight, function(i, v) {
+        if (v != 0) {
+          if (v.includes("Opening")) {
+            full_text = v;
+            v = 0;
+          } else {
+            split_text = v.split(",");
+            slice_text = split_text[2];
+            slice_text = slice_text.replace("+", "");
+            slice_text = slice_text.replace("Kg", "");
+            if (slice_text != "000.000") {
+              full_text = slice_text + " Kg";
+              v = parseFloat(slice_text);
+            } else {
+              v = 0;
+              full_text = v + " Kg";
+            }
+          }
+        } else {
+          full_text = v + " Kg";
+        }
+        $("#table-" + num + " input").val(v).trigger('change');
+        $("#table-" + num + " .card-body h5").text(full_text);
+        // console.log($('input[name="berat_timbang"]:checked').val());
+        num++;
+      });
+      // $("#table-2").text(data.data2);
+    }))
+  }
+  setInterval("getData()", 500);
 
   </script>
   
