@@ -58,7 +58,7 @@
                 </div>
                 <label ><i><a style="color: red;" id='warning'></a></i></label><br />
                 <label >Indikator : </label>
-                <div style="background-color: grey;"><h4 id="indikator"></h4></div>
+                <div style="background-color: #a9a9a9;"><h4 id="indikator"></h4></div>
               </div>
             </div>
           </div>
