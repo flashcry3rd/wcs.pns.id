@@ -20,13 +20,35 @@ var stream2 = 0;
 var stream3 = 0;
 var stream4 = 0;
 var stream5 = 0;
+var stream6 = 0;
+var stream7 = 0;
 var err1 = null;
 var err2 = null;
 var err3 = null;
 var err4 = null;
 var err5 = null;
+var err6 = null;
+var err7 = null;
 
 const { ReadlineParser } = require('@serialport/parser-readline')
+const SerialPort6 = require('serialport').SerialPort,
+      port6 = new SerialPort6({path: "COM3", baudRate: 9600,  dataBits: 7, stopBits: 1, bufferSize: '16777216'}, err => {
+    if(err != null) {
+        console.log(err)
+        err6 = err.message;
+        // return
+    }
+}).setEncoding('utf8');
+
+const SerialPort7 = require('serialport').SerialPort,
+      port7 = new SerialPort7({path: "COM4", baudRate: 9600,  dataBits: 7, stopBits: 1, bufferSize: '16777216'}, err => {
+    if(err != null) {
+        console.log(err)
+        err7 = err.message;
+        // return
+    }
+}).setEncoding('utf8');
+
 const SerialPort1 = require('serialport').SerialPort,
       port1 = new SerialPort1({path: "COM5", baudRate: 9600,  dataBits: 7, stopBits: 1, bufferSize: '16777216'}, err => {
     if(err != null) {
@@ -84,6 +106,8 @@ const parser2 = port2.pipe(new ReadlineParser({ delimiter: '\r\n' }))
 const parser3 = port3.pipe(new ReadlineParser({ delimiter: '\r\n' }))
 const parser4 = port4.pipe(new ReadlineParser({ delimiter: '\r\n' }))
 const parser5 = port5.pipe(new ReadlineParser({ delimiter: '\r\n' }))
+const parser6 = port6.pipe(new ReadlineParser({ delimiter: '\r\n' }))
+const parser7 = port7.pipe(new ReadlineParser({ delimiter: '\r\n' }))
 // parser.on('data', console.log)
 
 app.get('/data', (req,res) => {
@@ -137,6 +161,25 @@ app.get('/data', (req,res) => {
     }else{
         stream5 = err5;
     }
+    if(err6 == null){
+        parser6.on('data', data => {
+            data = JSON.stringify(data)
+            data = JSON.parse(data)
+            stream6 = data
+        })
+    }else{
+        stream6 = err6;
+    }
+
+    if(err7 == null){
+        parser7.on('data', data => {
+            data = JSON.stringify(data)
+            data = JSON.parse(data)
+            stream7 = data
+        })
+    }else{
+        stream7 = err7;
+    }
     // portx.on('readable', () => {
     //     console.log('Data2:', portx.read());
     // })
@@ -148,6 +191,8 @@ app.get('/data', (req,res) => {
             data3: stream3,
             data4: stream4,
             data5: stream5,
+            data6: stream6,
+            data7: stream7,
         },
         data_post: req.body,
     }

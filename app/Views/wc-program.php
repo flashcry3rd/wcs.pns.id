@@ -56,7 +56,9 @@
                 <br>
                 <input class="form-control" type="text" id="get-serial-messages" >
                 </div>
-                <label ><i><a style="color: red;" id='warning'></a></i></label>
+                <label ><i><a style="color: red;" id='warning'></a></i></label><br />
+                <label >Indikator : </label>
+                <div style="background-color: grey;"><h4 id="indikator"></h4></div>
               </div>
             </div>
           </div>
@@ -74,7 +76,26 @@
           <div class="card h-100 badan-read" id="badan-read" >
             <div class="card-body" >
             <div id="badan" style="height: 500px; overflow-y: auto; overflow-x: hidden;" >
-              <div class="row" >
+
+
+              <div class="row mt-4" >
+                <div class="col-lg-6 col-md-6">
+                  <div class="form-group">  
+                    <h5>Berat Timbang In </h5>
+                    <input id="berat-in" name="berat_in" class="message form-control barcode" readonly >
+                    <input id="berat-in-time" name="berat_in_time"  class="message form-control barcode" hidden>
+                  </div>
+
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <div class="form-group">
+                    <h5>Berat Timbang Out </h5>
+                    <input id="berat-out" name="berat_out" class="message form-control barcode" readonly >
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mt-4" >
               
                 <div class="form-group">
                   <h5 >No. Transaksi </h5>
@@ -252,22 +273,7 @@
 
               </div>
               
-              <div class="row mt-4" >
-                <div class="col-lg-6 col-md-6">
-                  <div class="form-group">  
-                    <h5>Berat Timbang In </h5>
-                    <input id="berat-in" name="berat_in" class="message form-control barcode" readonly >
-                    <input id="berat-in-time" name="berat_in_time"  class="message form-control barcode" hidden>
-                  </div>
-
-                </div>
-                <div class="col-lg-6 col-md-6">
-                  <div class="form-group">
-                    <h5>Berat Timbang Out </h5>
-                    <input id="berat-out" name="berat_out" class="message form-control barcode" readonly >
-                  </div>
-                </div>
-              </div>
+             
 
               <div class="row" >
                 <div class="col-lg-6 col-md-6 mt-4">
@@ -300,7 +306,7 @@
   <script src="./assets/js/core/bootstrap.min.js"></script>
   <script src="./assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="./assets/js/plugins/smooth-scrollbar.min.js"></script>
-  <script type="module">
+  <script type="text/javascript">
 
     
     class SerialScaleController {
@@ -357,10 +363,11 @@
     });
 
     async function getSerialMessage() {
-      const dataBit = await serialScaleController.read();
+      // const dataBit = await serialScaleController.read();
       var value = $("#get-serial-messages").val();
+      var data = $("#indikator").html();
       $.ajax({
-        data: {data: dataBit, value: value},
+        data: {data: data, value: value},
         cache: false,
         dataType: "json",
         type: "post",
@@ -481,6 +488,8 @@
           if (v.includes("Opening")) {
             full_text = v;
             v = 0;
+            // $("#indikator").html(v).trigger('change');
+            // $("#indikator").html(full_text);
           } else {
             split_text = v.split(",");
             slice_text = split_text[2];
@@ -493,12 +502,15 @@
               v = 0;
               full_text = v + " Kg";
             }
+            $("#indikator").html(v).trigger('change');
+            $("#indikator").html(full_text);
           }
         } else {
           full_text = v + " Kg";
+          // $("#indikator").html(v).trigger('change');
+          // $("#indikator").html(full_text);
         }
-        $("#table-" + num + " input").val(v).trigger('change');
-        $("#table-" + num + " .card-body h5").text(full_text);
+       
         // console.log($('input[name="berat_timbang"]:checked').val());
         num++;
       });
