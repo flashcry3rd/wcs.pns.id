@@ -879,9 +879,10 @@
             slice_text = split_text[2];
             slice_text = slice_text.replace("+", "");
             slice_text = slice_text.replace("Kg", "");
+            slice_text_num = slice_text.replace(".", "");
             if (slice_text != "000.000") {
               full_text = slice_text + " Kg";
-              v = parseFloat(slice_text);
+              v = parseFloat(slice_text_num);
             } else {
               v = 0;
               full_text = v + " Kg";
