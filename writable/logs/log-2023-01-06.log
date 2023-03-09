@@ -1,0 +1,42 @@
+ERROR - 2023-01-06 09:24:55 --> Error connecting to the database: No connection could be made because the target machine actively refused it.
+
+CRITICAL - 2023-01-06 09:24:55 --> Unable to connect to the database.
+Main connection [MySQLi]: No connection could be made because the target machine actively refused it.
+
+#0 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\Database\BaseConnection.php(577): CodeIgniter\Database\BaseConnection->initialize()
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1588): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#2 C:\xampp\htdocs\wcs.pns.id\app\Models\Home_model.php(9): CodeIgniter\Database\BaseBuilder->getWhere(Array)
+#3 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(37): App\Models\Home_model->getSelect('master_user', Array)
+#4 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->login()
+#5 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#6 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2023-01-06 23:20:13 --> Invalid argument supplied for foreach()
+#0 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(122): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Invalid argumen...', 'C:\\xampp\\htdocs...', 122, Array)
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->serialData()
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-06 23:20:13 --> Invalid argument supplied for foreach()
+#0 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(122): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Invalid argumen...', 'C:\\xampp\\htdocs...', 122, Array)
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->serialData()
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-06 23:20:14 --> Invalid argument supplied for foreach()
+#0 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(122): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Invalid argumen...', 'C:\\xampp\\htdocs...', 122, Array)
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->serialData()
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-06 23:20:43 --> Invalid argument supplied for foreach()
+#0 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(122): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Invalid argumen...', 'C:\\xampp\\htdocs...', 122, Array)
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->serialData()
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}

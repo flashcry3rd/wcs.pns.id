@@ -1,0 +1,147 @@
+CRITICAL - 2023-01-10 09:41:41 --> Undefined offset: -1
+#0 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(117): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 117, Array)
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->serialData()
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-10 09:43:28 --> file_put_contents(http://localhost/wcs.pns.id/assets/qr/DH52E32E060123145631.png): failed to open stream: HTTP wrapper does not support writeable connections
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'file_put_conten...', 'C:\\xampp\\htdocs...', 17, Array)
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\endroid\qr-code\src\Writer\Result\AbstractResult.php(17): file_put_contents('http://localhos...', '\x89PNG\r\n\x1A\n\x00\x00\x00\rIHD...')
+#2 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(211): Endroid\QrCode\Writer\Result\AbstractResult->saveToFile('http://localhos...')
+#3 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->saveTruckIn()
+#4 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#5 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2023-01-10 09:43:28 --> Uncaught CodeIgniter\Format\Exceptions\FormatException: Failed to parse json string, error: "Malformed UTF-8 characters, possibly incorrectly encoded". in C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\Format\JSONFormatter.php:41
+Stack trace:
+#0 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\Format\JSONFormatter.php(41): CodeIgniter\Format\Exceptions\FormatException::forInvalidJSON('Malformed UTF-8...')
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\API\ResponseTrait.php(341): CodeIgniter\Format\JSONFormatter->format(Array)
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\API\ResponseTrait.php(99): CodeIgniter\Debug\Exceptions->format(Array)
+#3 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\Debug\Exceptions.php(115): CodeIgniter\Debug\Exceptions->respond(Array, 500)
+#4 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(ErrorException))
+#5 {main}
+  thrown
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-10 10:33:16 --> Trying to get property 'nama_vendor' of non-object
+#0 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(140): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get p...', 'C:\\xampp\\htdocs...', 140, Array)
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->serialData()
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-10 10:35:14 --> Invalid argument supplied for foreach()
+#0 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(127): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Invalid argumen...', 'C:\\xampp\\htdocs...', 127, Array)
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->serialData()
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-10 10:35:14 --> Call to undefined function App\Controllers\arrray()
+#0 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->saveTruckIn()
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-10 10:35:42 --> Trying to get property 'nama_vendor' of non-object
+#0 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(140): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get p...', 'C:\\xampp\\htdocs...', 140, Array)
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->serialData()
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-10 10:38:32 --> Invalid argument supplied for foreach()
+#0 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(127): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Invalid argumen...', 'C:\\xampp\\htdocs...', 127, Array)
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->serialData()
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-10 10:38:50 --> Invalid argument supplied for foreach()
+#0 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(127): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Invalid argumen...', 'C:\\xampp\\htdocs...', 127, Array)
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->serialData()
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-10 10:39:07 --> Invalid argument supplied for foreach()
+#0 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(127): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Invalid argumen...', 'C:\\xampp\\htdocs...', 127, Array)
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->serialData()
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-10 10:39:22 --> Trying to get property 'nama_vendor' of non-object
+#0 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(140): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get p...', 'C:\\xampp\\htdocs...', 140, Array)
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->serialData()
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-10 10:40:45 --> Invalid argument supplied for foreach()
+#0 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(127): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Invalid argumen...', 'C:\\xampp\\htdocs...', 127, Array)
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->serialData()
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-10 10:40:51 --> Trying to get property 'nama_vendor' of non-object
+#0 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(140): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get p...', 'C:\\xampp\\htdocs...', 140, Array)
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->serialData()
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-10 10:43:57 --> Invalid argument supplied for foreach()
+#0 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(127): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Invalid argumen...', 'C:\\xampp\\htdocs...', 127, Array)
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->serialData()
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-10 16:57:25 --> Undefined index: no_petak
+#0 C:\xampp\htdocs\wcs.pns.id\app\Views\data-timbang.php(33): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 33, Array)
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\View\View.php(210): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\Common.php(1089): CodeIgniter\View\View->render('data-timbang', Array, true)
+#4 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(118): view('data-timbang', Array)
+#5 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->data_timbang()
+#6 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2023-01-10 16:57:26 --> Undefined index: no_petak
+#0 C:\xampp\htdocs\wcs.pns.id\app\Views\data-timbang.php(33): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 33, Array)
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\View\View.php(210): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\Common.php(1089): CodeIgniter\View\View->render('data-timbang', Array, true)
+#4 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(118): view('data-timbang', Array)
+#5 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->data_timbang()
+#6 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2023-01-10 16:57:27 --> Undefined index: no_petak
+#0 C:\xampp\htdocs\wcs.pns.id\app\Views\data-timbang.php(33): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 33, Array)
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\View\View.php(210): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\Common.php(1089): CodeIgniter\View\View->render('data-timbang', Array, true)
+#4 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(118): view('data-timbang', Array)
+#5 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->data_timbang()
+#6 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2023-01-10 16:57:30 --> Undefined index: no_petak
+#0 C:\xampp\htdocs\wcs.pns.id\app\Views\data-timbang.php(33): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 33, Array)
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\View\View.php(210): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\Common.php(1089): CodeIgniter\View\View->render('data-timbang', Array, true)
+#4 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(118): view('data-timbang', Array)
+#5 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->data_timbang()
+#6 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}

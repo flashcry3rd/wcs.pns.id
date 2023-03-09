@@ -1,0 +1,12 @@
+CRITICAL - 2022-12-01 10:20:38 --> date_default_timezone_set(): Timezone ID 'Asian/Jakarta' is invalid
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(8, 'date_default_ti...', 'C:\\xampp\\htdocs...', 184, Array)
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(184): date_default_timezone_set('Asian/Jakarta')
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\bootstrap.php(146): CodeIgniter\CodeIgniter->initialize()
+#3 C:\xampp\htdocs\wcs.pns.id\index.php(28): require('C:\\xampp\\htdocs...')
+#4 {main}
+CRITICAL - 2022-12-01 10:20:38 --> date_default_timezone_set(): Timezone ID 'Asian/Jakarta' is invalid
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(8, 'date_default_ti...', 'C:\\xampp\\htdocs...', 184, Array)
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(184): date_default_timezone_set('Asian/Jakarta')
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\bootstrap.php(146): CodeIgniter\CodeIgniter->initialize()
+#3 C:\xampp\htdocs\wcs.pns.id\index.php(28): require('C:\\xampp\\htdocs...')
+#4 {main}

@@ -2,6 +2,22 @@ ERROR - 2023-03-06 11:49:23 --> Error connecting to the database: A connection a
 
 CRITICAL - 2023-03-06 11:49:23 --> Unable to connect to the database.
 Main connection [MySQLi]: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+ERROR - 2023-03-06 13:21:03 --> Error connecting to the database: MySQL server has gone away
+CRITICAL - 2023-03-06 13:21:03 --> Unable to connect to the database.
+Main connection [MySQLi]: MySQL server has gone away
+#0 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\Database\BaseConnection.php(577): CodeIgniter\Database\BaseConnection->initialize()
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1455): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#2 C:\xampp\htdocs\wcs.pns.id\app\Models\Home_model.php(86): CodeIgniter\Database\BaseBuilder->get()
+#3 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(934): App\Models\Home_model->check_conn()
+#4 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->check2()
+#5 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#6 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+ERROR - 2023-03-06 17:09:11 --> Error connecting to the database: An established connection was aborted by the software in your host machine.
+
+CRITICAL - 2023-03-06 17:09:11 --> Unable to connect to the database.
+Main connection [MySQLi]: An established connection was aborted by the software in your host machine.
 
 #0 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\Database\BaseConnection.php(577): CodeIgniter\Database\BaseConnection->initialize()
 #1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1455): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)

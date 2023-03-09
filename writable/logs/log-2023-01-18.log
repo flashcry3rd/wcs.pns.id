@@ -1,0 +1,92 @@
+ERROR - 2023-01-18 09:24:52 --> Error connecting to the database: No connection could be made because the target machine actively refused it.
+
+CRITICAL - 2023-01-18 09:24:52 --> Unable to connect to the database.
+Main connection [MySQLi]: No connection could be made because the target machine actively refused it.
+
+#0 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\Database\BaseConnection.php(577): CodeIgniter\Database\BaseConnection->initialize()
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1588): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#2 C:\xampp\htdocs\wcs.pns.id\app\Models\Home_model.php(9): CodeIgniter\Database\BaseBuilder->getWhere(Array)
+#3 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(44): App\Models\Home_model->getSelect('master_user', Array)
+#4 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->login()
+#5 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#6 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2023-01-18 10:28:09 --> Undefined offset: 25
+#0 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(176): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 176, Array)
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->serialData()
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-18 10:28:23 --> Undefined offset: 25
+#0 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(176): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 176, Array)
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->serialData()
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-18 10:29:11 --> Undefined offset: 25
+#0 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(176): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 176, Array)
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->serialData()
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-18 10:31:28 --> Invalid argument supplied for foreach()
+#0 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(145): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Invalid argumen...', 'C:\\xampp\\htdocs...', 145, Array)
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->serialData()
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-18 10:31:28 --> Invalid argument supplied for foreach()
+#0 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(145): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Invalid argumen...', 'C:\\xampp\\htdocs...', 145, Array)
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->serialData()
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-18 10:34:20 --> Undefined offset: 23
+#0 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(176): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 176, Array)
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->serialData()
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-18 10:36:37 --> count(): Parameter must be an array or an object that implements Countable
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'count(): Parame...', 'C:\\xampp\\htdocs...', 176, Array)
+#1 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(176): count('User Mobile 1')
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->serialData()
+#3 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#4 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2023-01-18 10:37:21 --> Undefined offset: 23
+#0 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(179): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 179, Array)
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->serialData()
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-18 10:43:40 --> Wrong parameter count for number_format()
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Wrong parameter...', 'C:\\xampp\\htdocs...', 292, Array)
+#1 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(292): number_format('005857', 4, ',')
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->saveTruckIn()
+#3 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#4 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+ERROR - 2023-01-18 10:44:31 --> Duplicate entry 'HL/388BE9/170123143935' for key 'no_transaksi'
+CRITICAL - 2023-01-18 10:44:31 --> Duplicate entry 'HL/388BE9/170123143935' for key 'no_transaksi'
+#0 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `tb...', 0)
+#1 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tb...')
+#2 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tb...')
+#3 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1771): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tb...', Array, false)
+#4 C:\xampp\htdocs\wcs.pns.id\app\Models\Home_model.php(47): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp\htdocs\wcs.pns.id\app\Controllers\Home.php(248): App\Models\Home_model->dataInsert('tbl_weight_scal...', Array)
+#6 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\Home->saveTruckIn()
+#7 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 C:\xampp\htdocs\wcs.pns.id\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\wcs.pns.id\index.php(37): CodeIgniter\CodeIgniter->run()
+#10 {main}

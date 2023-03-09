@@ -409,20 +409,21 @@ class Home extends BaseController
     {
         $model = new Home_model();
 
-        $value = $this->request->getPost('data');
+        $num = $this->request->getPost('data');
         if($method != "cu"){
-            $arr0 = explode("\r\n", $value);
-            $count0 = count($arr0);
-            $getMin10 = $count0 - 2 ;
-            $pars = $arr0[$getMin10];
+            // $arr0 = explode("\r\n", $value);
+            // $count0 = count($arr0);
+            // $getMin10 = $count0 - 2 ;
+            // $pars = $arr0[$getMin10];
             
-            $arr1 = explode(",", $pars);
-            $count1 = count($arr1);
-            $getMin11 = $count1 - 1;
-            $data['call'] = str_replace("KG", "", $arr1[$getMin11]);
-            $data['call'] = str_replace("+", "+ ", $data['call']);
-            $arr2 = explode(" ", $data['call']);
-            $data['call'] = $arr2[1];
+            // $arr1 = explode(",", $pars);
+            // $count1 = count($arr1);
+            // $getMin11 = $count1 - 1;
+            // $data['call'] = str_replace("KG", "", $value);
+            // $data['call'] = $value;
+            // $data['call'] = str_replace("+", "+ ", $data['call']);
+            // $arr2 = explode(" ", $data['call']);
+            // $data['call'] = $arr2[1];
         }
         
         // $data['call'] = 1000;
@@ -466,10 +467,10 @@ class Home extends BaseController
         
         $count = count($arr); 
         if($method != "cu"){
-            $b1 = str_replace("Kg", "", $data['call']);
+            $b1 = str_replace("Kg", "", $num);
             $b1 = str_replace(".", "", $b1);
             $b1 = str_replace(",", ".", $b1);
-            $b1 = number_format($b1, 2, ",", ".")." Kg";
+            $b1 = number_format((float)$b1, 0, ",", ".")." Kg";
         }
         if($count > 20){
             $whereArrCek = array('no_transaksi' => $no_transaksi);
