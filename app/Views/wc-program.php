@@ -21,7 +21,7 @@
       <div class="row">
         <div class="card" id="badan-connect" hidden>
           <div class="card-body">
-            <div class="row" style="text-align: center;">
+            <div class="row" style="text-align: center;" >
               <div class="center">
               <h2 >Connect Jembatan Timbang</h2>
                 <li class="list-group-item border-0 px-0">
@@ -57,8 +57,8 @@
                 <input class="form-control" type="text" id="get-serial-messages" >
                 </div>
                 <label ><i><a style="color: red;" id='warning'></a></i></label><br />
-                <label >Indikator : </label>
-                <div style="background-color: #a9a9a9;"><h4 id="indikator"></h4></div>
+                <label><h4 ><b>Indikator : </b></h4></label>
+                <div ><h3 id="indikator"></h3></div>
               </div>
             </div>
           </div>

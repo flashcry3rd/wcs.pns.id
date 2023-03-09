@@ -36,7 +36,8 @@ class Home extends BaseController
 
     public function login()
     {
-        
+        $tipe = $this->request->getPost('tipe');
+       
         $dataLogin = array(
             "username" => $this->request->getPost('username'),
             "password"=> md5($this->request->getPost('password'))
@@ -52,7 +53,8 @@ class Home extends BaseController
             $session_arr = array(
                 "username" => $username,
                 "nama" => $nama,
-                "iduser" => $iduser
+                "iduser" => $iduser,
+                "tipe" => $tipe
             );
             session()->set($session_arr);
             echo "<script> 

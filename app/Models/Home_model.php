@@ -59,8 +59,16 @@ class Home_model extends Model
 
     public function getMenu($id)
     {
+        $tipe = session()->get('tipe');
+        if($tipe=='truck'){
+            $where = "and b.tipe in ('ALL', 'JBT')";
+        }elseif($tipe=='cu'){
+            $where = "and b.tipe in ('ALL', 'CU')";
+        }else{
+            $where = "";
+        }
         $query = "SELECT b.* FROM master_menu_user as a 
-        LEFT JOIN master_menu as b on a.id_menu = b.id WHERE a.id_user = '$id'"; 
+        LEFT JOIN master_menu as b on a.id_menu = b.id WHERE a.id_user = '$id' $where "; 
         $run = $this->db->query($query);
         $result = $run->getResult('array');
 

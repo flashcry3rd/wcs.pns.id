@@ -32,7 +32,7 @@ var err7 = null;
 
 const { ReadlineParser } = require('@serialport/parser-readline')
 const SerialPort6 = require('serialport').SerialPort,
-      port6 = new SerialPort6({path: "COM3", baudRate: 9600,  dataBits: 7, stopBits: 1, bufferSize: '16777216'}, err => {
+      port6 = new SerialPort6({path: "COM3", baudRate: 9600,  dataBits: 8, stopBits: 1, bufferSize: '16777216'}, err => {
     if(err != null) {
         console.log(err)
         err6 = err.message;
@@ -50,7 +50,7 @@ const SerialPort7 = require('serialport').SerialPort,
 }).setEncoding('utf8');
 
 const SerialPort1 = require('serialport').SerialPort,
-      port1 = new SerialPort1({path: "COM5", baudRate: 9600,  dataBits: 7, stopBits: 1, bufferSize: '16777216'}, err => {
+      port1 = new SerialPort1({path: "COM11", baudRate: 9600,  dataBits: 7, stopBits: 1, bufferSize: '16777216'}, err => {
     if(err != null) {
         console.log(err)
         err1 = err.message;
@@ -59,7 +59,7 @@ const SerialPort1 = require('serialport').SerialPort,
 }).setEncoding('utf8');
 
 const SerialPort2 = require('serialport').SerialPort,
-      port2 = new SerialPort2({path: "COM6", baudRate: 9600,  dataBits: 7, stopBits: 1, bufferSize: '16777216'}, err => {
+      port2 = new SerialPort2({path: "COM12", baudRate: 9600,  dataBits: 7, stopBits: 1, bufferSize: '16777216'}, err => {
     if(err != null) {
         console.log(err)
         err2 = err.message;

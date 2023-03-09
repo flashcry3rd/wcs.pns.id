@@ -371,8 +371,14 @@
                     <div class="text-center">
                       <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Sign in</button>
                     </div>
+                    <div class="row mt-4">
                     <div class="text-center">
-                      <button type="button" id="sinkron-user" class="btn bg-gradient-success w-100 mt-4 mb-0">Sinkron User</button>
+                      <!-- <button type="button" id="sinkron-user" class="btn bg-gradient-success w-100 mt-4 mb-0">Sinkron User</button> -->
+                      <input type="radio" name="tipe" id="tipe1" value="truck" checked><label> WCS TRUCK</label>
+
+                      &emsp;
+                      <input type="radio" name="tipe" id="tipe2" value="cu"><label> WCS CU</label>
+                    </div>
                     </div>
                     <div class="text-center">
                       
