@@ -874,6 +874,7 @@
         if (v != 0) {
           if (v.includes("Opening")) {
             full_text = v;
+            console.log(full_text);
             v = 0;
           } else {
             split_text = v.split(",");
