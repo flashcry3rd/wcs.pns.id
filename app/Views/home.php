@@ -541,21 +541,21 @@ header("Access-Control-Allow-Origin: *");
           //   .then(response => response.json())
           //   .then(data => console.log(data));
         };
-        // var autoHitung = setInterval(async () =>{
-        //   const result = await checkOnlineStatus();
-        //   if(result==false){
-        //     $(".status-online-btn").removeClass("btn-outline-success");
-        //     $(".status-online-btn").addClass("btn-outline-danger");
-        //     $(".status-online-btn").html("Offline");
-        //   }else{
-        //     $(".status-online-btn").removeClass("btn-outline-danger");
-        //     $(".status-online-btn").addClass("btn-outline-success");
-        //     $(".status-online-btn").html("Online");
-        //     $.ajax({
-        //       url: "<?=base_url()?>/home/sync2"
-        //     })
-        //   }
-        // }, 3000);
+        var autoHitung = setInterval(async () =>{
+          const result = await checkOnlineStatus();
+          if(result==false){
+            $(".status-online-btn").removeClass("btn-outline-success");
+            $(".status-online-btn").addClass("btn-outline-danger");
+            $(".status-online-btn").html("Offline");
+          }else{
+            $(".status-online-btn").removeClass("btn-outline-danger");
+            $(".status-online-btn").addClass("btn-outline-success");
+            $(".status-online-btn").html("Online");
+            $.ajax({
+              url: "<?=base_url()?>/home/sync2"
+            })
+          }
+        }, 3000);
         
       })
      
