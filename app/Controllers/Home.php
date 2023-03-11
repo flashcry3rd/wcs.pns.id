@@ -534,7 +534,12 @@ class Home extends BaseController
                         $data['alert'] = "";
                     }
                 }else{
-                    
+                    $WhereDetailCheck = array('no_transaksi' => $no_transaksi);
+                    $DetailCheck = $model->getSelect("tbl_wcs_detail", $WhereDetailCheck);
+                    $TotalDetailCheck = count($DetailCheck);
+                    if($TotalDetailCheck >= 2):
+                        $data['alert'] = "No Ticket ini sudah dilakukan dua kali angkatan.";
+                    endif;
                 }
             }
         }else{
@@ -555,7 +560,7 @@ class Home extends BaseController
             }
             $numCek = count($arrCek);
             $data['alert'] = "";
-            if($numCek > 0){
+            if($numCek > 0 && $method != "cu"){
                 $data['alert'] = "Data Transaksi sudah pernah di SCAN";
             }else{
                 if($method != "cu") {
@@ -564,6 +569,8 @@ class Home extends BaseController
                     }else{
                         $data['alert'] = "";
                     }
+                }else{
+
                 }
             }
         }

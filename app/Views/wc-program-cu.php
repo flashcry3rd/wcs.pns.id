@@ -366,12 +366,12 @@
                       <input id="ancak" name="ancak" class="form-control barcode" readonly>
                     </div>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <h5>Tanggal Tebang</h5>
                       <input id="tgl_tebang" name="tgl_tebang" class="form-control barcode" readonly>
-                    </div>
+                    </div> -->
 
-                    <div class="form-group">
+                    <div class="form-group" hidden>
                       <h5>No Tiket</h5>
                       <input id="no_tiket" name="no_tiket" class="form-control barcode" readonly>
                     </div>
