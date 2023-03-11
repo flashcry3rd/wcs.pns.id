@@ -41,7 +41,7 @@
   </div> 
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid" >
   <div class="row mt-4">
     <div class="col-12">
       <div class="row">
@@ -54,7 +54,7 @@
                 <!-- <button class="message-button btn btn-primary" id='get-serial-messages' data-value="0" >Get Data</button> -->
                 <label><i><a style="color: red;">Arahkan kursor anda ke form input berikut *</a></i></label>
                 <br>
-                <input class="form-control" type="text" id="get-serial-messages" >
+                <input class="form-control" type="text" id="get-serial-messages" name="serial-input">
                 </div>
                 <label ><i><a style="color: red;" id='warning'></a></i></label><br />
                 <label><h4 ><b>Indikator : </b></h4></label>
@@ -308,6 +308,16 @@
   <script src="./assets/js/plugins/smooth-scrollbar.min.js"></script>
   <script type="text/javascript">
 
+  
+
+    
+    $(document).ready(function(){
+        $("#badan").fadeOut(500);
+        document.getElementById('get-serial-messages').focus();
+      
+    })
+    
+
     
     class SerialScaleController {
         constructor() {
@@ -450,6 +460,7 @@
             // window.open(url, '_blank');
             print(url);
             $("#badan").fadeOut(500);
+            document.getElementById('get-serial-messages').focus();
           }
         })
     })
@@ -469,6 +480,7 @@
           // window.open(url, '_blank');
           print(url);
           $("#badan").fadeOut(500);
+          document.getElementById('get-serial-messages').focus();
         }
       })
     })
