@@ -869,6 +869,7 @@
     fetch("http://localhost:3000/data").then(res => res.json().then(data => {
       console.log(data);
       num = 1;
+      
       $.each(data.data_weight, function(i, v) {
         if (v != 0) {
           if (v.includes("Opening")) {
@@ -887,14 +888,16 @@
               v = 0;
               full_text = v + " Kg";
             }
+            $("#table-" + num + " input").val(v).trigger('change');
+            $("#table-" + num + " .card-body h5").text(full_text);
+            num++;
           }
         } else {
           full_text = v + " Kg";
         }
-        $("#table-" + num + " input").val(v).trigger('change');
-        $("#table-" + num + " .card-body h5").text(full_text);
+      
         // console.log($('input[name="berat_timbang"]:checked').val());
-        num++;
+       
       });
       // $("#table-2").text(data.data2);
     }))

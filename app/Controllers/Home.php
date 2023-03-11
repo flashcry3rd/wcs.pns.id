@@ -36,7 +36,8 @@ class Home extends BaseController
 
     public function login()
     {
-        
+        $tipe = $this->request->getPost('tipe');
+       
         $dataLogin = array(
             "username" => $this->request->getPost('username'),
             "password"=> md5($this->request->getPost('password'))
@@ -52,7 +53,8 @@ class Home extends BaseController
             $session_arr = array(
                 "username" => $username,
                 "nama" => $nama,
-                "iduser" => $iduser
+                "iduser" => $iduser,
+                "tipe" => $tipe
             );
             session()->set($session_arr);
             echo "<script> 
@@ -254,6 +256,19 @@ class Home extends BaseController
         echo view("wc-program-cu");
     }
 
+    public function cu_bridge()
+    {
+        if(session()->get('menu')!="/cu_bridge"){
+            echo "<script >location.reload()</script>";
+        }
+        $arr = array(
+            "menu" => "/cu_bridge"
+        );
+        session()->set($arr);
+
+        echo view("cu-bridge-settings");
+    }
+
     public function master_user()
     {
         $model = new Home_model();
@@ -266,6 +281,30 @@ class Home extends BaseController
         session()->set($arr);
 
         echo view("master-user", $data);
+    }
+
+    public function get_cuPort()
+    {
+        $model = new Home_model();
+        $where = array(
+            "port" => $this->request->getPost('com')
+        );
+        $bridge = $model->getSelect("master_port_cu", $where) ;
+        
+        foreach($bridge as $br){
+            if($br['bridge']=='1'){
+                $data['table1'] = $br['var'];
+            }else if($br['bridge']=='2'){
+                $data['table2'] = $br['var'];
+            }else if($br['bridge']=='3'){
+                $data['table3'] = $br['var'];
+            }else if($br['bridge']=='4'){
+                $data['table4'] = $br['var'];
+            }else if($br['bridge']=='5'){
+                $data['table5'] = $br['var'];
+            }
+        }
+        echo json_encode($data);
     }
 
     public function ListDataCU()

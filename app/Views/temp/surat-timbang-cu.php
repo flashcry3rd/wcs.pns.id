@@ -5,16 +5,15 @@
     
     @media print{
         @page {
-            size: auto;   /* auto is the initial value */
-            size: portrait;
+           
             margin: 0;  /* this affects the margin in the printer settings */
     
         }
     }
 
     a{
-        font-family: calibri;
-        font-size: small;
+        font-family: tahoma;
+        font-size: medium;
     }
     .tengah{
         display: flex;
@@ -23,7 +22,7 @@
         height: 100%;
     }
     table {
-        border: 0px solid white;
+        border: 0px dotted white;
         border-collapse: collapse;
         border-spacing: 0px;
     }
@@ -32,11 +31,11 @@
         
     }
     .garis-panjang {
-        border: 1px solid black;
+        border: 0.1px dotted black;
         margin-top: 1%;
     }
     th {
-        border: 1px solid black;
+        border: 0.1px dotted black;
     }
  
  
@@ -60,14 +59,14 @@
                             <div class="col-2" style="text-align: center;"><img src="assets/img/logo.png" style="height: 100px;width: 120px;"></div>
                             <div class="col-10 tengah" style="text-align: center;">
                                 <div class="form-control" style="border: none;">
-                                    <b><a style="font-size: 29px;">PT. PRATAMA NUSANTARA SAKTI</a>
+                                    <a style="font-size: 25px;">PT. PRATAMA NUSANTARA SAKTI</a>
                                         <br />
-                                        <a style="font-size: 18;">Taman Perkantoran Kuningan - Wisma GAWI</a>
+                                        <a style="font-size: 14px;">Taman Perkantoran Kuningan - Wisma GAWI</a>
                                         <br />
-                                        <a style="font-size: 18;">Bumi Pratama Mandiri, Kec. Sungai Menang OKI Sumsel</a>
+                                        <a style="font-size: 14px;">Bumi Pratama Mandiri, Kec. Sungai Menang OKI Sumsel</a>
                                         <br />
-                                        <a style="font-size: 18;">Telp: , FAX: , </a>
-                                    </b>
+                         
+                                    
                                 </div>
                             </div>
                         </div>
@@ -77,7 +76,7 @@
             </tr>
             <tr>
                 <td style="padding: 0%; ">
-                    <div class="tengah"><strong><a style="font-size: 18px;">SLIP TIMBANGAN CU</a></strong></div>
+                    <div class="tengah"><a style="font-size: 18px;">SLIP TIMBANGAN CU</a></div>
                 </td>
             </tr>
             <tr>
@@ -85,9 +84,9 @@
                     <table style="width: 100%; ">
                         <tbody> 
                             <tr >
-                                <td style="width: 15%; padding: 0%; padding-left: 2%"><b><a>No. Transaksi</a></b></td>
+                                <td style="width: 15%; padding: 0%; padding-left: 2%"><b><a >No. Transaksi</a></b></td>
                                 <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a> : </a></b></td>
-                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><a ><?= $timbang->no_transaksi ?></a></td>
+                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><a ><b><?= $timbang->no_transaksi ?></b></a></td>
                                 <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>Tgl. Timbang</a></b></td>
                                 <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a> : </a></b></td>
                                 <? 
@@ -120,23 +119,23 @@
                                     $m ="";
                                 }
                                 ?>
-                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><a ><?= date_format(date_create($timbang->weight_in_time), "d")." ".$m." ".date_format(date_create($timbang->weight_in_time), "Y") ?></a></td>
+                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><a ><b><?= date_format(date_create($timbang->weight_in_time), "d")." ".$m." ".date_format(date_create($timbang->weight_in_time), "Y") ?></b></a></td>
                             </tr>
                             <tr >
-                                <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>No. Barge</a></b></td>
+                                <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a >No. Barge</a></b></td>
                                 <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a> : </a></b></td>
-                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><a ><?= $timbang->kode_barge ?></a></td>
+                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><a ><b><?= $timbang->kode_barge ?></b></a></td>
                                 <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>Kontraktor</a></b></td>
-                                <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a> : </a></b></td>
-                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><a ><?= $kontraktor->nama_vendor ?></a></td>
+                                <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a > : </a></b></td>
+                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><a ><b><?= $kontraktor->nama_vendor ?></b></a></td>
                             </tr>
                             <tr >
                                 <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>No. Tugboat</a></b></td>
                                 <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a> : </a></b></td>
-                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><a ><?= $timbang->kode_tugboat ?></a></td>
+                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><a ><b><?= $timbang->kode_tugboat ?></b></a></td>
                                 <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>Petak</a></b></td>
                                 <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a> : </a></b></td>
-                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><a ><?= $timbang->kode_petak ?></a></td>
+                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><a ><b><?= $timbang->kode_petak ?></b></a></td>
                             </tr>
                         </tbody>
                     </table>
@@ -144,43 +143,48 @@
             </tr>
             <tr>
                 <td style="padding-left: 1%; padding-right: 1%">
-                    <table style="width: 100%; border: 1px solid black; border-collapse: collapse;">
+                    <table style="width: 100%; border: border-collapse: collapse;">
                         <thead> 
-                            <tr style="border: 1px solid black;">
-                                <th style="width: 25%;text-align: center; padding: 0%;border: 1px solid black"><a>No. Ticket</a></th>
-                                <th style="width: 25%;text-align: center; padding: 0%;border: 1px solid black"><a>Gross</a></th>
-                                <th style="width: 25%;text-align: center; padding: 0%;border: 1px solid black"><a>Tare</a></th>
-                                <th style="width: 25%;text-align: center; padding: 0%;border: 1px solid black"><a>Nett</a></th>
+                            <tr >
+                                <th style="width: 25%;text-align: center; padding: 0%;border-top: 1px dotted black"><a>No. Ticket</a></th>
+                                <th style="width: 25%;text-align: center; padding: 0%;border-top: 1px dotted black"><a>Gross</a></th>
+                                <th style="width: 25%;text-align: center; padding: 0%;border-top: 0.1px dotted black"><a>Tare</a></th>
+                                <th style="width: 25%;text-align: center; padding: 0%;border-top: 0.1px dotted black"><a>Nett</a></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach($timbang_detail as $td) : ?>
-                                <tr style="border: 1px solid black;">
-                                    <td style="text-align: center;border: 1px solid black"><a><?= $td['no_ticket'] ?></a></td>
-                                    <td style="text-align: center;border: 1px solid black"><a><?= number_format($td['gross'], 2, ",", ".") ?></a></td>
-                                    <td style="text-align: center;border: 1px solid black"><a><?= number_format($td['tare'], 2, ",", ".") ?></a></td>
-                                    <td style="text-align: center;border: 1px solid black"><a><?= number_format($td['nett'], 2, ",", ".") ?></a></td>
+                            <?php
+							$cnt = count($timbang_detail);
+							$i = 1;
+							foreach($timbang_detail as $td) :
+							if($cnt == $i){ 
+							$border = "border-bottom: 0.1px dotted black;";}else{ $border = "";}?>
+                                <tr style="border: 0.1px none black;">
+                                    <td style="text-align: center;border: 0.1px none black; <?= $border ?>"><b><a><?= $td['no_ticket'] ?></a></b></td>
+                                    <td style="text-align: center;border: 0.1px none black; <?= $border ?>"><b><a><?= number_format($td['gross'], 2, ",", ".") ?></a></b></td>
+                                    <td style="text-align: center;border: 0.1px none black; <?= $border ?>"><b><a><?= number_format($td['tare'], 2, ",", ".") ?></a></b></td>
+                                    <td style="text-align: center;border: 0.1px none black; <?= $border ?>"><b><a><?= number_format($td['nett'], 2, ",", ".") ?></a></b></td>
                                 </tr>
-                            <?php endforeach;?>
+                            <?php $i++; endforeach;?>
                             <tr>
-                                <td colspan="3" style="text-align: right;border-bottom: 0;border-right: 1px solid black; padding: 0%;">
-                                    <strong><a>Gross</a> &emsp;</strong>
+                                <td colspan="3" style="text-align: right;border-bottom: 0; padding: 0%;border-right: 0px dotted black">
+                                    <a >Gross</a> &emsp;
                                 </td>
-                                <td style=" padding: 0% ;"><strong><a>  &emsp; <?= number_format($timbang->weight_in, 2, ",", ".") ?> Kg</a></strong></td>
+                                <td style=" padding: 0% ;"><b><a >  &emsp; <?= number_format($timbang->weight_in, 2, ",", ".") ?> Kg</a></b></td>
                             </tr>
                             <tr style="border: none; padding: 0%;">
-                                <td colspan="3" style="text-align: right;border-bottom: 0; padding: 0%;border-right: 1px solid black">
-                                    <strong><a>Tare</a> &emsp;</strong>
+                                <td colspan="3" style="text-align: right;border-bottom: 0; padding: 0%;border-right: 0px dotted black">
+                                    <a >Tare</a> &emsp;
                                 </td>
-                                <td style="padding-left: 3%;padding: 0% ;"><strong><a> &emsp; <?= number_format($timbang->weight_out, 2, ",", ".") ?> Kg</a></strong></td>
+                                <td style="padding-left: 3%;padding: 0% ;"><b><a > &emsp; <?= number_format($timbang->weight_out, 2, ",", ".") ?> Kg</a></b></td>
                             </tr>
                             <tr style="border: none; padding: 0%;">
-                                <td colspan="3" style="text-align: right;border-bottom: 0; padding: 0%;border-right: 1px solid black">
-                                    <strong><a>Nett</a> &emsp;</strong>
+                                <td colspan="3" style="text-align: right;border-bottom: 0; padding: 0%;border-right: 0px dotted black">
+                                    <a >Nett</a> &emsp;
                                 </td>
-                                <td style="padding-left: 3%;padding: 0% ;"><strong><a> &emsp; <?= number_format($timbang->weight_in - $timbang->weight_out, 2, ",", ".") ?> Kg</a></strong></td>
+                                <td style="padding-left: 3%;padding: 0% ;"><b><a > &emsp; <?= number_format($timbang->weight_in - $timbang->weight_out, 2, ",", ".") ?> Kg</a></b></td>
                             </tr>
-                            <tr style="border: 1px solid black;">
+                            <tr style="border-top: 0.1px dotted black;border-bottom: 0">
                                 <td colspan="3" style="padding-left: 1%">
                                     <?
                                     $day = date('l');
@@ -231,19 +235,19 @@
                                     }
                                     
                                      ?>
-                                    <a >Sungai Menang, <strong><?= $d ?> <?= date("d")?> <?= $m." ".date("Y") ?></strong></a></br>
-                                    <a ><strong>Supir</strong></a>
+                                    <b><a >Sungai Menang, <?= $d ?> <?= date("d")?> <?= $m." ".date("Y") ?></a></b></br>
+                                    <b><a ></a></b>
                                     <br />
                                     <br />
                                     <br />
-                                    <a ><strong><?= $timbang->supir ?></strong></a>
+                                    <b><a >Pengawas</a></b>
                                 </td>
-                                <td >
-                                    <a ><strong>Operator</strong></a>
+                                <td style="border-bottom: 0">
+                                    <a >Operator</a>
                                     <br />
                                     <br />
                                     <br />
-                                    <a ><strong><?= session()->get('nama') ?></strong></a>
+                                    <a ><?= session()->get('nama') ?></a>
                                 </td>
 
                             </tr>
