@@ -95,7 +95,7 @@ const SerialPort5 = require('serialport').SerialPort,
 }).setEncoding('utf8');
 
 
-// SerialPort.list().then(function (ports) {
+// SerialPort1.list().then(function (ports) {
 //     ports.forEach(function (portz) {
 //         console.log("Port: ", portz);
 //     })
