@@ -49,6 +49,7 @@
     <?= $timbang->no_transaksi ?>
 </title>
 <body>
+</br>
 <div class="table responsive">
     <table style="width: 100%; ">
         <tbody>
@@ -238,7 +239,8 @@
                                     <a ><strong><?= $timbang->supir ?></strong></a>
                                 </td>
                                 <td >
-                                    <a ><strong>Operator</strong></a>
+                                    <a ><strong>Operator</strong></a></br>
+									<a ></a>
                                     <br />
                                     <br />
                                     <br />

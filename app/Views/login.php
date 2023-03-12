@@ -378,7 +378,7 @@
                       <input type="radio" name="tipe" id="tipe1" value="truck" checked><label> WCS TRUCK</label>
 
                       &emsp;
-                      <input type="radio" name="tipe" id="tipe2" value="cu"><label> WCS CU</label>
+                      <!-- <input type="radio" name="tipe" id="tipe2" value="cu"><label> WCS CU</label> -->
                     </div>
                     </div>
                     <div class="text-center">

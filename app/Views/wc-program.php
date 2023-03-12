@@ -503,13 +503,14 @@
             // $("#indikator").html(v).trigger('change');
             // $("#indikator").html(full_text);
           } else {
-            split_text = v.split(",");
-            slice_text = split_text[2];
-            slice_text = slice_text.replace("+", "");
-            slice_text = slice_text.replace("Kg", "");
-            if (slice_text != "000.000") {
+            split_text = v.split(" ");
+            slice_text = split_text[1];
+            //slice_text = slice_text.replace("+", "");
+            slice_text = slice_text.replace("KG", "");
+            if (slice_text != "0000000") {
               full_text = slice_text + " Kg";
               v = parseFloat(slice_text);
+			  full_text = v + " Kg";
             } else {
               v = 0;
               full_text = v + " Kg";

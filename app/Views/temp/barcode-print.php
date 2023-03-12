@@ -10,7 +10,7 @@
         }
     }
     a{
-        font-family: calibri;
+        font-family: tahoma;
     }
     .tengah{
         display: flex;
@@ -18,21 +18,29 @@
         justify-content: center;
         height: 100%;
     }
+	
 </style>
 <title>
     <?= $timbang->no_transaksi ?>
 </title>
-<body>
-<div class="table responsive">
+<body style="margin-left: -15px">
+<div class="table responsive" style="display: block;">
     <table style="width: 100%;">
         <tr>
-            <td style="text-align: center;"><b><u><a style="font-size: 23px">TIKET TIMBANG MASUK</a></u></b></td>
+            <td style="text-align: center;"><b><u><a style="font-size: 20px">TIKET TIMBANG MASUK</a></u></b></td>
         </tr>
         <tr>
-            <td style="text-align: center;"><b><a style="font-size: 23px;"> <?= $timbang->no_transaksi ?></a></b></td>
+            <td style="text-align: center;"><b><a style="font-size: 18px;"> <?= $timbang->no_transaksi ?></a></b></td>
         </tr>
         <tr>
             <td style="text-align: center;"><b><a style="font-size: 20px;"> <?= $kontraktor->nama_vendor ?></a></b></td>
+        </tr>
+		<tr>
+            <td style="text-align: center;"><b><a style="font-size: 20px;">----------- Scan QR -----------</a></b></td>
+        </tr>
+        <tr>
+            <? $runTime = date('dMYHis'); ?>
+            <td style="text-align: center;"><img src="./assets/qr/<?=$file?>.png?r=<?= $runTime ?>" ></td>
         </tr>
         <tr>
             <td style="text-align: center;"><b><a style="font-size: 20px;">----------- DETAIL -----------</a></b></td>
@@ -88,13 +96,7 @@
             </td>
         </tr>
       
-        <tr>
-            <td style="text-align: center;"><b><a style="font-size: 20px;">----------- Scan QR -----------</a></b></td>
-        </tr>
-        <tr>
-            <? $runTime = date('dMYHis'); ?>
-            <td style="text-align: center;"><img src="./assets/qr/<?=$file?>.png?r=<?= $runTime ?>" ></td>
-        </tr>
+        
     </table>
 </div>
 
