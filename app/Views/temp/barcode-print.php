@@ -10,7 +10,8 @@
         }
     }
     a{
-        font-family: tahoma;
+        font-family: sans-serif;
+        font-size: small;
     }
     .tengah{
         display: flex;
@@ -23,27 +24,27 @@
 <title>
     <?= $timbang->no_transaksi ?>
 </title>
-<body style="margin-left: -15px">
+<body style="margin-left: -10px">
 <div class="table responsive" style="display: block;">
     <table style="width: 100%;">
         <tr>
-            <td style="text-align: center;"><b><u><a style="font-size: 20px">TIKET TIMBANG MASUK</a></u></b></td>
+            <td style="text-align: center;"><u><a style="font-size: 20px">TIKET TIMBANG MASUK</a></u></td>
         </tr>
         <tr>
-            <td style="text-align: center;"><b><a style="font-size: 18px;"> <?= $timbang->no_transaksi ?></a></b></td>
+            <td style="text-align: center;"><a style="font-size: 18px;"> <?= $timbang->no_transaksi ?></a></td>
         </tr>
         <tr>
-            <td style="text-align: center;"><b><a style="font-size: 20px;"> <?= $kontraktor->nama_vendor ?></a></b></td>
+            <td style="text-align: center;"><a style="font-size: 20px;"> <?= $kontraktor->nama_vendor ?></a></td>
         </tr>
 		<tr>
-            <td style="text-align: center;"><b><a style="font-size: 20px;">----------- Scan QR -----------</a></b></td>
+            <td style="text-align: center;"><a style="font-size: 20px;">----------- Scan QR -----------</a></td>
         </tr>
         <tr>
             <? $runTime = date('dMYHis'); ?>
-            <td style="text-align: center;"><img src="./assets/qr/<?=$file?>.png?r=<?= $runTime ?>" ></td>
+            <td style="text-align: center;"><img style="max-width: 250px; max-height: 250px" src="./assets/qr/<?=$file?>.png?r=<?= $runTime ?>" ></td>
         </tr>
         <tr>
-            <td style="text-align: center;"><b><a style="font-size: 20px;">----------- DETAIL -----------</a></b></td>
+            <td style="text-align: center;"><a style="font-size: 20px;">----------- DETAIL -----------</a></td>
         </tr>
 
         <tr>
@@ -53,40 +54,40 @@
                         <table style="width: 249px;">
                             <tbody>
                                 <tr>
-                                    <td style="text-align: left;"><b><a >Tgl Muat</a></b></td>
-                                    <td style="text-align: right;"><b><a ><?= date_format(date_create($timbang->tgl_muat), "d/m/Y") ?></a></b></td>
+                                    <td style="text-align: left;"><a >Kode Petak</a></td>
+                                    <td style="text-align: right;"><a ><?= $timbang->kode_petak ?></a></td>
                                 </tr>
                                 <tr>
-                                    <td style="text-align: left;"><b><a >Kode Petak</a></b></td>
-                                    <td style="text-align: right;"><b><a ><?= $timbang->kode_petak ?></a></b></td>
+                                    <td style="text-align: left;"><a >Ancak</a></td>
+                                    <td style="text-align: right;"><a ><?= $timbang->ancak ?></a></td>
                                 </tr>
                                 <tr>
-                                    <td style="text-align: left;"><b><a >Ancak</a></b></td>
-                                    <td style="text-align: right;"><b><a ><?= $timbang->ancak ?></a></b></td>
+                                    <td style="text-align: left;"><a >No Alat Muat</a></td>
+                                    <td style="text-align: right;"><a ><?= $timbang->loading_vehicle_number ?></a></td>
                                 </tr>
                                 <tr>
-                                    <td style="text-align: left;"><b><a >Retase</a></b></td>
-                                    <td style="text-align: right;"><b><a ><?= $timbang->retase ?></a></b></td>
+                                    <td style="text-align: left;"><a >No Truck</a></td>
+                                    <td style="text-align: right;"><a ><?= $timbang->kode_truck ?></a></td>
                                 </tr>
                                 <tr>
-                                    <td style="text-align: left;"><b><a >No Truck</a></b></td>
-                                    <td style="text-align: right;"><b><a ><?= $timbang->kode_truck ?></a></b></td>
+                                    <td style="text-align: left;"><a >Tujuan</a></td>
+                                    <td style="text-align: right;"><a ><?= $timbang->tujuan ?></a></td>
                                 </tr>
                                 <tr>
-                                    <td style="text-align: left;"><b><a >Tujuan</a></b></td>
-                                    <td style="text-align: right;"><b><a ><?= $timbang->tujuan ?></a></b></td>
+                                    <td style="text-align: left;"><a >Rute</a></td>
+                                    <td style="text-align: right;"><a ><?= $timbang->tujuan_tugboat ?></a></td>
                                 </tr>
                                 <tr>
-                                    <td style="text-align: left;"><b><a >Rute</a></b></td>
-                                    <td style="text-align: right;"><b><a ><?= $timbang->tujuan_tugboat ?></a></b></td>
+                                    <td style="text-align: left;"><a >Jenis Tebu</a></td>
+                                    <td style="text-align: right;"><a ><?= $timbang->jenis_tebu ?></a></td>
                                 </tr>
                                 <tr>
-                                    <td style="text-align: left;"><b><a >Jenis Tebu</a></b></td>
-                                    <td style="text-align: right;"><b><a ><?= $timbang->jenis_tebu ?></a></b></td>
+                                    <td style="text-align: left;"><a >Berat Masuk</a></td>
+                                    <td style="text-align: right;"><a ><?= $timbang->weight_in ?></a></td>
                                 </tr>
                                 <tr>
-                                    <td style="text-align: left;"><b><a >Berat Masuk</a></b></td>
-                                    <td style="text-align: right;"><b><a ><?= $timbang->weight_in ?></a></b></td>
+                                    <td style="text-align: left;"><a >Jam Timbang</a></td>
+                                    <td style="text-align: right;"><a ><?= date_format(date_create($timbang->weight_in_time), "d / m / Y H:i:s")  ?></a></td>
                                 </tr>
 
                             </tbody>
