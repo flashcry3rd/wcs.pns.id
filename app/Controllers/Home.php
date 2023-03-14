@@ -487,9 +487,11 @@ class Home extends BaseController
             if($filterEndDate):
                 $where_arr['DATE(A.weight_in_time) <='] = $filterEndDate;
             endif;
+            $where_arr['del ='] = 0 ;
             $data['timbang'] = $model->getSelectReportAll('tbl_weight_scale',$where_arr);
         else:
-            $data['timbang'] = $model->getSelectReportAll('tbl_weight_scale');
+            $where_arr['del ='] = 0 ;
+            $data['timbang'] = $model->getSelectReportAll('tbl_weight_scale', $where_arr);
         endif;
         $data['filter_module'] = $filter;
         $data['filterStartDate'] = $filterStartDate;
