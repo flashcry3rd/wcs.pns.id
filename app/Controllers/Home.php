@@ -1274,19 +1274,19 @@ class Home extends BaseController
         $data['whereMinggu5'] = date("d", strtotime($tglAwalMinggu5))." s/d ".date("d F Y", strtotime($tglAkhirMinggu5))  ;
         ///////////////////////////
 
-        $timbang1 = $model->getSelectDb2("tbl_weight_scale", $tHariKemaren);
+        $timbang1 = $model->getSelect("tbl_weight_scale", $tHariKemaren);
         $ritasiTimbang1 = count($timbang1);
-        $timbang2 = $model->getSelectDb2("tbl_weight_scale", $tHariIni);
+        $timbang2 = $model->getSelect("tbl_weight_scale", $tHariIni);
         $ritasiTimbang2 = count($timbang2);
-        $timbangAll = $model->getSelectDb2("tbl_weight_scale", $tYear);
+        $timbangAll = $model->getSelect("tbl_weight_scale", $tYear);
         $ritasiTimbangAll = count($timbangAll);
-        $timbangHour = $model->getSelectDb2("tbl_weight_scale", $tPerJam);
+        $timbangHour = $model->getSelect("tbl_weight_scale", $tPerJam);
         $ritasiTimbangHour = count($timbangHour);
-        $timbangMinggu1 = $model->getSelectDb2("tbl_weight_scale", $whereMinggu1);
-        $timbangMinggu2 = $model->getSelectDb2("tbl_weight_scale", $whereMinggu2);
-        $timbangMinggu3 = $model->getSelectDb2("tbl_weight_scale", $whereMinggu3);
-        $timbangMinggu4 = $model->getSelectDb2("tbl_weight_scale", $whereMinggu4);
-        $timbangMinggu5 = $model->getSelectDb2("tbl_weight_scale", $whereMinggu5);
+        $timbangMinggu1 = $model->getSelect("tbl_weight_scale", $whereMinggu1);
+        $timbangMinggu2 = $model->getSelect("tbl_weight_scale", $whereMinggu2);
+        $timbangMinggu3 = $model->getSelect("tbl_weight_scale", $whereMinggu3);
+        $timbangMinggu4 = $model->getSelect("tbl_weight_scale", $whereMinggu4);
+        $timbangMinggu5 = $model->getSelect("tbl_weight_scale", $whereMinggu5);
 
         $totalTimbang1 = 0;
         $totalTimbang2 = 0;
@@ -1359,7 +1359,7 @@ class Home extends BaseController
         $hourNow = date("Y-m-d ").$jamArr[0].":00:00";
         $hourLimit = date("Y-m-d ").$jamArr[0].":59:59" ;
         $tPerJam = "weight_out_time between '$hourNow' and '$hourLimit'  and del = 0 $tipeFilter";
-        $timbangHour = $model->getSelectDb2("tbl_weight_scale", $tPerJam);
+        $timbangHour = $model->getSelect("tbl_weight_scale", $tPerJam);
         $ritasiHour = count($timbangHour);
         $totalHour = 0;
         foreach($timbangHour as $th){
@@ -1390,7 +1390,7 @@ class Home extends BaseController
         $hourNow = date("Y-m-d ").$jamArr[0].":00:00";
         $hourLimit = date("Y-m-d ").$jamArr[0].":59:59" ;
         $tPerJam = "weight_out_time <= '$hourLimit' and weight_in > 0 and del = 0 $tipeFilter";
-        $timbangHour = $model->getSelectDb2("tbl_weight_scale", $tPerJam);
+        $timbangHour = $model->getSelect("tbl_weight_scale", $tPerJam);
         $ritasiHour = count($timbangHour);
         $totalHour = 0;
         foreach($timbangHour as $th){
