@@ -477,7 +477,7 @@ class Home extends BaseController
             if($filter == 'cu'):
                 $where_arr['tipe'] = 'BP';
                 // $where = array('tipe' => 'BP');
-            else:
+            elseif($filter == "truck"):
                 $where_arr['tipe !='] = 'BP';
                 // $where = array('tipe !=' => 'BP');
             endif;
