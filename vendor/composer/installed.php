@@ -1,11 +1,11 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => NULL,
+        'reference' => 'df4ba22fb6253bcfec576cd1662a2db8fe4d8217',
         'name' => 'codeigniter4/appstarter',
         'dev' => true,
     ),
@@ -20,12 +20,12 @@
             'dev_requirement' => false,
         ),
         'codeigniter4/appstarter' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => NULL,
+            'reference' => 'df4ba22fb6253bcfec576cd1662a2db8fe4d8217',
             'dev_requirement' => false,
         ),
         'codeigniter4/framework' => array(
@@ -189,6 +189,15 @@
             'aliases' => array(),
             'reference' => '851867efcbb6a1b992ec515c71cdcf20d895e9d2',
             'dev_requirement' => true,
+        ),
+        'picqer/php-barcode-generator' => array(
+            'pretty_version' => 'v2.2.4',
+            'version' => '2.2.4.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../picqer/php-barcode-generator',
+            'aliases' => array(),
+            'reference' => 'b98f110cc5a79f723688fb17fd90b9325300d844',
+            'dev_requirement' => false,
         ),
         'psr/container' => array(
             'pretty_version' => '2.0.1',

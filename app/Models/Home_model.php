@@ -110,7 +110,7 @@ class Home_model extends Model
                 $tb->insert($d);
             }
         }
-        $qCari = $db->query("SELECT * FROM tbl_weight_scale WHERE sync IS NULL");
+        $qCari = $db->query("SELECT no_transaksi, tipe, no_tiket_mobil, tiket_barge, no_wo, kode_petak, ancak, jenis_tebu, tgl_harvesting, tgl_muat, kode_kontraktor, loading_vehicle_number, loading_vehicle_operator, kode_barge, kode_tugboat, tugboat_captain, tujuan_tugboat, kode_truck, supir, kepala_regu, weight_in, weight_in_time, weight_out, weight_out_time, retase, kontraktor_delivery, no_polisi, tujuan, no_alat2, op_alat2, del, createby, sync, operator_timbang, trash_status FROM tbl_weight_scale WHERE sync IS NULL");
         $cari = $qCari->getResult('array');
         foreach($cari as $c){
             $qCek = $this->db->query("SELECT * FROM tbl_weight_scale WHERE no_transaksi = '".$c['no_transaksi']."'");

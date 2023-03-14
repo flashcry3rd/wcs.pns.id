@@ -25,6 +25,7 @@
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "express-http-to-https": "^1.1.4",
+    "jquery-datetimepicker": "^2.5.21",
     "serialport": "^10.5.0"
   },
   "devDependencies": {

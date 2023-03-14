@@ -422,7 +422,12 @@ class Home extends BaseController
 
     public function data_timbang_all()
     {
-        $filter = $this->request->getGet('filter');
+        
+        $filter = $this->request->getPost('method');
+        $filterStartDate = $this->request->getPost('start_date');
+        $filterEndDate = $this->request->getPost('end_date');
+        // exit;
+        // $filter = $this->request->getGet('filter');
         // print_r($filter);
         $model = new Home_model();
         $arr = array(
@@ -430,16 +435,28 @@ class Home extends BaseController
         );
         session()->set($arr);
         if($filter):
+			$order = array('weight_in_time' => 'DESC');
+            $where_arr = array();
             if($filter == 'cu'):
-                $where = array('tipe' => 'BP');
+                $where_arr['tipe'] = 'BP';
+                // $where = array('tipe' => 'BP');
             else:
-                $where = array('tipe !=' => 'BP');
+                $where_arr['tipe !='] = 'BP';
+                // $where = array('tipe !=' => 'BP');
             endif;
-            $data['timbang'] = $model->getSelectDb2('tbl_weight_scale',$where);
+            if($filterStartDate):
+                $where_arr['weight_in_time >='] = $filterStartDate;
+            endif;
+            if($filterEndDate):
+                $where_arr['weight_in_time <='] = $filterEndDate;
+            endif;
+            $data['timbang'] = $model->getSelectDb2('tbl_weight_scale',$where_arr);
         else:
             $data['timbang'] = $model->selectAllDb2('tbl_weight_scale');
         endif;
         $data['filter_module'] = $filter;
+        $data['filterStartDate'] = $filterStartDate;
+        $data['filterEndDate'] = $filterEndDate;
         $data['vendor'] = $model->selectAllDb2('master_vendor');
         echo view("data-timbang-all", $data);
     }
@@ -484,8 +501,16 @@ class Home extends BaseController
         $where2 = array( 'kode_vendor' => $kon_delivery );
         $rowKon = $model->getSelectRow("master_vendor", $where1);
         $rowKonDev = $model->getSelectRow("master_vendor", $where2);
-        $data['nama_kontraktor'] = $rowKon->nama_vendor;
-        $data['nama_kon_delivery'] = $rowKonDev->nama_vendor;
+		if($rowKon){
+			$data['nama_kontraktor'] = $rowKon->nama_vendor;
+		}else{
+			$data['nama_kontraktor'] = $kode_kontraktor;
+		}
+		if($rowKonDev){
+			$data['nama_kon_delivery'] = $rowKonDev->nama_vendor;
+		}else{
+			$data['nama_kon_delivery'] = $kon_delivery;
+		}
 
         $no_transaksi = $arr[1];
         $arrTrans = explode("/", $no_transaksi);
@@ -687,6 +712,7 @@ class Home extends BaseController
 
     public function saveTruckCU()
     {   
+		$model = new Home_model();
         // if(!$this->request->getPost('Checkbox')):
         //     $return = array("status" => "error", "msg" => "Silahkan pilih berat timbang CU", "no" => $this->request->getPost('no_transaksi'));
         //     return json_encode($return);
@@ -699,6 +725,7 @@ class Home extends BaseController
         $tglIn=$this->request->getPost('berat_in_time');
         $no_transaksi = $this->request->getPost('no_transaksi'); 
         $noTrans = str_replace("/","", $this->request->getPost('no_transaksi'));
+		$trashStatus = $this->request->getPost('TrashStatus');
         // $arrT = explode("/", $this->request->getPost('tgl_tebang'));
         // $tglTebang = $arrT[2]."-".$arrT[1]."-".$arrT[0];
         $arrM = explode("/", $this->request->getPost('tgl_muat'));
@@ -713,9 +740,14 @@ class Home extends BaseController
         // $b2 = str_replace("Kg", "", $this->request->getPost('berat_out'));
         // $b2 = str_replace(".", "", $b2);
         // $b2 = str_replace(",", ".", $b2);
+		$where_arr = array('no_transaksi' => $no_transaksi);
+		$cekAngkatan1 = $model->getSelectList("tbl_weight_scale",$where_arr);
+		if(count($cekAngkatan1) == 1):
+			$no_transaksi = $no_transaksi.'-B';
+		endif;
 
         $data = [
-            "no_transaksi" => $this->request->getPost('no_transaksi'),
+            "no_transaksi" => $no_transaksi,
             "tipe" => $this->request->getPost('tipe_tiket'),
             "no_tiket_mobil" => $this->request->getPost('no_tiket'),
             "tiket_barge" => $this->request->getPost('tiket_barge'),
@@ -747,8 +779,29 @@ class Home extends BaseController
             "tgl_muat" => $tglMuat
             
         ];
-        $model = new Home_model();
+		if($trashStatus){
+			$data['trash_status'] = $trashStatus;
+		}
+        
         $insert = $model->dataInsert('tbl_weight_scale', $data);
+        if($insert){
+            $db = \Config\Database::connect('default');
+            $queryLastWCSTrans = "SELECT * FROM tbl_weight_scale WHERE no_transaksi = '".$no_transaksi."' ORDER BY weight_in_time DESC LIMIT 1";
+            $run = $db->query($queryLastWCSTrans);
+            $WCSData = $run->getRow();
+            $wcs_id = $WCSData->wcs_id;
+            $beratNett = $beratIn - $beratOut;
+
+            $data_detail = array(
+                'wcs_id' => $WCSData->wcs_id,
+                'no_transaksi' => $no_transaksi,
+                'no_ticket' => $no_transaksi,
+                'gross' => $WCSData->weight_in,
+                'tare' => $WCSData->weight_out,
+                'nett' => $beratNett,
+            );
+            $insert_detail = $model->dataInsert('tbl_wcs_detail', $data_detail);
+        }
         // if($insert){
         //     $det_id = $this->request->getPost('det_id');
         //     $CheckBox = $this->request->getPost('Checkbox');
@@ -784,7 +837,7 @@ class Home extends BaseController
         //     $return = array("status" => "error", "msg" => "Data timbangan gagal disimpan , mohon segera menghubungi administrator !", "no" => $no_transaksi);
         // }
         if($insert){
-            $return = array("status" => "success", "msg" => "Data timbangan berhasil di simpan !" , "no" => $no_transaksi);
+            $return = array("status" => "success", "msg" => "Data timbangan berhasil di simpan !" , "no" => $no_transaksi, "id" => $wcs_id);
         }else{
             $return = array("status" => "error", "msg" => "Data timbangan gagal disimpan , mohon segera menghubungi administrator !", "no" => $no_transaksi);
         }
@@ -881,11 +934,14 @@ class Home extends BaseController
     public function slip_timbang()
     {
         $model = new Home_model();
+        // $wcs_id = $this->request->getGet('no');
         $noTrans = $this->request->getGet('no');
         $arrTrans = explode("/", $noTrans);
 
         $where = array( 'no_transaksi' => $noTrans );
-        $data['timbang'] = $model->getSelectRow('tbl_weight_scale', $where);
+        // $where = array( 'wcs_id' => $wcs_id );
+        $dataTimbang = $model->getSelectRow('tbl_weight_scale', $where);
+        $data['timbang'] = $dataTimbang;
         $kode_kontraktor = $data['timbang']->kode_kontraktor;
         $kode_kon_delivery = $data['timbang']->kontraktor_delivery;
         $where1 = array( 'kode_vendor' => $kode_kontraktor );
@@ -893,8 +949,9 @@ class Home extends BaseController
         $where2 = array( 'kode_vendor' => $kode_kon_delivery );
         $data['kon_delivery'] = $model->getSelectRow('master_vendor', $where2);
 
-        if($arrTrans[0] == 'BP'){
-            $where = array( 'no_transaksi' => $noTrans );
+        $arrTrans = explode("/", $dataTimbang->no_transaksi);
+        if(strtoupper($arrTrans[0]) == 'BP'){
+            $where = array( 'wcs_id' => $dataTimbang->wcs_id );
             $data['timbang_detail'] = $model->getSelectlist('tbl_wcs_detail', $where);
             echo view('temp/surat-timbang-cu', $data);
         }else{

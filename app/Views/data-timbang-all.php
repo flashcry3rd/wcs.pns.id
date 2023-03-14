@@ -7,6 +7,45 @@
         text-align: center;
         cursor: pointer;
     }
+
+    .bg-loader {
+        display: none;
+        position: absolute;
+        /* left: 45%; */
+        width: 100%;
+        height: 100%;
+        z-index: 99;
+        background-color: #00000069;
+
+    }
+
+    .loader {
+        position: absolute;
+        left: 45%;
+        top: 2%;
+        border: 16px solid #f3f3f3;
+        border-top: 16px solid #3498db;
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    .paginate_button.page-item.active{
+        --bs-pagination-active-bg: #8392ab;
+    }
+    .paginate_button.page-item.active a{
+        color: white;
+    }
 </style>
 <!-- <link href="./assets/css/data-table.css" rel="stylesheet" /> -->
 <!-- <link href="./assets/bootstrap5/css/bootstrap.css" rel="stylesheet" /> -->
@@ -24,19 +63,40 @@
                         <h5>Modul</h5>
                         <select class="form-control" name="ModuleFilter" title="Pilih Module" onchange="load_filter();">
                             <option value="none">All</option>
-                            <option value="truck" <?=$filter_module=='truck'?'selected':''?> >Truk</option>
-                            <option value="cu" <?=$filter_module=='cu'?'selected':''?> >CU</option>
+                            <option value="truck" <?= $filter_module == 'truck' ? 'selected' : '' ?> >Truk</option>
+                            <option value="cu" <?= $filter_module == 'cu' ? 'selected' : '' ?> >CU</option>
                         </select>
                     </div>
+                    <div class="row col-12">
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label for="filterStartDate">Tanggal Awal</label>
+                                <input type="date" class="form-control" id="filterStartDate" name="filterStartDate" value="<?= $filterStartDate ? $filterStartDate : date('Y-m-d') ?>" onchange="load_filter();">
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label for="filterEndDate">Tanggal Akhir</label>
+                                <input type="date" class="form-control" id="filterEndDate" name="filterEndDate" value="<?= $filterEndDate ? $filterEndDate : date('Y-m-d', strtotime('+1 day')) ?>" onchange="load_filter();">
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group">
+                        <div class="bg-loader">
+                            <div class="loader"></div>
+                        </div>
                         <div class="table-responsive">
                             <table class="table table-striped" id="data-timbang" style="width: 100%;">
                                 <thead>
                                     <tr>
                                         <td>Slip</td>
-                                        <th>No.</th>
+                                        <!-- <th>No.</th> -->
                                         <th>No. Transaksi</th>
                                         <th>Petak</th>
+                                        <th>No Truck</th>
+                                        <th>No Barge</th>
+                                        <th>Tanggal In</th>
+                                        <th>Tanggal Out</th>
                                         <th>Ancak</th>
                                         <th>Kontraktor</th>
                                         <th>Kontraktor Deliv.</th>
@@ -48,26 +108,46 @@
                                 <tbody>
                                     <?
                                     $i = 1;
+                                    /* echo "<pre>";
+									print_r($timbang);
+									echo "<pre>"; */
                                     foreach ($timbang as $ti) {
+
                                         $noTrans = $ti['no_transaksi'];
                                         $file = str_replace("/", "", $noTrans);
                                     ?>
                                         <tr>
-                                            <td><a href="<?= base_url() ?>/slip-timbang?no=<?= $noTrans ?>" target="_blank" title="Print Tiket Timbang"><i class="ni ni-single-copy-04"></i></a></td>
-                                            <td><?= $i ?></td>
+                                            <td>
+                                                <a href="<?= base_url() ?>/slip-timbang?no=<?= $noTrans ?>" target="_blank" title="Print Tiket Timbang"><i class="ni ni-single-copy-04"></i></a>
+                                            </td>
+                                            <!-- <td><?= $i ?></td> -->
                                             <td><?= $ti['no_transaksi'] ?></td>
                                             <td><?= $ti['kode_petak'] ?></td>
+                                            <td><?= $ti['kode_truck'] ?></td>
+                                            <td><?= $ti['kode_barge'] ?></td>
+                                            <td><?= $ti['weight_in_time'] ?></td>
+                                            <td><?= $ti['weight_out_time'] ?></td>
                                             <td><?= $ti['ancak'] ?></td>
-                                            <? foreach ($vendor as $v) {
-                                                if ($v['kode_vendor'] == $ti['kode_kontraktor']) {
+                                            <? $kcount = 0;
+                                            foreach ($vendor as $v) {
+                                                if ($v['kode_vendor'] == strtoupper($ti['kode_kontraktor'])) {
+                                                    $kcount = 1;
                                                     echo "<td>" . $v['nama_vendor'] . "</td>";
                                                 } ?>
                                             <? } ?>
-                                            <? foreach ($vendor as $v2) {
-                                                if ($v2['kode_vendor'] == $ti['kontraktor_delivery']) {
+                                            <?php if ($kcount == 0) { ?>
+                                                <td>-</td>
+                                            <?php } ?>
+                                            <? $kdcount = 0;
+                                            foreach ($vendor as $v2) {
+                                                if ($v2['kode_vendor'] == strtoupper($ti['kontraktor_delivery'])) {
+                                                    $kdcount = 1;
                                                     echo "<td>" . $v['nama_vendor'] . "</td>";
                                                 } ?>
                                             <? } ?>
+                                            <?php if ($kdcount == 0) { ?>
+                                                <td>-</td>
+                                            <?php } ?>
                                             <td><?= number_format($ti['weight_in'], 2, ",", ".") ?></td>
                                             <td><?= number_format($ti['weight_out'], 2, ",", ".") ?></td>
                                             <td><?= number_format($ti['weight_in'] - $ti['weight_out'], 2, ",", ".") ?></td>
@@ -85,28 +165,88 @@
     </div>
 </div>
 <script src="./assets/js/jquery-3.5.1.js"></script>
-<script src="./assets/js/data-tables-bs5.min.js"></script>
 <script src="./assets/js/data-tables.min.js"></script>
+<script src="./assets/js/data-tables-bs5.min.js"></script>
+<!-- Download / CSV / Copy / Print -->
+<script src="./assets/vendor/datatables/buttons.min.js"></script>
+<script src="./assets/vendor/datatables/jszip.min.js"></script>
+<script src="./assets/vendor/datatables/pdfmake.min.js"></script>
+<script src="./assets/vendor/datatables/vfs_fonts.js"></script>
+<script src="./assets/vendor/datatables/html5.min.js"></script>
+<script src="./assets/vendor/datatables/buttons.print.min.js"></script>
+
 <script src="./assets/bootstrap5/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         $('#data-timbang').DataTable({
-            pageLength: false,
-            paging: false
+            "destroy": true,
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            // pageLength: false,
+            // paging: false,
+            dom: 'Bfrtip',
+            buttons: [
+                'pageLength',
+                {
+                    extend: 'copyHtml5',
+                    exportOptions: {
+                        columns: ':not(:last-child)',
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    exportOptions: {
+                        columns: ':not(:last-child)',
+                    }
+                },
+                // {
+                //     extend: 'csvHtml5',
+                //     exportOptions: {
+                //         columns: ':not(:last-child)',
+                //     }
+                // },
+                // {
+                //     extend: 'pdfHtml5',
+                //     exportOptions: {
+                //         columns: ':not(:last-child)',
+                //     }
+                // },
+                // {
+                //     extend: 'print',
+                //     exportOptions: {
+                //         columns: ':not(:last-child)',
+                //     }
+                // },
+            ],
         });
     });
 
     function load_filter() {
+        $(".bg-loader").show();
         filter = $("[name=ModuleFilter]").val();
-        var ses_menu = "<? if(null !== session()->get('menu')){ echo session()->get('menu') ; }else{ echo "";} ?>";
-        if(ses_menu==""){
-          $("#page-item").load("home/dashboard");
-        }else{
-            if(filter != 'none') {
-                $("#page-item").load("home"+ses_menu+'?filter='+filter);
-            }else{
-                $("#page-item").load("home"+ses_menu);
-            }
+        filterStartDate = $("[name=filterStartDate]").val();
+        filterEndDate = $("[name=filterEndDate]").val();
+        filter_data = {
+            method: filter,
+            start_date: filterStartDate,
+            end_date: filterEndDate,
+        }
+        var ses_menu = "<? if (null !== session()->get('menu')) {
+                            echo session()->get('menu');
+                        } else {
+                            echo "";
+                        } ?>";
+        if (ses_menu == "") {
+            $("#page-item").load("home/dashboard");
+        } else {
+            $("#page-item").load("home" + ses_menu, filter_data);
+            // if (filter != 'none') {
+            //     $("#page-item").load("home" + ses_menu + '?filter=' + filter);
+            // } else {
+            //     $("#page-item").load("home" + ses_menu);
+            // }
         }
     }
 </script>

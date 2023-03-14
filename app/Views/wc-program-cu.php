@@ -605,7 +605,8 @@
         $("#warning").html(data['alert']);
         $("#berat-in-time").val(data['berat_in_time']);
         if (data['timbangOut'] == 0) {
-          $("#submit-cu").show(500);
+          showSaveButton();
+          // $("#submit-cu").show(500);
           $("#cetak-in").fadeIn(500);
           $("#cetak-out").fadeOut(500);
           if (data['alert'] != '') {
@@ -694,37 +695,14 @@
       url: '<?= base_url() ?>/home/saveTruckCU',
       success: function(data) {
         console.log(data);
-        var url = "<?= base_url() ?>/barcode-in?file=" + data['file'] + "&no=" + data['no'];
+        var url = "<?= base_url() ?>/slip-timbang?no=" + data['no_transaksi'];
         alert(data['msg']);
+        console.log(url);
         $("#form-wcs").trigger('reset');
         // reloadTable();
-        // window.open(url, '_blank');
-        // print(url);
-        // $("#badan").fadeOut(500);
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        console.log(jqXHR.responseText);
-      },
-    })
-  })
-
-  $("#submit-cu").click(function() {
-    var data = $("#form-wcs").serialize();
-    $.ajax({
-      data: $("#form-wcs").serialize(),
-      type: 'post',
-      dataType: 'json',
-      cache: false,
-      url: '<?= base_url() ?>/home/saveTruckCU',
-      success: function(data) {
-        console.log(data);
-        var url = "<?= base_url() ?>/barcode-in?file=" + data['file'] + "&no=" + data['no'];
-        alert(data['msg']);
-        $("#form-wcs").trigger('reset');
-        reloadTable();
-        // window.open(url, '_blank');
-        // print(url);
-        // $("#badan").fadeOut(500);
+        window.open(url, '_blank');
+        print(url);
+        $("#submit-cu").hide(500);
       },
       error: function(jqXHR, textStatus, errorThrown) {
         console.log(jqXHR.responseText);
@@ -861,26 +839,36 @@
     });
   }
 
+  function showSaveButton() {
+    noTransaksi = $("#no_transaksi").val();
+    beratInput = $("#berat-nett").val();
+    // console.log(noTransaksi);
+    // console.log(beratInput);
+    if(noTransaksi != "" && beratInput >= 0){
+      $("#submit-cu").show(500);
+    }
+    
+  }
+
   function reloadTable() {
     table_cu.ajax.reload();
   }
 
   function getData() {
     fetch("http://localhost:3000/data").then(res => res.json().then(data => {
-      console.log(data);
+      // console.log(data);
       num = 1;
       
       $.each(data.data_weight, function(i, v) {
         if (v != 0) {
           if (v.includes("Opening")) {
             full_text = v;
-            console.log(full_text);
             v = 0;
           } else {
             split_text = v.split(",");
             slice_text = split_text[2];
-            slice_text = slice_text.replace("+", "");
-            slice_text = slice_text.replace("Kg", "");
+            // slice_text = slice_text.replace("+", "");
+            // slice_text = slice_text.replace("Kg", "");
             slice_text_num = slice_text.replace(".", "");
             if (slice_text != "000.000") {
               full_text = slice_text + " Kg";
@@ -910,6 +898,9 @@
     // val = $(this).val();
     val = $("input[name=berat_timbang]:checked").val();
     // console.log(val);
+    if(val == 'on'){
+      val = 0;
+    }
     tare = 0;
     // gross = parseInt(val);
     tare = parseInt(tare);
@@ -920,5 +911,6 @@
     $("#berat-in").val(val);
     $("#berat-out").val(tare);
     $("#berat-nett").val(total);
+    showSaveButton();
   })
 </script>

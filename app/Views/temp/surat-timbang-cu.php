@@ -49,6 +49,7 @@
     <?= $timbang->no_transaksi ?>
 </title>
 <body>
+</br>
 <div class="table responsive">
     <table style="width: 100%; ">
         <tbody>
@@ -56,15 +57,15 @@
                 <td style=" padding-left: 1%; padding-right: 1%">
                     <div class="col-12">
                         <div class="row">
-                            <div class="col-2" style="text-align: center;"><img src="assets/img/logo.png" style="height: 100px;width: 120px;"></div>
-                            <div class="col-10 tengah" style="text-align: center;">
+                            <!-- <div class="col-2" style="text-align: center;"><img src="assets/img/logo.png" style="height: 100px;width: 120px;"></div> -->
+                            <div class="col-12 tengah" style="text-align: center;">
                                 <div class="form-control" style="border: none;">
                                     <a style="font-size: 25px;">PT. PRATAMA NUSANTARA SAKTI</a>
                                         <br />
-                                        <a style="font-size: 14px;">Taman Perkantoran Kuningan - Wisma GAWI</a>
+                                        <!-- <a style="font-size: 14px;">Taman Perkantoran Kuningan - Wisma GAWI</a>
                                         <br />
                                         <a style="font-size: 14px;">Bumi Pratama Mandiri, Kec. Sungai Menang OKI Sumsel</a>
-                                        <br />
+                                        <br /> -->
                          
                                     
                                 </div>
@@ -125,17 +126,71 @@
                                 <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a >No. Barge</a></b></td>
                                 <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a> : </a></b></td>
                                 <td style="width: 30%;  padding: 0%; padding-left: 0%;"><a ><b><?= $timbang->kode_barge ?></b></a></td>
-                                <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>Kontraktor</a></b></td>
-                                <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a > : </a></b></td>
-                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><a ><b><?= $kontraktor->nama_vendor ?></b></a></td>
+                                <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>Tgl. Muat</a></b></td>
+                                <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a> : </a></b></td>
+                                <? 
+                                $month = date_format(date_create($timbang->tgl_muat), "m");
+                                if($month=="01"){
+                                    $m = "Januari";
+                                }else if($month=="02"){
+                                    $m = "Februari";
+                                }else if($month=="03"){
+                                    $m = "Maret";
+                                }else if($month=="04"){
+                                    $m = "April";
+                                }else if($month=="05"){
+                                    $m = "Mei";
+                                }else if($month=="06"){
+                                    $m = "Juni";
+                                }else if($month=="07"){
+                                    $m = "Juli";
+                                }else if($month=="08"){
+                                    $m= "Agustus";
+                                }else if($month=="09"){
+                                    $m = "September";
+                                }else if($month=="10"){
+                                    $m = "Oktober";
+                                }else if($month=="11"){
+                                    $m = "November";
+                                }else if($month=='12'){
+                                    $m = 'Desember';
+                                }else{
+                                    $m ="";
+                                }
+                                ?>
+                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><a ><b><?= date_format(date_create($timbang->tgl_muat), "d")." ".$m." ".date_format(date_create($timbang->tgl_muat), "Y")." ".date_format(date_create($timbang->tgl_muat),"H:i") ?></b></a></td>
                             </tr>
                             <tr >
                                 <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>No. Tugboat</a></b></td>
                                 <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a> : </a></b></td>
                                 <td style="width: 30%;  padding: 0%; padding-left: 0%;"><a ><b><?= $timbang->kode_tugboat ?></b></a></td>
+                                <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>Kontraktor</a></b></td>
+                                <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a > : </a></b></td>
+                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><a ><b><?= $kontraktor->nama_vendor ?></b></a></td>
+                            </tr>
+                            <tr>
                                 <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>Petak</a></b></td>
                                 <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a> : </a></b></td>
                                 <td style="width: 30%;  padding: 0%; padding-left: 0%;"><a ><b><?= $timbang->kode_petak ?></b></a></td>
+                                <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>Kontraktor Delivery</a></b></td>
+                                <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a > : </a></b></td>
+                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><a ><b><?= $kon_delivery->nama_vendor ?></b></a></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>Ancak</a></b></td>
+                                <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a> : </a></b></td>
+                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><a ><b><?= $timbang->ancak ?></b></a></td>
+                                <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>Nahkoda</a></b></td>
+                                <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a > : </a></b></td>
+                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><a ><b><?= $timbang->tugboat_captain ?></b></a></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>No. Alat Muat (Load)</a></b></td>
+                                <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a> : </a></b></td>
+                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><a ><b><?= $timbang->loading_vehicle_number ?></b></a></td>
+                                <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>Op. Alat Muat (Load)</a></b></td>
+                                <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a > : </a></b></td>
+                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><a ><b><?= $timbang->loading_vehicle_operator ?></b></a></td>
                             </tr>
                         </tbody>
                     </table>
@@ -146,7 +201,8 @@
                     <table style="width: 100%; border: border-collapse: collapse;">
                         <thead> 
                             <tr >
-                                <th style="width: 25%;text-align: center; padding: 0%;border-top: 1px dotted black"><a>No. Ticket</a></th>
+                                <?php if($timbang->trash_status): $trash_status = '(TRASH)'; else: $trash_status = ''; endif;?>
+                                <th style="width: 25%;text-align: center; padding: 0%;border-top: 1px dotted black"><a><?= $timbang->jenis_tebu ?> <?= $trash_status ?></a></th>
                                 <th style="width: 25%;text-align: center; padding: 0%;border-top: 1px dotted black"><a>Gross</a></th>
                                 <th style="width: 25%;text-align: center; padding: 0%;border-top: 0.1px dotted black"><a>Tare</a></th>
                                 <th style="width: 25%;text-align: center; padding: 0%;border-top: 0.1px dotted black"><a>Nett</a></th>
@@ -160,13 +216,16 @@
 							if($cnt == $i){ 
 							$border = "border-bottom: 0.1px dotted black;";}else{ $border = "";}?>
                                 <tr style="border: 0.1px none black;">
-                                    <td style="text-align: center;border: 0.1px none black; <?= $border ?>"><b><a><?= $td['no_ticket'] ?></a></b></td>
+                                    <td></td>
                                     <td style="text-align: center;border: 0.1px none black; <?= $border ?>"><b><a><?= number_format($td['gross'], 2, ",", ".") ?></a></b></td>
                                     <td style="text-align: center;border: 0.1px none black; <?= $border ?>"><b><a><?= number_format($td['tare'], 2, ",", ".") ?></a></b></td>
                                     <td style="text-align: center;border: 0.1px none black; <?= $border ?>"><b><a><?= number_format($td['nett'], 2, ",", ".") ?></a></b></td>
                                 </tr>
                             <?php $i++; endforeach;?>
                             <tr>
+								<!-- <td style="text-align: center;border-bottom: 0; padding: 0%;border-right: 0px dotted black">
+									<b><?= $timbang->jenis_tebu ?></b>
+								</td> -->
                                 <td colspan="3" style="text-align: right;border-bottom: 0; padding: 0%;border-right: 0px dotted black">
                                     <a >Gross</a> &emsp;
                                 </td>
@@ -237,7 +296,6 @@
                                      ?>
                                     <b><a >Sungai Menang, <?= $d ?> <?= date("d")?> <?= $m." ".date("Y") ?></a></b></br>
                                     <b><a ></a></b>
-                                    <br />
                                     <br />
                                     <br />
                                     <b><a >Pengawas</a></b>
