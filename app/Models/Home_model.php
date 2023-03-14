@@ -32,6 +32,19 @@ class Home_model extends Model
         return $result;
     }
 
+    public function getSelectReportAll($table, $where = ""){
+        $tb = $this->db->table("$table as A");
+        $tb->select("A.*, B.nama_vendor as nama_kontraktor, C.nama_vendor as nama_kontraktor_delivery");
+        $tb->join("master_vendor as B", "B.kode_vendor = A.kode_kontraktor","left");
+        $tb->join("master_vendor as C", "C.kode_vendor = A.kontraktor_delivery","left");
+        if($where != ""):
+            $get = $tb->getWhere($where);
+        endif;
+        $result = $get->getResultArray();
+
+        return $result;
+    }
+
     public function selectAll($table, $select = "")
     {
         $tb = $this->db->table($table);

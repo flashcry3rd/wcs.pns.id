@@ -150,26 +150,8 @@
                                             <td><?= $ti['weight_in_time'] ?></td>
                                             <td><?= $ti['weight_out_time'] ?></td>
                                             <td><?= $ti['ancak'] ?></td>
-                                            <? $kcount = 0;
-                                            foreach ($vendor as $v) {
-                                                if ($v['kode_vendor'] == strtoupper($ti['kode_kontraktor'])) {
-                                                    $kcount = 1;
-                                                    echo "<td>" . $v['nama_vendor'] . "</td>";
-                                                } ?>
-                                            <? } ?>
-                                            <?php if ($kcount == 0) { ?>
-                                                <td>-</td>
-                                            <?php } ?>
-                                            <? $kdcount = 0;
-                                            foreach ($vendor as $v2) {
-                                                if ($v2['kode_vendor'] == strtoupper($ti['kontraktor_delivery'])) {
-                                                    $kdcount = 1;
-                                                    echo "<td>" . $v['nama_vendor'] . "</td>";
-                                                } ?>
-                                            <? } ?>
-                                            <?php if ($kdcount == 0) { ?>
-                                                <td>-</td>
-                                            <?php } ?>
+                                            <td><?= $ti['nama_kontraktor'] ?></td>
+                                            <td><?= $ti['nama_kontraktor_delivery'] ?></td>
                                             <td><?= number_format($ti['weight_in'], 2, ",", ".") ?></td>
                                             <td><?= number_format($ti['weight_out'], 2, ",", ".") ?></td>
                                             <td><?= number_format($ti['weight_in'] - $ti['weight_out'], 2, ",", ".") ?></td>
