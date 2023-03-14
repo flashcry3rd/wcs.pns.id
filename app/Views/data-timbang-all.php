@@ -164,7 +164,7 @@
                                             foreach ($vendor as $v2) {
                                                 if ($v2['kode_vendor'] == strtoupper($ti['kontraktor_delivery'])) {
                                                     $kdcount = 1;
-                                                    echo "<td>" . $v['nama_vendor'] . "</td>";
+                                                    echo "<td>" . $v2['nama_vendor'] . "</td>";
                                                 } ?>
                                             <? } ?>
                                             <?php if ($kdcount == 0) { ?>
