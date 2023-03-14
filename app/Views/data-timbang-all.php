@@ -71,13 +71,19 @@
                         <div class="col-2">
                             <div class="form-group">
                                 <label for="filterStartDate">Tanggal Awal</label>
-                                <input type="date" class="form-control" id="filterStartDate" name="filterStartDate" value="<?= $filterStartDate ? $filterStartDate : date('Y-m-d') ?>" onchange="load_filter();">
+                                <input type="date" class="form-control" id="filterStartDate" name="filterStartDate" value="<?= $filterStartDate ? $filterStartDate : date('Y-m-d') ?>">
                             </div>
                         </div>
                         <div class="col-2">
                             <div class="form-group">
                                 <label for="filterEndDate">Tanggal Akhir</label>
-                                <input type="date" class="form-control" id="filterEndDate" name="filterEndDate" value="<?= $filterEndDate ? $filterEndDate : date('Y-m-d', strtotime('+1 day')) ?>" onchange="load_filter();">
+                                <input type="date" class="form-control" id="filterEndDate" name="filterEndDate" value="<?= $filterEndDate ? $filterEndDate : date('Y-m-d') ?>">
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label>Filter</label>
+                                <input class="form-control btn btn-secondary" type="button" value="Filter" onclick="load_filter();">
                             </div>
                         </div>
                     </div>
@@ -103,6 +109,12 @@
                                         <th>Berat Masuk</th>
                                         <th>Berat Keluar</th>
                                         <th>Nett</th>
+                                        <th>No Trans Barge</th>
+                                        <th>No Tugboat</th>
+                                        <th>Nahkoda</th>
+                                        <th>Rute</th>
+                                        <th>No Alat Muat</th>
+                                        <th>Operator Alat Muat</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -115,6 +127,16 @@
 
                                         $noTrans = $ti['no_transaksi'];
                                         $file = str_replace("/", "", $noTrans);
+                                        if(strtoupper($ti['tipe']) == 'TP' || strtoupper($ti['tipe']) == 'BP'):
+                                            $NoAlatMuat = $ti['loading_vehicle_number'];
+                                            $OpAlatMuat = $ti['loading_vehicle_operator'];
+                                        elseif(strtoupper($ti['tipe']) == 'TD'):
+                                            $NoAlatMuat = $ti['no_alat2'];
+                                            $OpAlatMuat = $ti['op_alat2'];
+                                        else:
+                                            $NoAlatMuat = $ti['loading_vehicle_number'];
+                                            $OpAlatMuat = $ti['loading_vehicle_operator'];
+                                        endif;
                                     ?>
                                         <tr>
                                             <td>
@@ -151,6 +173,12 @@
                                             <td><?= number_format($ti['weight_in'], 2, ",", ".") ?></td>
                                             <td><?= number_format($ti['weight_out'], 2, ",", ".") ?></td>
                                             <td><?= number_format($ti['weight_in'] - $ti['weight_out'], 2, ",", ".") ?></td>
+                                            <td><?= $ti['ticket_barge'] ?></td>
+                                            <td><?= $ti['kode_tugboat'] ?></td>
+                                            <td><?= $ti['tugboat_captain'] ?></td>
+                                            <td><?= $ti['tujuan'] ?></td>
+                                            <td><?= $NoAlatMuat ?></td>
+                                            <td><?= $OpAlatMuat ?></td>
                                         </tr>
                                     <? $i++;
                                     } ?>
@@ -184,6 +212,7 @@
                 [10, 25, 50, -1],
                 [10, 25, 50, "All"]
             ],
+            order: [[5, 'desc']],
             // pageLength: false,
             // paging: false,
             dom: 'Bfrtip',
