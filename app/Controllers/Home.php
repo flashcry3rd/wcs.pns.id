@@ -480,14 +480,14 @@ class Home extends BaseController
             if($filterEndDate):
                 $where_arr['weight_in_time <='] = $filterEndDate;
             endif;
-            $data['timbang'] = $model->getSelectDb2('tbl_weight_scale',$where_arr);
+            $data['timbang'] = $model->getSelect('tbl_weight_scale',$where_arr);
         else:
             $data['timbang'] = $model->selectAll('tbl_weight_scale');
         endif;
         $data['filter_module'] = $filter;
         $data['filterStartDate'] = $filterStartDate;
         $data['filterEndDate'] = $filterEndDate;
-        $data['vendor'] = $model->selectAllDb2('master_vendor');
+        $data['vendor'] = $model->selectAll('master_vendor');
         echo view("data-timbang-all", $data);
     }
 
@@ -916,9 +916,13 @@ class Home extends BaseController
         $b2 = str_replace(".", "", $b2);
         $b2 = str_replace(",", ".", $b2);
 		
-
+        if($this->request->getPost('trash')){
+            $trash = 1 ;
+        }else{
+            $trash = 0;
+        }
         $data = [
-            "trash_status" => $this->request->getPost('trash'),
+            "trash_status" => $trash,
             "no_transaksi" => $this->request->getPost('no_transaksi'),
             "tipe" => $this->request->getPost('tipe_tiket'),
             // "no_tiket_mobil" => $this->request->getPost('no_tiket'),
