@@ -553,11 +553,11 @@ header("Access-Control-Allow-Origin: *");
             $(".status-online-btn").removeClass("btn-outline-danger");
             $(".status-online-btn").addClass("btn-outline-success");
             $(".status-online-btn").html("Online");
-            $.ajax({
+            await $.ajax({
               url: "<?=base_url()?>/home/sync2"
             })
           }
-        }, 3000);
+        }, 30000);
         
       })
      
