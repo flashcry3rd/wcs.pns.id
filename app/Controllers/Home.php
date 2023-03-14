@@ -590,7 +590,7 @@ class Home extends BaseController
                 $data['alert'] = "Data Transaksi sudah pernah di SCAN";
             }else{
                 if($method != "cu") {
-                    if($data['tipe']=="BP"){
+                    if($data['tipe']=="BP" || $data['tipe']=="BD"){
                         $data['alert'] ="Tipe tiket tidak sesuai , mohon di cek kembali tiket yang anda gunakan !" ;
                     }else{
                         $data['alert'] = "";
@@ -626,7 +626,7 @@ class Home extends BaseController
                 $data['alert'] = "Data Transaksi sudah pernah di SCAN";
             }else{
                 if($method != "cu") {
-                    if($data['tipe']=="BP"){
+                    if($data['tipe']=="BP" || $data['tipe']=="BD"){
                         $data['alert'] ="Tipe tiket tidak sesuai , mohon di cek kembali tiket yang anda gunakan !" ;
                     }else{
                         $data['alert'] = "";

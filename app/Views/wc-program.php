@@ -54,7 +54,7 @@
                 <!-- <button class="message-button btn btn-primary" id='get-serial-messages' data-value="0" >Get Data</button> -->
                 <label><i><a style="color: red;">Arahkan kursor anda ke form input berikut *</a></i></label>
                 <br>
-                <input class="form-control" type="text" id="get-serial-messages" name="serial-input">
+                <input class="form-control" type="text" id="get-serial-messages" name="serial-input" autocomplete="off">
                 </div>
                 <label ><i><a style="color: red;" id='warning'></a></i></label><br />
                 <label><h4 ><b>Indikator : </b></h4></label>
