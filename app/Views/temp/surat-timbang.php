@@ -194,7 +194,7 @@
                                     $m ="";
                                 }
                                 ?>
-                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><b><a ><?= date_format(date_create($timbang->weight_out_time), "d")." ".$m." ".date_format(date_create($timbang->weight_out_time), "Y") ?></a></b></td>
+                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><b><a ><?= date_format(date_create($timbang->weight_out_time), "d")." ".$m." ".date_format(date_create($timbang->weight_out_time), "Y")." ".date_format(date_create($timbang->weight_out_time), "H:i:s") ?></a></b></td>
                                 <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>Rute</a></b></td>
                                 <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a> : </a></b></td>
                                 <td style="width: 30%;  padding: 0%; padding-left: 0%;"><b><a ><?= $timbang->tujuan ?></a></b></td>
@@ -204,9 +204,9 @@
                                 <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>No. Truk</a></b></td>
                                 <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a> : </a></b></td>
                                 <td style="width: 30%;  padding: 0%; padding-left: 0%;"><b><a ><?= $timbang->kode_truck ?></a></b></td>
-                                <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>Jenis Tebu</a></b></td>
+                                <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>Kontraktor Delivery</a></b></td>
                                 <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a> : </a></b></td>
-                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><b><a ><?= $timbang->jenis_tebu ?></a></b></td>
+                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><b><a ><?= $kon_delivery->nama_vendor ?></a></b></td>
                             </tr>
                             
                             

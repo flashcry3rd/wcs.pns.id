@@ -328,6 +328,9 @@
           $("#timbang_hariini").html(data['timbang2']);
           $("#timbang_all").html(data['timbangAll']);
           $("#timbang_perjam").html(data['timbangHour']);
+          $("#timbang_perjam_2").html(data['timbangHour_2']);
+          $("#jam").val("<?= date("H:00") ?>");
+          $("#jam_2").val("<?= date("H:00") ?>");
           $("#timbang_week1").html(data['timbangMinggu1']);
           $("#timbang_week2").html(data['timbangMinggu2']);
           $("#timbang_week3").html(data['timbangMinggu3']);
