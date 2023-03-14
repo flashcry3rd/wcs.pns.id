@@ -173,7 +173,7 @@
                                             <td><?= number_format($ti['weight_in'], 2, ",", ".") ?></td>
                                             <td><?= number_format($ti['weight_out'], 2, ",", ".") ?></td>
                                             <td><?= number_format($ti['weight_in'] - $ti['weight_out'], 2, ",", ".") ?></td>
-                                            <td><?= $ti['ticket_barge'] ?></td>
+                                            <td><?= $ti['tiket_barge'] ?></td>
                                             <td><?= $ti['kode_tugboat'] ?></td>
                                             <td><?= $ti['tugboat_captain'] ?></td>
                                             <td><?= $ti['tujuan'] ?></td>
