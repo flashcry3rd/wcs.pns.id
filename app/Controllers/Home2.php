@@ -128,15 +128,15 @@ class Home extends BaseController
         }
 
         
-        $tHariKemaren = "weight_out_time between '$dateBefore' and '$dateNow' and weight_in > 0" ;
-        $tHariIni = "weight_out_time between '$dateNow' and '$dateNow1' and weight_in > 0" ;
-        $tYear = "YEAR(weight_out_time) = '$year' and weight_in > 0";
+        $tHariKemaren = "weight_out_time between '$dateBefore' and '$dateNow' " ;
+        $tHariIni = "weight_out_time between '$dateNow' and '$dateNow1' " ;
+        $tYear = "YEAR(weight_out_time) = '$year' ";
 
         //perjam 
         
         $hourNow = date("Y-m-d H:")."00:00";
         $hourLimit = date("Y-m-d H:")."59:59" ;
-        $tPerJam = "weight_out_time between '$hourNow' and '$hourLimit' and weight_in > 0";
+        $tPerJam = "weight_out_time between '$hourNow' and '$hourLimit'";
 
         //weekly
 
@@ -183,13 +183,9 @@ class Home extends BaseController
         ///////////////////////////
 
         $timbang1 = $model->getSelectDb2("tbl_weight_scale", $tHariKemaren);
-        $ritasiTimbang1 = count($timbang1);
         $timbang2 = $model->getSelectDb2("tbl_weight_scale", $tHariIni);
-        $ritasiTimbang2 = count($timbang2);
         $timbangAll = $model->getSelectDb2("tbl_weight_scale", $tYear);
-        $ritasiTimbangAll = count($timbangAll);
         $timbangHour = $model->getSelectDb2("tbl_weight_scale", $tPerJam);
-        $ritasiTimbangHour = count($timbangHour);
         $timbangMinggu1 = $model->getSelectDb2("tbl_weight_scale", $whereMinggu1);
         $timbangMinggu2 = $model->getSelectDb2("tbl_weight_scale", $whereMinggu2);
         $timbangMinggu3 = $model->getSelectDb2("tbl_weight_scale", $whereMinggu3);
@@ -234,15 +230,15 @@ class Home extends BaseController
             $totalMinggu5 += ($tm5['weight_in'] - $tm5['weight_out']);
         }
         
-          $data['timbang1'] = number_format($totalTimbang1, 2 ,"," , "."). " Kg </br> Ritasi : ".$ritasiTimbang1." (ALL)";
-        $data['timbang2'] = number_format($totalTimbang2, 2 ,",", "."). " Kg </br> Ritasi : ".$ritasiTimbang2." (ALL)";
-        $data['timbangAll'] = number_format($totalAll, 2, ",", "."). " Kg </br> Ritasi : ".$ritasiTimbangAll." (ALL)";
-        $data['timbangHour'] = number_format($totalHour, 2, ",", "."). " Kg </br> Ritasi : ".$ritasiTimbangHour." (ALL)";
-        $data['timbangMinggu1'] = number_format($totalMinggu1, 2, ",", ".") ;
-        $data['timbangMinggu2'] = number_format($totalMinggu2, 2, ",", ".") ;
-        $data['timbangMinggu3'] = number_format($totalMinggu3, 2, ",", ".") ;
-        $data['timbangMinggu4'] = number_format($totalMinggu4, 2, ",", ".") ;
-        $data['timbangMinggu5'] = number_format($totalMinggu5, 2, ",", ".") ;
+        $data['timbang1'] = $totalTimbang1 ;
+        $data['timbang2'] = $totalTimbang2 ;
+        $data['timbangAll'] = $totalAll ;
+        $data['timbangHour'] = $totalHour ;
+        $data['timbangMinggu1'] = $totalMinggu1 ;
+        $data['timbangMinggu2'] = $totalMinggu2 ;
+        $data['timbangMinggu3'] = $totalMinggu3 ;
+        $data['timbangMinggu4'] = $totalMinggu4 ;
+        $data['timbangMinggu5'] = $totalMinggu5 ;
 
         // echo $tglAkhirMinggu5;
         
@@ -441,12 +437,7 @@ class Home extends BaseController
 
     public function data_timbang_all()
     {
-        
-        $filter = $this->request->getPost('method');
-        $filterStartDate = $this->request->getPost('start_date');
-        $filterEndDate = $this->request->getPost('end_date');
-        // exit;
-        // $filter = $this->request->getGet('filter');
+        $filter = $this->request->getGet('filter');
         // print_r($filter);
         $model = new Home_model();
         $arr = array(
@@ -454,28 +445,16 @@ class Home extends BaseController
         );
         session()->set($arr);
         if($filter):
-			$order = array('weight_in_time' => 'DESC');
-            $where_arr = array();
             if($filter == 'cu'):
-                $where_arr['tipe'] = 'BP';
-                // $where = array('tipe' => 'BP');
+                $where = array('tipe' => 'BP');
             else:
-                $where_arr['tipe !='] = 'BP';
-                // $where = array('tipe !=' => 'BP');
+                $where = array('tipe !=' => 'BP');
             endif;
-            if($filterStartDate):
-                $where_arr['weight_in_time >='] = $filterStartDate;
-            endif;
-            if($filterEndDate):
-                $where_arr['weight_in_time <='] = $filterEndDate;
-            endif;
-            $data['timbang'] = $model->getSelectDb2('tbl_weight_scale',$where_arr);
+            $data['timbang'] = $model->getSelectDb2('tbl_weight_scale',$where);
         else:
-            $data['timbang'] = $model->selectAll('tbl_weight_scale');
+            $data['timbang'] = $model->selectAllDb2('tbl_weight_scale');
         endif;
         $data['filter_module'] = $filter;
-        $data['filterStartDate'] = $filterStartDate;
-        $data['filterEndDate'] = $filterEndDate;
         $data['vendor'] = $model->selectAllDb2('master_vendor');
         echo view("data-timbang-all", $data);
     }
@@ -520,16 +499,8 @@ class Home extends BaseController
         $where2 = array( 'kode_vendor' => $kon_delivery );
         $rowKon = $model->getSelectRow("master_vendor", $where1);
         $rowKonDev = $model->getSelectRow("master_vendor", $where2);
-		if($rowKon){
-			$data['nama_kontraktor'] = $rowKon->nama_vendor;
-		}else{
-			$data['nama_kontraktor'] = $kode_kontraktor;
-		}
-		if($rowKonDev){
-			$data['nama_kon_delivery'] = $rowKonDev->nama_vendor;
-		}else{
-			$data['nama_kon_delivery'] = $kon_delivery;
-		}
+        $data['nama_kontraktor'] = $rowKon->nama_vendor;
+        $data['nama_kon_delivery'] = $rowKonDev->nama_vendor;
 
         $no_transaksi = $arr[1];
         $arrTrans = explode("/", $no_transaksi);
@@ -638,20 +609,9 @@ class Home extends BaseController
         $b1 = str_replace("Kg", "", $this->request->getPost('berat_in'));
         $b1 = str_replace(".", "", $b1);
         $b1 = str_replace(",", ".", $b1);
-		
-		if($b1 < 1){
-			$return = array( 'status' => "error", "msg" => "Berat timbang tidak boleh 0 , silahkan di SCAN kembali !", "file" => $noTrans, "no" => $no_transaksi);
-			echo json_encode($return) ;
-			exit();
-		}
-		
-		if($this->request->getPost('trash')){
-			$trash = $this->request->getPost('trash');
-		}else{
-			$trash = 0 ;
-		}
+
         $data = [
-            "trash_status" => $trash,
+            
             "no_transaksi" => $this->request->getPost('no_transaksi'),
             "tipe" => $this->request->getPost('tipe_tiket'),
             // "no_tiket_mobil" => $this->request->getPost('no_tiket'),
@@ -722,8 +682,7 @@ class Home extends BaseController
             '19' => $this->request->getPost('createby'),
             //25 timbang in 
             'berat' => $beratIn, 
-            'berat_time' => $dateNow,
-			'trash' => $this->request->getPost('trash')
+            'berat_time' => $dateNow
 
         );
 
@@ -740,7 +699,7 @@ class Home extends BaseController
         
         $result = $writer->write($qr);
         $result->saveToFile( ROOTPATH."/assets/qr/$noTrans.png");
-		if($result){
+        if($result){
             $return = array( 'status' => "success", "msg" => "Data weight in berhasil di proses !", "file" => $noTrans, "no" => $no_transaksi );
         }else{
             $return = array( 'status' => "error", "msg" => "Simpan data weight in gagal , data sudah pernah di SCAN !", "file" => $noTrans, "no" => $no_transaksi);
@@ -751,7 +710,6 @@ class Home extends BaseController
 
     public function saveTruckCU()
     {   
-		$model = new Home_model();
         // if(!$this->request->getPost('Checkbox')):
         //     $return = array("status" => "error", "msg" => "Silahkan pilih berat timbang CU", "no" => $this->request->getPost('no_transaksi'));
         //     return json_encode($return);
@@ -764,7 +722,6 @@ class Home extends BaseController
         $tglIn=$this->request->getPost('berat_in_time');
         $no_transaksi = $this->request->getPost('no_transaksi'); 
         $noTrans = str_replace("/","", $this->request->getPost('no_transaksi'));
-		$trashStatus = $this->request->getPost('TrashStatus');
         // $arrT = explode("/", $this->request->getPost('tgl_tebang'));
         // $tglTebang = $arrT[2]."-".$arrT[1]."-".$arrT[0];
         $arrM = explode("/", $this->request->getPost('tgl_muat'));
@@ -779,14 +736,9 @@ class Home extends BaseController
         // $b2 = str_replace("Kg", "", $this->request->getPost('berat_out'));
         // $b2 = str_replace(".", "", $b2);
         // $b2 = str_replace(",", ".", $b2);
-		$where_arr = array('no_transaksi' => $no_transaksi);
-		$cekAngkatan1 = $model->getSelectList("tbl_weight_scale",$where_arr);
-		if(count($cekAngkatan1) == 1):
-			$no_transaksi = $no_transaksi.'-B';
-		endif;
 
         $data = [
-            "no_transaksi" => $no_transaksi,
+            "no_transaksi" => $this->request->getPost('no_transaksi'),
             "tipe" => $this->request->getPost('tipe_tiket'),
             "no_tiket_mobil" => $this->request->getPost('no_tiket'),
             "tiket_barge" => $this->request->getPost('tiket_barge'),
@@ -818,29 +770,8 @@ class Home extends BaseController
             "tgl_muat" => $tglMuat
             
         ];
-		if($trashStatus){
-			$data['trash_status'] = $trashStatus;
-		}
-        
+        $model = new Home_model();
         $insert = $model->dataInsert('tbl_weight_scale', $data);
-        if($insert){
-            $db = \Config\Database::connect('default');
-            $queryLastWCSTrans = "SELECT * FROM tbl_weight_scale WHERE no_transaksi = '".$no_transaksi."' ORDER BY weight_in_time DESC LIMIT 1";
-            $run = $db->query($queryLastWCSTrans);
-            $WCSData = $run->getRow();
-            $wcs_id = $WCSData->wcs_id;
-            $beratNett = $beratIn - $beratOut;
-
-            $data_detail = array(
-                'wcs_id' => $WCSData->wcs_id,
-                'no_transaksi' => $no_transaksi,
-                'no_ticket' => $no_transaksi,
-                'gross' => $WCSData->weight_in,
-                'tare' => $WCSData->weight_out,
-                'nett' => $beratNett,
-            );
-            $insert_detail = $model->dataInsert('tbl_wcs_detail', $data_detail);
-        }
         // if($insert){
         //     $det_id = $this->request->getPost('det_id');
         //     $CheckBox = $this->request->getPost('Checkbox');
@@ -876,7 +807,7 @@ class Home extends BaseController
         //     $return = array("status" => "error", "msg" => "Data timbangan gagal disimpan , mohon segera menghubungi administrator !", "no" => $no_transaksi);
         // }
         if($insert){
-            $return = array("status" => "success", "msg" => "Data timbangan berhasil di simpan !" , "no" => $no_transaksi, "id" => $wcs_id);
+            $return = array("status" => "success", "msg" => "Data timbangan berhasil di simpan !" , "no" => $no_transaksi);
         }else{
             $return = array("status" => "error", "msg" => "Data timbangan gagal disimpan , mohon segera menghubungi administrator !", "no" => $no_transaksi);
         }
@@ -904,10 +835,9 @@ class Home extends BaseController
         $b2 = str_replace("Kg", "", $this->request->getPost('berat_out'));
         $b2 = str_replace(".", "", $b2);
         $b2 = str_replace(",", ".", $b2);
-		
 
         $data = [
-            "trash_status" => $this->request->getPost('trash'),
+            
             "no_transaksi" => $this->request->getPost('no_transaksi'),
             "tipe" => $this->request->getPost('tipe_tiket'),
             // "no_tiket_mobil" => $this->request->getPost('no_tiket'),
@@ -942,7 +872,7 @@ class Home extends BaseController
         ];
         $model = new Home_model();
         $insert = $model->dataInsert('tbl_weight_scale', $data);
-		if($insert){
+        if($insert){
 
             $return = array("status" => "success", "msg" => "Data timbangan berhasil di simpan !" , "no" => $no_transaksi);
         }else{
@@ -974,14 +904,11 @@ class Home extends BaseController
     public function slip_timbang()
     {
         $model = new Home_model();
-        // $wcs_id = $this->request->getGet('no');
         $noTrans = $this->request->getGet('no');
         $arrTrans = explode("/", $noTrans);
 
         $where = array( 'no_transaksi' => $noTrans );
-        // $where = array( 'wcs_id' => $wcs_id );
-        $dataTimbang = $model->getSelectRow('tbl_weight_scale', $where);
-        $data['timbang'] = $dataTimbang;
+        $data['timbang'] = $model->getSelectRow('tbl_weight_scale', $where);
         $kode_kontraktor = $data['timbang']->kode_kontraktor;
         $kode_kon_delivery = $data['timbang']->kontraktor_delivery;
         $where1 = array( 'kode_vendor' => $kode_kontraktor );
@@ -989,9 +916,8 @@ class Home extends BaseController
         $where2 = array( 'kode_vendor' => $kode_kon_delivery );
         $data['kon_delivery'] = $model->getSelectRow('master_vendor', $where2);
 
-        $arrTrans = explode("/", $dataTimbang->no_transaksi);
-        if(strtoupper($arrTrans[0]) == 'BP'){
-            $where = array( 'wcs_id' => $dataTimbang->wcs_id );
+        if($arrTrans[0] == 'BP'){
+            $where = array( 'no_transaksi' => $noTrans );
             $data['timbang_detail'] = $model->getSelectlist('tbl_wcs_detail', $where);
             echo view('temp/surat-timbang-cu', $data);
         }else{
@@ -1186,13 +1112,10 @@ class Home extends BaseController
         $tipe = $this->request->getPost('tipe');
         if($tipe == "truck"){
             $tipeFilter = "and tipe in ('TP', 'TD')"; 
-            $ritasi = "TRUCK";
         }else if($tipe == "barge"){
             $tipeFilter = "and tipe in ('BP')";
-            $ritasi = "BARGE";
         }else{
             $tipeFilter = "";
-            $ritasi = "(ALL)";
         }
 
         $date = date("Y-m-d");
@@ -1209,15 +1132,15 @@ class Home extends BaseController
         }
 
         
-        $tHariKemaren = "weight_out_time between '$dateBefore' and '$dateNow' and weight_in > 0 $tipeFilter " ;
-        $tHariIni = "weight_out_time between '$dateNow' and '$dateNow1' and weight_in > 0 $tipeFilter " ;
-        $tYear = "YEAR(weight_out_time) = '$year' $tipeFilter and weight_in > 0";
+        $tHariKemaren = "weight_out_time between '$dateBefore' and '$dateNow' $tipeFilter" ;
+        $tHariIni = "weight_out_time between '$dateNow' and '$dateNow1' $tipeFilter" ;
+        $tYear = "YEAR(weight_out_time) = '$year' $tipeFilter";
 
         //perjam 
         
         $hourNow = date("Y-m-d H:")."00:00";
         $hourLimit = date("Y-m-d H:")."59:59" ;
-        $tPerJam = "weight_out_time between '$hourNow' and '$hourLimit' and weight_in > 0 $tipeFilter";
+        $tPerJam = "weight_out_time between '$hourNow' and '$hourLimit' $tipeFilter";
 
         //weekly
 
@@ -1264,13 +1187,9 @@ class Home extends BaseController
         ///////////////////////////
 
         $timbang1 = $model->getSelectDb2("tbl_weight_scale", $tHariKemaren);
-        $ritasiTimbang1 = count($timbang1);
         $timbang2 = $model->getSelectDb2("tbl_weight_scale", $tHariIni);
-        $ritasiTimbang2 = count($timbang2);
         $timbangAll = $model->getSelectDb2("tbl_weight_scale", $tYear);
-        $ritasiTimbangAll = count($timbangAll);
         $timbangHour = $model->getSelectDb2("tbl_weight_scale", $tPerJam);
-        $ritasiTimbangHour = count($timbangHour);
         $timbangMinggu1 = $model->getSelectDb2("tbl_weight_scale", $whereMinggu1);
         $timbangMinggu2 = $model->getSelectDb2("tbl_weight_scale", $whereMinggu2);
         $timbangMinggu3 = $model->getSelectDb2("tbl_weight_scale", $whereMinggu3);
@@ -1315,10 +1234,10 @@ class Home extends BaseController
             $totalMinggu5 += ($tm5['weight_in'] - $tm5['weight_out']);
         }
         
-        $data['timbang1'] = number_format($totalTimbang1, 2 ,"," , "."). " Kg </br> Ritasi : ".$ritasiTimbang1." ".$ritasi ;
-        $data['timbang2'] = number_format($totalTimbang2, 2 ,",", "."). " Kg </br> Ritasi : ".$ritasiTimbang2." ".$ritasi ;
-        $data['timbangAll'] = number_format($totalAll, 2, ",", "."). " Kg </br> Ritasi : ".$ritasiTimbangAll." ".$ritasi ;
-        $data['timbangHour'] = number_format($totalHour, 2, ",", "."). " Kg </br> Ritasi : ".$ritasiTimbangHour." ".$ritasi ;
+        $data['timbang1'] = number_format($totalTimbang1, 2 ,"," , ".") ;
+        $data['timbang2'] = number_format($totalTimbang2, 2 ,",", ".") ;
+        $data['timbangAll'] = number_format($totalAll, 2, ",", ".") ;
+        $data['timbangHour'] = number_format($totalHour, 2, ",", ".") ;
         $data['timbangMinggu1'] = number_format($totalMinggu1, 2, ",", ".") ;
         $data['timbangMinggu2'] = number_format($totalMinggu2, 2, ",", ".") ;
         $data['timbangMinggu3'] = number_format($totalMinggu3, 2, ",", ".") ;
@@ -1342,7 +1261,7 @@ class Home extends BaseController
             $ritasi = "BARGE"; 
         }else{
             $tipeFilter = "";
-            $ritasi = "(ALL)";
+            $ritasi = "TRUCK & BARGE";
         }
 
         $hourNow = date("Y-m-d ").$jamArr[0].":00:00";
@@ -1355,10 +1274,11 @@ class Home extends BaseController
             $totalHour += ($th['weight_in'] - $th['weight_out']);
         }
 
-        $data['timbangHour'] = number_format($totalHour, 2, "," ,"."). " Kg </br> Ritasi : ".$ritasiHour." ".$ritasi ;
+        $data['timbangHour'] = number_format($totalHour, 2, "," ,"."). " Kg / ".$ritasiHour." ".$ritasi ;
         echo json_encode($data);
     }
 
 
 
 }
+

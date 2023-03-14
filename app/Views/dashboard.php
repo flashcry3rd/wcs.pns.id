@@ -52,7 +52,7 @@
             <div class="numbers">
               <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Timbang Kemaren</p>
               <h5 class="font-weight-bolder mb-0">
-                <a id="timbang_kemaren"><?= number_format($timbang1, 2,",", ".")  ?></a> Kg
+                <a id="timbang_kemaren"><?= $timbang1 ?></a>
                 <span class="text-success text-sm font-weight-bolder"></span>
               </h5>
             </div>
@@ -74,8 +74,8 @@
             <div class="numbers">
               <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Timbang Hari ini</p>
               <h5 class="font-weight-bolder mb-0">
-                <a id="timbang_hariini" ><?= number_format($timbang2, 2,",", ".")  ?></a> Kg
-                <span class="text-<? if(($timbang2 - $timbang1) < 0){echo "danger";}else{ echo "success";} ?> text-sm font-weight-bolder"><? if($timbang1==0 && $timbang2==0){echo '+0%';}else{ if($timbang1!=0){ echo round(($timbang2-$timbang1)/$timbang1,2)." %" ;}else{ echo "+100%"; }};?> </span>
+                <a id="timbang_hariini" ><?= $timbang2 ?></a>
+                
               </h5>
             </div>
           </div>
@@ -96,7 +96,7 @@
             <div class="numbers">
               <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Timbang Todate</p>
               <h5 class="font-weight-bolder mb-0">
-                <a id="timbang_all"><?= number_format($timbangAll, 2,",", ".") ?></a> Kg
+                <a id="timbang_all"><?= $timbangAll ?></a>
                 <span class="text-danger text-sm font-weight-bolder"></span>
               </h5>
             </div>
@@ -122,10 +122,20 @@
           <div class="col-8">
             <div class="numbers">
               <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Timbang Per Jam </p>
-              <p class="text-sm mb-0 text-capitalize font-weight-bold">( <?= date("H").":00 s/d ".date("H").":59" ?> )</p>
+              <div class="col-md-12">
+
+              <div class="row">
+              <div class="col-sm-8" >
+                <input type="time" id="jam" name="jam" class="form-control" timeformat="24h" value="<?= date("H").":00" ?>">
+              </div>
+              </div>
+              </div>
+              <div class="row mt-3">
+              </div>
+              <!-- <p class="text-sm mb-0 text-capitalize font-weight-bold">( <?= date("H").":00 s/d ".date("H").":59" ?> )</p> -->
               <div class="garis_panjang"></div>
               <h5 class="font-weight-bolder mb-0" style="padding: 2%;">
-                <a id="timbang_perjam" ><?= number_format($timbangHour, 2,",", ".")  ?></a> Kg
+                <a id="timbang_perjam" ><?= $timbangHour?></a>
                 <span class="text-success text-sm font-weight-bolder"></span>
               </h5>
             </div>
@@ -153,7 +163,7 @@
               <p class="text-sm mb-0 text-capitalize font-weight-bold">( <?= $whereMinggu1 ?> )</p>
               <div class="garis_panjang"></div>
               <h5 class="font-weight-bolder mb-0" style="padding: 2%;">
-                <a id="timbang_week1"><?= number_format($timbangMinggu1, 2,",", ".")  ?></a> Kg
+                <a id="timbang_week1"><?= $timbangMinggu1  ?></a>
                 <span class="text-success text-sm font-weight-bolder"></span>
               </h5>
             </div>
@@ -177,7 +187,7 @@
               <p class="text-sm mb-0 text-capitalize font-weight-bold">( <?= $whereMinggu2 ?> )</p>
               <div class="garis_panjang"></div>
               <h5 class="font-weight-bolder mb-0" style="padding: 2%;">
-                <a id="timbang_week2" ><?= number_format($timbangMinggu2, 2,",", ".")  ?></a> Kg
+                <a id="timbang_week2" ><?= $timbangMinggu2  ?></a>
                 <span class="text-success text-sm font-weight-bolder"></span>
               </h5>
             </div>
@@ -201,7 +211,7 @@
               <p class="text-sm mb-0 text-capitalize font-weight-bold">( <?= $whereMinggu3 ?> )</p>
               <div class="garis_panjang"></div>
               <h5 class="font-weight-bolder mb-0" style="padding: 2%;">
-                <a id="timbang_week3" ><?= number_format($timbangMinggu3, 2,",", ".")  ?></a> Kg
+                <a id="timbang_week3" ><?= $timbangMinggu3  ?></a>
                 <span class="text-success text-sm font-weight-bolder"></span>
               </h5>
             </div>
@@ -225,7 +235,7 @@
               <p class="text-sm mb-0 text-capitalize font-weight-bold">( <?= $whereMinggu4 ?> )</p>
               <div class="garis_panjang"></div>
               <h5 class="font-weight-bolder mb-0" style="padding: 2%;">
-                <a id="timbang_week4"><?= number_format($timbangMinggu4, 2,",", ".")  ?></a> Kg
+                <a id="timbang_week4"><?= $timbangMinggu4  ?></a>
                 <span class="text-success text-sm font-weight-bolder"></span>
               </h5>
             </div>
@@ -252,7 +262,7 @@
               <p class="text-sm mb-0 text-capitalize font-weight-bold">( <?= $whereMinggu5 ?> )</p>
               <div class="garis_panjang"></div>
               <h5 class="font-weight-bolder mb-0" style="padding: 2%;">
-                <a id="timbang_week5"><?= number_format($timbangMinggu5, 2,",", ".")  ?></a> Kg
+                <a id="timbang_week5"><?= $timbangMinggu5  ?></a>
                 <span class="text-success text-sm font-weight-bolder"></span>
               </h5>
             </div>
@@ -288,6 +298,20 @@
           $("#timbang_week3").html(data['timbangMinggu3']);
           $("#timbang_week4").html(data['timbangMinggu4']);
           $("#timbang_week5").html(data['timbangMinggu5']);
+        }
+      })
+    })
+    $("#jam").change(function(){
+      var jam = $(this).val();
+      var tipe = $("#filter input[type=radio]").val();
+      $.ajax({
+        data: {jam: jam, tipe: tipe},
+        cache: false,
+        type: "post",
+        dataType: "json",
+        url: "<?= base_url() ?>/home/timbangPerJam",
+        success: function(data){
+          $("#timbang_perjam").html(data['timbangHour']);
         }
       })
     })

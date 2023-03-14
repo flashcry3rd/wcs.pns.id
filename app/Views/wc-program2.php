@@ -77,17 +77,8 @@
             <div class="card-body" >
             <div id="badan" style="height: 500px; overflow-y: auto; overflow-x: hidden;" >
 
-				
-					
-						
-						
-						
-					
-				
+
               <div class="row mt-4" >
-				<div class="col-lg-12" >
-					<input style="width: 20px; height:20px;" id="trash" type="checkbox" name="trash" value="1"><label>TRASH</label>
-				</div>
                 <div class="col-lg-6 col-md-6">
                   <div class="form-group">  
                     <h5>Berat Timbang In </h5>
@@ -321,7 +312,7 @@
 
     
     $(document).ready(function(){
-        $("#badan").fadeOut(500);
+        // $("#badan").fadeOut(500);
         document.getElementById('get-serial-messages').focus();
       
     })
@@ -395,11 +386,7 @@
 
           document.querySelector("#berat-in").value = data['timbangIn'];
           document.querySelector("#berat-out").value = data['timbangOut'];
-          if(data['rd']['trash']==1){
-			  $("#trash").attr("checked", true);
-		  }else{
-			  $("#trash").attr("checked", false);
-		  }
+          
           $("#tipe_tiket").val(data['tipe']);
           $("#get-serial-messages").val("");
           $("#no_transaksi").val(data['rd'][1]);
@@ -460,71 +447,58 @@
     
     $("#cetak-in").click(function(){
 
-      var data = $("#form-wcs").serialize();
-      var berat_in = $("#berat-in").val();
-      if(berat_in < 1){
-        alert("Berat timbang tidak boleh 0 ! Silahkan SCAN ulang !");
-        $("#form-wcs").trigger('reset');
-        document.getElementById('get-serial-messages').focus();
-      }else{
-        $.ajax({
-          data:  $("#form-wcs").serialize(),
-          type: 'post',
-          dataType: 'json',
-          cache: false,
-          url: '<?= base_url() ?>/home/saveTruckIn',
-          success: function(data){
-			  if(data['status']=='success'){
-				var url = "<?= base_url() ?>/barcode-in?file="+data['file']+"&no="+data['no'] ;
-				alert(data['msg']);
-				$("#form-wcs").trigger('reset');
-				// window.open(url, '_blank');
-				print(url);
-				$("#badan").fadeOut(500);
-				document.getElementById('get-serial-messages').focus();
-			  }else{
-				  alert(data['msg']);
-				  $("#form-wcs").trigger('reset');
-				  document.getElementById('get-serial-messages').focus();
-			  }
-          }
-        })
-      }
+        var data = $("#form-wcs").serialize();
+        var berat_in = $("#berat-in").val();
+        if(berat_in < 1){
+          alert("Berat timbang tidak boleh 0 ! Silahkan SCAN ulang !");
+          $("#form-wcs").trigger('reset');
+          document.getElementById('get-serial-messages').focus();
+        }else{
+          $.ajax({
+            data:  $("#form-wcs").serialize(),
+            type: 'post',
+            dataType: 'json',
+            cache: false,
+            url: '<?= base_url() ?>/home/saveTruckIn',
+            success: function(data){
+              var url = "<?= base_url() ?>/barcode-in?file="+data['file']+"&no="+data['no'] ;
+              alert(data['msg']);
+              $("#form-wcs").trigger('reset');
+              // window.open(url, '_blank');
+              print(url);
+              $("#badan").fadeOut(500);
+              document.getElementById('get-serial-messages').focus();
+            }
+          })
+        }
+        
+    })
 
-      })
-
-      $("#cetak-out").click(function(){
+    $("#cetak-out").click(function(){
       var berat_out = $("#berat-out").val();
-      if(berat_out < 1){
-        alert("Berat timbang tidak boleh 0 ! Silahkan SCAN ulang !");
-        $("#form-wcs").trigger('reset');
-        document.getElementById('get-serial-messages').focus();
-      }else{
-        $.ajax({
-          data:  $("#form-wcs").serialize(),
-          type: "post",
-          dataType: "json",
-          cache: false,
-          url: '<?= base_url() ?>/home/saveTruckOut',
-          success: function(data){
-			  if(data['status']=='success'){
-				var url = "<?= base_url() ?>/slip-timbang?no="+data['no'] ;
-				alert(data['msg']);
-				$("#form-wcs").trigger('reset');
-				// window.open(url, '_blank');
-				print(url);
-				$("#badan").fadeOut(500);
-				document.getElementById('get-serial-messages').focus();
-			  }else{
-				   alert(data['msg']);
-				  $("#form-wcs").trigger('reset');
-				  document.getElementById('get-serial-messages').focus();
-			  }
-          }
-        })
+        if(berat_out < 1){
+          alert("Berat timbang tidak boleh 0 ! Silahkan SCAN ulang !");
+          $("#form-wcs").trigger('reset');
+          document.getElementById('get-serial-messages').focus();
+        }else{
+          $.ajax({
+            data:  $("#form-wcs").serialize(),
+            type: "post",
+            dataType: "json",
+            cache: false,
+            url: '<?= base_url() ?>/home/saveTruckOut',
+            success: function(data){
+              var url = "<?= base_url() ?>/slip-timbang?no="+data['no'] ;
+              alert(data['msg']);
+              $("#form-wcs").trigger('reset');
+              // window.open(url, '_blank');
+              print(url);
+              $("#badan").fadeOut(500);
+              document.getElementById('get-serial-messages').focus();
+            }
+          })
       }
-      })
-
+    })
     
     function print(url){
         var printwin = window.open(url, '_blank');
