@@ -1230,6 +1230,10 @@ class Home extends BaseController
         $hourLimit = date("Y-m-d H:")."59:59" ;
         $tPerJam = "weight_out_time between '$hourNow' and '$hourLimit' and weight_in > 0  and del = 0 $tipeFilter";
 
+        //perjam2
+
+         $tPerJam_2 = "weight_out_time <= '$hourLimit' and weight_in > 0  and del = 0 $tipeFilter";
+
         //weekly
 
         $tglTerakhir = date('Y-m-d', strtotime(date('Y-m-t'))) ;
@@ -1282,6 +1286,8 @@ class Home extends BaseController
         $ritasiTimbangAll = count($timbangAll);
         $timbangHour = $model->getSelect("tbl_weight_scale", $tPerJam);
         $ritasiTimbangHour = count($timbangHour);
+        $timbangHour_2 = $model->getSelect("tbl_weight_scale", $tPerJam_2);
+        $ritasiTimbangHour_2 = count($timbangHour_2);
         $timbangMinggu1 = $model->getSelect("tbl_weight_scale", $whereMinggu1);
         $timbangMinggu2 = $model->getSelect("tbl_weight_scale", $whereMinggu2);
         $timbangMinggu3 = $model->getSelect("tbl_weight_scale", $whereMinggu3);
@@ -1292,6 +1298,7 @@ class Home extends BaseController
         $totalTimbang2 = 0;
         $totalAll = 0 ;
         $totalHour = 0;
+        $totalHour2 = 0;
         $totalMinggu1 = 0;
         $totalMinggu2 = 0;
         $totalMinggu3 = 0;
@@ -1309,6 +1316,9 @@ class Home extends BaseController
         }
         foreach($timbangHour as $th){
             $totalHour += ($th['weight_in'] - $th['weight_out']);
+        }
+        foreach($timbangHour_2 as $th2){
+            $totalHour2 += ($th2['weight_in'] - $th2['weight_out']);
         }
         foreach($timbangMinggu1 as $tm1){
             $totalMinggu1 += ($tm1['weight_in'] - $tm1['weight_out']);
@@ -1330,6 +1340,7 @@ class Home extends BaseController
         $data['timbang2'] = number_format($totalTimbang2, 2 ,",", "."). " Kg </br> Ritasi : ".$ritasiTimbang2." ".$ritasi ;
         $data['timbangAll'] = number_format($totalAll, 2, ",", "."). " Kg </br> Ritasi : ".$ritasiTimbangAll." ".$ritasi ;
         $data['timbangHour'] = number_format($totalHour, 2, ",", "."). " Kg </br> Ritasi : ".$ritasiTimbangHour." ".$ritasi ;
+        $data['timbangHour_2'] = number_format($totalHour2, 2, ",", "."). " Kg </br> Ritasi : ".$ritasiTimbangHour_2." ".$ritasi;
         $data['timbangMinggu1'] = number_format($totalMinggu1, 2, ",", ".") ;
         $data['timbangMinggu2'] = number_format($totalMinggu2, 2, ",", ".") ;
         $data['timbangMinggu3'] = number_format($totalMinggu3, 2, ",", ".") ;
