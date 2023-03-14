@@ -150,6 +150,41 @@
     </div>
   </div>
 
+  <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+    <div class="card">
+      <div class="card-body p-3">
+        <div class="row">
+          <div class="col-8">
+            <div class="numbers">
+              <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Batas Jam Todate </p>
+              <div class="col-md-12">
+
+              <div class="row">
+              <div class="col-sm-8" >
+                <input type="time" id="jam_2" name="jam_2" class="form-control" timeformat="24h" value="<?= date("H").":00" ?>">
+              </div>
+              </div>
+              </div>
+              <div class="row mt-3">
+              </div>
+              <!-- <p class="text-sm mb-0 text-capitalize font-weight-bold">( <?= date("H").":00 s/d ".date("H").":59" ?> )</p> -->
+              <div class="garis_panjang"></div>
+              <h5 class="font-weight-bolder mb-0" style="padding: 2%;">
+                <a id="timbang_perjam_2" ><?= $timbangHour_2?></a>
+                <span class="text-success text-sm font-weight-bolder"></span>
+              </h5>
+            </div>
+          </div>
+          <div class="col-4 text-end">
+            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+              <i class="ni ni-air-baloon text-lg opacity-10" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <div class="row mt-4">
@@ -303,7 +338,7 @@
     })
     $("#jam").change(function(){
       var jam = $(this).val();
-      var tipe = $("#filter input[type=radio]").val();
+      var tipe = $("#filter input[type=radio]:checked").val();
       $.ajax({
         data: {jam: jam, tipe: tipe},
         cache: false,
@@ -312,6 +347,20 @@
         url: "<?= base_url() ?>/home/timbangPerJam",
         success: function(data){
           $("#timbang_perjam").html(data['timbangHour']);
+        }
+      })
+    })
+    $("#jam_2").change(function(){
+      var jam = $(this).val();
+      var tipe = $("#filter input[type=radio]:checked").val();
+      $.ajax({
+        data: {jam: jam, tipe: tipe},
+        cache: false,
+        type: "post",
+        dataType: "json",
+        url: "<?= base_url() ?>/home/timbangPerJam_2",
+        success: function(data){
+          $("#timbang_perjam_2").html(data['timbangHour']);
         }
       })
     })

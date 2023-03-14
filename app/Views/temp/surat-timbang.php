@@ -85,8 +85,10 @@
                             <tr >
                                 <td style="width: 15%; padding: 0%; padding-left: 2%"><b><a>No. Tran Barge </a></b></td>
                                 <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a> : </a></b></td>
-                                <td style="width: 50%;  padding: 0%; padding-left: 0%;"><b><a ><?= $timbang->tiket_barge ?></a></b></td>
-                                <td style="width: 15%; padding: 0%; padding-left: 2%"><b><a><? if($timbang->trash_status==1){ echo "TRASH"; }?></a></b></td>
+                                <td style="width: 40%;  padding: 0%; padding-left: 0%;"><b><a ><?= $timbang->tiket_barge ?></a></b></td>
+                                <td style="width: 15%; padding: 0%; padding-left: 2%"><b><a></a></b></td>
+                                <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a></a></b></td>
+                                <td style="width: 20%;  padding: 0%; padding-left: 0%;"><b><a ><? if($timbang->trash_status==1){ echo "TRASH"; }?></a></b></td>
                                 
                             </tr>
                             <tr >

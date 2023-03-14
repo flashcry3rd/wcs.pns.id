@@ -128,15 +128,19 @@ class Home extends BaseController
         }
 
         
-        $tHariKemaren = "weight_out_time between '$dateBefore' and '$dateNow' and weight_in > 0" ;
-        $tHariIni = "weight_out_time between '$dateNow' and '$dateNow1' and weight_in > 0" ;
-        $tYear = "YEAR(weight_out_time) = '$year' and weight_in > 0";
+        $tHariKemaren = "weight_out_time between '$dateBefore' and '$dateNow' and weight_in > 0  and del = 0" ;
+        $tHariIni = "weight_out_time between '$dateNow' and '$dateNow1' and weight_in > 0  and del = 0" ;
+        $tYear = "YEAR(weight_out_time) = '$year' and weight_in > 0  and del = 0";
 
         //perjam 
         
         $hourNow = date("Y-m-d H:")."00:00";
         $hourLimit = date("Y-m-d H:")."59:59" ;
-        $tPerJam = "weight_out_time between '$hourNow' and '$hourLimit' and weight_in > 0";
+        $tPerJam = "weight_out_time between '$hourNow' and '$hourLimit' and weight_in > 0  and del = 0";
+
+        //perjam2
+
+        $tPerJam_2 = "weight_out_time <= '$hourLimit' and weight_in > 0  and del = 0";
 
         //weekly
 
@@ -153,22 +157,22 @@ class Home extends BaseController
             }
         }
         //Minggu 1 
-        $whereMinggu1 = "weight_out_time between '$tglAwalBulan' and '$tglMinggu'" ;
+        $whereMinggu1 = "weight_out_time between '$tglAwalBulan' and '$tglMinggu'  and del = 0" ;
         $data['whereMinggu1'] = date("d", strtotime($tglAwalBulan))." s/d ".date("d F Y", strtotime($tglMinggu))  ;
         //Minggu 2
         $tglAwalMinggu2 = $tglMinggu ;
         $tglAkhirMinggu2 = date("Y-m-d H:i:s", strtotime("+7 day", strtotime($tglMinggu))) ;
-        $whereMinggu2 =  "weight_out_time between '$tglAwalMinggu2' and '$tglAkhirMinggu2'" ;
+        $whereMinggu2 =  "weight_out_time between '$tglAwalMinggu2' and '$tglAkhirMinggu2'  and del = 0" ;
         $data['whereMinggu2'] = date("d", strtotime($tglAwalMinggu2))." s/d ".date("d F Y", strtotime($tglAkhirMinggu2))  ;
         //Minggu 3
         $tglAwalMinggu3 = $tglAkhirMinggu2 ;
         $tglAkhirMinggu3 = date("Y-m-d H:i:s", strtotime("+7 day", strtotime($tglAkhirMinggu2))) ;
-        $whereMinggu3 = "weight_out_time between '$tglAwalMinggu3' and '$tglAkhirMinggu3'" ;
+        $whereMinggu3 = "weight_out_time between '$tglAwalMinggu3' and '$tglAkhirMinggu3'  and del = 0" ;
         $data['whereMinggu3'] = date("d", strtotime($tglAwalMinggu3))." s/d ".date("d F Y", strtotime($tglAkhirMinggu3))  ;
         //Minggu 4
         $tglAwalMinggu4 = $tglAkhirMinggu3;
         $tglAkhirMinggu4 = date("Y-m-d H:i:s", strtotime("+7 day", strtotime($tglAkhirMinggu3))) ;
-        $whereMinggu4 = "weight_out_time between '$tglAwalMinggu4' and '$tglAkhirMinggu4'" ;
+        $whereMinggu4 = "weight_out_time between '$tglAwalMinggu4' and '$tglAkhirMinggu4'  and del = 0" ;
         $data['whereMinggu4'] = date("d", strtotime($tglAwalMinggu4))." s/d ".date("d F Y", strtotime($tglAkhirMinggu4))  ;
         //Minggu 5
         $tglAwalMinggu5 = $tglAkhirMinggu4 ;
@@ -178,28 +182,31 @@ class Home extends BaseController
         }else{
             $tglAkhirMinggu5 = $tglAkhirMinggu5 ;
         }
-        $whereMinggu5 = "weight_out_time between '$tglAwalMinggu5' and '$tglAkhirMinggu5'" ;
+        $whereMinggu5 = "weight_out_time between '$tglAwalMinggu5' and '$tglAkhirMinggu5'  and del = 0" ;
         $data['whereMinggu5'] = date("d", strtotime($tglAwalMinggu5))." s/d ".date("d F Y", strtotime($tglAkhirMinggu5))  ;
         ///////////////////////////
 
-        $timbang1 = $model->getSelectDb2("tbl_weight_scale", $tHariKemaren);
+        $timbang1 = $model->getSelect("tbl_weight_scale", $tHariKemaren);
         $ritasiTimbang1 = count($timbang1);
-        $timbang2 = $model->getSelectDb2("tbl_weight_scale", $tHariIni);
+        $timbang2 = $model->getSelect("tbl_weight_scale", $tHariIni);
         $ritasiTimbang2 = count($timbang2);
-        $timbangAll = $model->getSelectDb2("tbl_weight_scale", $tYear);
+        $timbangAll = $model->getSelect("tbl_weight_scale", $tYear);
         $ritasiTimbangAll = count($timbangAll);
-        $timbangHour = $model->getSelectDb2("tbl_weight_scale", $tPerJam);
+        $timbangHour = $model->getSelect("tbl_weight_scale", $tPerJam);
         $ritasiTimbangHour = count($timbangHour);
-        $timbangMinggu1 = $model->getSelectDb2("tbl_weight_scale", $whereMinggu1);
-        $timbangMinggu2 = $model->getSelectDb2("tbl_weight_scale", $whereMinggu2);
-        $timbangMinggu3 = $model->getSelectDb2("tbl_weight_scale", $whereMinggu3);
-        $timbangMinggu4 = $model->getSelectDb2("tbl_weight_scale", $whereMinggu4);
-        $timbangMinggu5 = $model->getSelectDb2("tbl_weight_scale", $whereMinggu5);
+        $timbangHour_2 = $model->getSelect("tbl_weight_scale", $tPerJam_2);
+        $ritasiTimbangHour_2 = count($timbangHour_2);
+        $timbangMinggu1 = $model->getSelect("tbl_weight_scale", $whereMinggu1);
+        $timbangMinggu2 = $model->getSelect("tbl_weight_scale", $whereMinggu2);
+        $timbangMinggu3 = $model->getSelect("tbl_weight_scale", $whereMinggu3);
+        $timbangMinggu4 = $model->getSelect("tbl_weight_scale", $whereMinggu4);
+        $timbangMinggu5 = $model->getSelect("tbl_weight_scale", $whereMinggu5);
 
         $totalTimbang1 = 0;
         $totalTimbang2 = 0;
         $totalAll = 0 ;
         $totalHour = 0;
+        $totalHour2 = 0;
         $totalMinggu1 = 0;
         $totalMinggu2 = 0;
         $totalMinggu3 = 0;
@@ -218,6 +225,9 @@ class Home extends BaseController
         foreach($timbangHour as $th){
             $totalHour += ($th['weight_in'] - $th['weight_out']);
         }
+        foreach($timbangHour_2 as $th2){
+            $totalHour2 += ($th2['weight_in'] - $th2['weight_out']);
+        }
         foreach($timbangMinggu1 as $tm1){
             $totalMinggu1 += ($tm1['weight_in'] - $tm1['weight_out']);
         }
@@ -234,10 +244,11 @@ class Home extends BaseController
             $totalMinggu5 += ($tm5['weight_in'] - $tm5['weight_out']);
         }
         
-          $data['timbang1'] = number_format($totalTimbang1, 2 ,"," , "."). " Kg </br> Ritasi : ".$ritasiTimbang1." (ALL)";
+        $data['timbang1'] = number_format($totalTimbang1, 2 ,"," , "."). " Kg </br> Ritasi : ".$ritasiTimbang1." (ALL)";
         $data['timbang2'] = number_format($totalTimbang2, 2 ,",", "."). " Kg </br> Ritasi : ".$ritasiTimbang2." (ALL)";
         $data['timbangAll'] = number_format($totalAll, 2, ",", "."). " Kg </br> Ritasi : ".$ritasiTimbangAll." (ALL)";
         $data['timbangHour'] = number_format($totalHour, 2, ",", "."). " Kg </br> Ritasi : ".$ritasiTimbangHour." (ALL)";
+        $data['timbangHour_2'] = number_format($totalHour2, 2, ",", "."). " Kg </br> Ritasi : ".$ritasiTimbangHour_2." (ALL)";
         $data['timbangMinggu1'] = number_format($totalMinggu1, 2, ",", ".") ;
         $data['timbangMinggu2'] = number_format($totalMinggu2, 2, ",", ".") ;
         $data['timbangMinggu3'] = number_format($totalMinggu3, 2, ",", ".") ;
@@ -1209,15 +1220,15 @@ class Home extends BaseController
         }
 
         
-        $tHariKemaren = "weight_out_time between '$dateBefore' and '$dateNow' and weight_in > 0 $tipeFilter " ;
-        $tHariIni = "weight_out_time between '$dateNow' and '$dateNow1' and weight_in > 0 $tipeFilter " ;
-        $tYear = "YEAR(weight_out_time) = '$year' $tipeFilter and weight_in > 0";
+        $tHariKemaren = "weight_out_time between '$dateBefore' and '$dateNow' and weight_in > 0  and del = 0 $tipeFilter " ;
+        $tHariIni = "weight_out_time between '$dateNow' and '$dateNow1' and weight_in > 0  and del = 0 $tipeFilter " ;
+        $tYear = "YEAR(weight_out_time) = '$year' $tipeFilter and weight_in > 0  and del = 0";
 
         //perjam 
         
         $hourNow = date("Y-m-d H:")."00:00";
         $hourLimit = date("Y-m-d H:")."59:59" ;
-        $tPerJam = "weight_out_time between '$hourNow' and '$hourLimit' and weight_in > 0 $tipeFilter";
+        $tPerJam = "weight_out_time between '$hourNow' and '$hourLimit' and weight_in > 0  and del = 0 $tipeFilter";
 
         //weekly
 
@@ -1234,22 +1245,22 @@ class Home extends BaseController
             }
         }
         //Minggu 1 
-        $whereMinggu1 = "weight_out_time between '$tglAwalBulan' and '$tglMinggu' $tipeFilter" ;
+        $whereMinggu1 = "weight_out_time between '$tglAwalBulan' and '$tglMinggu' and del = 0 $tipeFilter" ;
         $data['whereMinggu1'] = date("d", strtotime($tglAwalBulan))." s/d ".date("d F Y", strtotime($tglMinggu))  ;
         //Minggu 2
         $tglAwalMinggu2 = $tglMinggu ;
         $tglAkhirMinggu2 = date("Y-m-d H:i:s", strtotime("+7 day", strtotime($tglMinggu))) ;
-        $whereMinggu2 =  "weight_out_time between '$tglAwalMinggu2' and '$tglAkhirMinggu2' $tipeFilter" ;
+        $whereMinggu2 =  "weight_out_time between '$tglAwalMinggu2' and '$tglAkhirMinggu2'  and del = 0 $tipeFilter" ;
         $data['whereMinggu2'] = date("d", strtotime($tglAwalMinggu2))." s/d ".date("d F Y", strtotime($tglAkhirMinggu2))  ;
         //Minggu 3
         $tglAwalMinggu3 = $tglAkhirMinggu2 ;
         $tglAkhirMinggu3 = date("Y-m-d H:i:s", strtotime("+7 day", strtotime($tglAkhirMinggu2))) ;
-        $whereMinggu3 = "weight_out_time between '$tglAwalMinggu3' and '$tglAkhirMinggu3' $tipeFilter" ;
+        $whereMinggu3 = "weight_out_time between '$tglAwalMinggu3' and '$tglAkhirMinggu3'  and del = 0 $tipeFilter" ;
         $data['whereMinggu3'] = date("d", strtotime($tglAwalMinggu3))." s/d ".date("d F Y", strtotime($tglAkhirMinggu3))  ;
         //Minggu 4
         $tglAwalMinggu4 = $tglAkhirMinggu3;
         $tglAkhirMinggu4 = date("Y-m-d H:i:s", strtotime("+7 day", strtotime($tglAkhirMinggu3))) ;
-        $whereMinggu4 = "weight_out_time between '$tglAwalMinggu4' and '$tglAkhirMinggu4' $tipeFilter" ;
+        $whereMinggu4 = "weight_out_time between '$tglAwalMinggu4' and '$tglAkhirMinggu4' and del = 0 $tipeFilter" ;
         $data['whereMinggu4'] = date("d", strtotime($tglAwalMinggu4))." s/d ".date("d F Y", strtotime($tglAkhirMinggu4))  ;
         //Minggu 5
         $tglAwalMinggu5 = $tglAkhirMinggu4 ;
@@ -1259,7 +1270,7 @@ class Home extends BaseController
         }else{
             $tglAkhirMinggu5 = $tglAkhirMinggu5 ;
         }
-        $whereMinggu5 = "weight_out_time between '$tglAwalMinggu5' and '$tglAkhirMinggu5' $tipeFilter" ;
+        $whereMinggu5 = "weight_out_time between '$tglAwalMinggu5' and '$tglAkhirMinggu5'  and del = 0 $tipeFilter" ;
         $data['whereMinggu5'] = date("d", strtotime($tglAwalMinggu5))." s/d ".date("d F Y", strtotime($tglAkhirMinggu5))  ;
         ///////////////////////////
 
@@ -1347,7 +1358,38 @@ class Home extends BaseController
 
         $hourNow = date("Y-m-d ").$jamArr[0].":00:00";
         $hourLimit = date("Y-m-d ").$jamArr[0].":59:59" ;
-        $tPerJam = "weight_out_time between '$hourNow' and '$hourLimit' $tipeFilter";
+        $tPerJam = "weight_out_time between '$hourNow' and '$hourLimit'  and del = 0 $tipeFilter";
+        $timbangHour = $model->getSelectDb2("tbl_weight_scale", $tPerJam);
+        $ritasiHour = count($timbangHour);
+        $totalHour = 0;
+        foreach($timbangHour as $th){
+            $totalHour += ($th['weight_in'] - $th['weight_out']);
+        }
+
+        $data['timbangHour'] = number_format($totalHour, 2, "," ,"."). " Kg </br> Ritasi : ".$ritasiHour." ".$ritasi ;
+        echo json_encode($data);
+    }
+
+    public function timbangPerJam_2()
+    {
+        $model = new Home_model();
+        $jam = $this->request->getPost('jam');
+        $jamArr = explode(":", $jam);
+        $tipe = $this->request->getPost('tipe');
+        if($tipe == "truck"){
+            $tipeFilter = "and tipe in ('TP', 'TD')"; 
+            $ritasi = "TRUCK";
+        }else if($tipe == "barge"){
+            $tipeFilter = "and tipe in ('BP')";
+            $ritasi = "BARGE"; 
+        }else{
+            $tipeFilter = "";
+            $ritasi = "(ALL)";
+        }
+
+        $hourNow = date("Y-m-d ").$jamArr[0].":00:00";
+        $hourLimit = date("Y-m-d ").$jamArr[0].":59:59" ;
+        $tPerJam = "weight_out_time <= '$hourLimit' and weight_in > 0 and del = 0 $tipeFilter";
         $timbangHour = $model->getSelectDb2("tbl_weight_scale", $tPerJam);
         $ritasiHour = count($timbangHour);
         $totalHour = 0;
