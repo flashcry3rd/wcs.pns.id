@@ -121,7 +121,7 @@
                                 <td style="width: 30%;  padding: 0%; padding-left: 0%;"><b><a ><?= $timbang->ancak ?></a></b></td>
                                 <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>No Alat Muat</a></b></td>
                                 <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a> : </a></b></td>
-                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><b><a ><?= $timbang->loading_vehicle_number ?></a></b></td>
+                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><b><a ><?  if(strtoupper($timbang->tipe)=='TP'){ echo $timbang->loading_vehicle_number; }else if(strtoupper($timbang->tipe)=='TD'){echo $timbang->no_alat2;} ?></a></b></td>
                             </tr>
                             <tr >
                                 <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>Tgl Muat</a></b></td>
@@ -159,7 +159,7 @@
                                 <td style="width: 30%;  padding: 0%; padding-left: 0%;"><b><a ><?= date_format(date_create($timbang->tgl_muat), "d")." ".$m." ".date_format(date_create($timbang->tgl_muat), "Y") ?></a></b></td>
                                 <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>Op Alat Muat</a></b></td>
                                 <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a> : </a></b></td>
-                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><b><a ><?= $timbang->loading_vehicle_operator ?></a></b></td>
+                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><b><a ><? if(strtoupper($timbang->tipe)=='TP'){ echo $timbang->loading_vehicle_operator; }else if(strtoupper($timbang->tipe)=='TD'){echo $timbang->op_alat2;} ?></a></b></td>
                             </tr>
                             <tr>
                             <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>Tgl. Timbang</a></b></td>
