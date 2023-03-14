@@ -613,13 +613,6 @@ class Home extends BaseController
         $b1 = str_replace("Kg", "", $this->request->getPost('berat_in'));
         $b1 = str_replace(".", "", $b1);
         $b1 = str_replace(",", ".", $b1);
-		
-		if($b1 < 1){
-			$return = array( 'status' => "error", "msg" => "Berat timbang tidak boleh 0 , silahkan di SCAN kembali !", "file" => $noTrans, "no" => $no_transaksi);
-			echo json_encode($return) ;
-			exit();
-		}
-		
 		if($this->request->getPost('trash')){
 			$trash = $this->request->getPost('trash');
 		}else{
@@ -715,7 +708,7 @@ class Home extends BaseController
         
         $result = $writer->write($qr);
         $result->saveToFile( ROOTPATH."/assets/qr/$noTrans.png");
-		if($result){
+        if($result){
             $return = array( 'status' => "success", "msg" => "Data weight in berhasil di proses !", "file" => $noTrans, "no" => $no_transaksi );
         }else{
             $return = array( 'status' => "error", "msg" => "Simpan data weight in gagal , data sudah pernah di SCAN !", "file" => $noTrans, "no" => $no_transaksi);
@@ -851,10 +844,13 @@ class Home extends BaseController
         $b2 = str_replace("Kg", "", $this->request->getPost('berat_out'));
         $b2 = str_replace(".", "", $b2);
         $b2 = str_replace(",", ".", $b2);
-		
-
+        if($this->request->getPost('trash')){
+			$trash = $this->request->getPost('trash');
+		}else{
+			$trash = 0 ;
+		}
         $data = [
-            "trash_status" => $this->request->getPost('trash'),
+            "trash_status" => $trash,
             "no_transaksi" => $this->request->getPost('no_transaksi'),
             "tipe" => $this->request->getPost('tipe_tiket'),
             // "no_tiket_mobil" => $this->request->getPost('no_tiket'),
@@ -889,7 +885,7 @@ class Home extends BaseController
         ];
         $model = new Home_model();
         $insert = $model->dataInsert('tbl_weight_scale', $data);
-		if($insert){
+        if($insert){
 
             $return = array("status" => "success", "msg" => "Data timbangan berhasil di simpan !" , "no" => $no_transaksi);
         }else{
@@ -1152,15 +1148,15 @@ class Home extends BaseController
         }
 
         
-        $tHariKemaren = "weight_out_time between '$dateBefore' and '$dateNow' and weight_in > 0 $tipeFilter " ;
-        $tHariIni = "weight_out_time between '$dateNow' and '$dateNow1' and weight_in > 0 $tipeFilter " ;
-        $tYear = "YEAR(weight_out_time) = '$year' $tipeFilter and weight_in > 0";
+        $tHariKemaren = "weight_out_time between '$dateBefore' and '$dateNow' $tipeFilter" ;
+        $tHariIni = "weight_out_time between '$dateNow' and '$dateNow1' $tipeFilter" ;
+        $tYear = "YEAR(weight_out_time) = '$year' $tipeFilter";
 
         //perjam 
         
         $hourNow = date("Y-m-d H:")."00:00";
         $hourLimit = date("Y-m-d H:")."59:59" ;
-        $tPerJam = "weight_out_time between '$hourNow' and '$hourLimit' and weight_in > 0 $tipeFilter";
+        $tPerJam = "weight_out_time between '$hourNow' and '$hourLimit' $tipeFilter";
 
         //weekly
 

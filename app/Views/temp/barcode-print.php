@@ -46,7 +46,9 @@
         <tr>
             <td style="text-align: center;"><a style="font-size: 20px;">----------- DETAIL -----------</a></td>
         </tr>
-
+		<tr>
+            <td style="text-align: center;"><a style="font-size: 20px;"><? if($timbang->trash_status==1){ echo "<b>TRASH</b>"; } ?></a></td>
+        </tr>
         <tr>
             <td style="text-align: center;">
                 <div class="tengah" >
