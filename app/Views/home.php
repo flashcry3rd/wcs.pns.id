@@ -383,6 +383,7 @@ header("Access-Control-Allow-Origin: *");
 
       </ul>
     </div>
+    <?php if(session()->get('username') != 'superhero'):?>
     <div class="sidenav-footer mx-3 ">
       <div class="card card-background shadow-none card-background-mask-secondary" id="sidenavCard">
         <div class="full-background" style="background-image: url('/assets/img/curved-images/white-curved.jpg')"></div>
@@ -413,6 +414,7 @@ header("Access-Control-Allow-Origin: *");
         </div>
         </div>
     </div>
+    <?php endif;?>
   </aside>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->

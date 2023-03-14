@@ -8,6 +8,7 @@ class Home_model extends Model
         $tb = $this->db->table($table);
         $get = $tb->getWhere($where);
         $result = $get->getResult('array');
+        // print_r($this->db->getLastQuery());
 
         return $result;
 

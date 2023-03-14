@@ -453,9 +453,16 @@ class Home extends BaseController
     public function data_timbang_all()
     {
         
+        // $DataPost = $this->request->getVar();
+        // print_r($DataPost);
         $filter = $this->request->getPost('method');
         $filterStartDate = $this->request->getPost('start_date');
         $filterEndDate = $this->request->getPost('end_date');
+        if(!$filter){
+            $filter = session()->get('tipe');
+            $filterStartDate = date('Y-m-d');
+            $filterEndDate = date('Y-m-d');
+        }
         // exit;
         // $filter = $this->request->getGet('filter');
         // print_r($filter);
@@ -475,19 +482,19 @@ class Home extends BaseController
                 // $where = array('tipe !=' => 'BP');
             endif;
             if($filterStartDate):
-                $where_arr['weight_in_time >='] = $filterStartDate;
+                $where_arr['DATE(weight_in_time) >='] = $filterStartDate;
             endif;
             if($filterEndDate):
-                $where_arr['weight_in_time <='] = $filterEndDate;
+                $where_arr['DATE(weight_in_time) <='] = $filterEndDate;
             endif;
-            $data['timbang'] = $model->getSelectDb2('tbl_weight_scale',$where_arr);
+            $data['timbang'] = $model->getSelect('tbl_weight_scale',$where_arr);
         else:
             $data['timbang'] = $model->selectAll('tbl_weight_scale');
         endif;
         $data['filter_module'] = $filter;
         $data['filterStartDate'] = $filterStartDate;
         $data['filterEndDate'] = $filterEndDate;
-        $data['vendor'] = $model->selectAllDb2('master_vendor');
+        $data['vendor'] = $model->selectAll('master_vendor');
         echo view("data-timbang-all", $data);
     }
 
