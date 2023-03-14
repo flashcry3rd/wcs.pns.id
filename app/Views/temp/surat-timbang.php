@@ -34,9 +34,7 @@
         border: 1px dotted black;
         margin-top: 1%;
     }
-    th {
-        /* border: 1px dotted black; */
-    }
+  
  
  
     
