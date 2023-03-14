@@ -8,8 +8,23 @@ use App\Models\Db2_model;
 
 use function PHPSTORM_META\map;
 // require "vendor/autoload.php";
+//use Endroid\QrCode\QrCode;
+//use Endroid\QrCode\Writer\PngWriter;
+use Endroid\QrCode\Builder\Builder;
+use Endroid\QrCode\Label\Font\NotoSans;
+use Endroid\QrCode\Color\Color;
+
+use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelHigh;
+use Endroid\QrCode\Label\Alignment\LabelAlignmentCenter;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelLow;
 use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Label\Label;
+use Endroid\QrCode\Logo\Logo;
+use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
 use Endroid\QrCode\Writer\PngWriter;
+use Endroid\QrCode\Writer\ValidationException;
+//use Endroid\QrCode\Writer\PngWriter;
 use PhpParser\Lexer\TokenEmulator\ExplicitOctalEmulator;
 use PhpParser\Node\Expr\Cast\Array_;
 
@@ -697,8 +712,16 @@ class Home extends BaseController
         );
 
         $strArr = json_encode($dataQR);
-        $qr= QrCode::create($strArr);
         $writer = new PngWriter();
+        $qr= QrCode::create($strArr)
+		 ->setEncoding(new Encoding('UTF-8'))
+		->setErrorCorrectionLevel(new ErrorCorrectionLevelLow())
+		->setSize(1200)
+		->setMargin(10)
+		->setRoundBlockSizeMode(new RoundBlockSizeModeMargin())
+		->setForegroundColor(new Color(0, 0, 0))
+		->setBackgroundColor(new Color(255, 255, 255));
+        
         $result = $writer->write($qr);
         $result->saveToFile( ROOTPATH."/assets/qr/$noTrans.png");
         if($result){

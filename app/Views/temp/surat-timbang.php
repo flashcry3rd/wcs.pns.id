@@ -5,16 +5,15 @@
     
     @media print{
         @page {
-            size: auto;   /* auto is the initial value */
-            size: portrait;
+    
             margin: 0;  /* this affects the margin in the printer settings */
     
         }
     }
 
     a{
-        font-family: calibri;
-        font-size: small;
+        font-family: tahoma;
+        font-size: medium;
     }
     .tengah{
         display: flex;
@@ -23,7 +22,7 @@
         height: 100%;
     }
     table {
-        border: 0px solid white;
+        border: 0px dotted white;
         border-collapse: collapse;
         border-spacing: 0px;
     }
@@ -32,11 +31,11 @@
         
     }
     .garis-panjang {
-        border: 1px solid black;
+        border: 1px dotted black;
         margin-top: 1%;
     }
     th {
-        border: 1px solid black;
+        /* border: 1px dotted black; */
     }
  
  
@@ -50,6 +49,7 @@
     <?= $timbang->no_transaksi ?>
 </title>
 <body>
+</br>
 <div class="table responsive">
     <table style="width: 100%; ">
         <tbody>
@@ -60,14 +60,14 @@
                             <div class="col-2" style="text-align: center;"><img src="assets/img/logo.png" style="height: 100px;width: 120px;"></div>
                             <div class="col-10 tengah" style="text-align: center;">
                                 <div class="form-control" style="border: none;">
-                                    <b><a style="font-size: 29px;">PT. PRATAMA NUSANTARA SAKTI</a>
+                                    <a style="font-size: 29px;">PT. PRATAMA NUSANTARA SAKTI</a>
                                         <br />
                                         <a style="font-size: 18;">Taman Perkantoran Kuningan - Wisma GAWI</a>
                                         <br />
                                         <a style="font-size: 18;">Bumi Pratama Mandiri, Kec. Sungai Menang OKI Sumsel</a>
                                         <br />
-                                        <a style="font-size: 18;">Telp: , FAX: , </a>
-                                    </b>
+                                        <!-- <a style="font-size: 18;">Telp: , FAX: , </a> -->
+                                    
                                 </div>
                             </div>
                         </div>
@@ -87,19 +87,23 @@
                             <tr >
                                 <td style="width: 15%; padding: 0%; padding-left: 2%"><b><a>No. Transaksi</a></b></td>
                                 <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a> : </a></b></td>
-                                <td style="width: 80%;  padding: 0%; padding-left: 0%;"><a ><?= $timbang->no_transaksi ?></a></td>
+                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><b><a ><?= $timbang->no_transaksi ?></a></b></td>
+                                <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>Kontraktor</a></b></td>
+                                <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a> : </a></b></td>
+                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><b><a ><?= $kontraktor->nama_vendor ?></a></b></td>
                             </tr>
                             <tr >
                                 <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>No. Truk</a></b></td>
                                 <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a> : </a></b></td>
-                                <td style="width: 80%;  padding: 0%; padding-left: 0%;"><a ><?= $timbang->kode_truck ?></a></td>
+                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><b><a ><?= $timbang->kode_truck ?></a></b></td>
+                                <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>Petak</a></b></td>
+                                <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a> : </a></b></td>
+                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><b><a ><?= $timbang->kode_petak ?></a></b></td>
                             </tr>
                             <tr >
                                 <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>Supir</a></b></td>
                                 <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a> : </a></b></td>
-                                <td style="width: 80%;  padding: 0%; padding-left: 0%;"><a ><?= $timbang->supir ?></a></td>
-                            </tr>
-                            <tr >
+                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><b><a ><?= $timbang->supir ?></a></b></td>
                                 <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>Tgl. Timbang</a></b></td>
                                 <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a> : </a></b></td>
                                 <? 
@@ -132,59 +136,51 @@
                                     $m ="";
                                 }
                                 ?>
-                                <td style="width: 80%;  padding: 0%; padding-left: 0%;"><a ><?= date_format(date_create($timbang->weight_in_time), "d")." ".$m." ".date_format(date_create($timbang->weight_in_time), "Y") ?></a></td>
+                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><b><a ><?= date_format(date_create($timbang->weight_in_time), "d")." ".$m." ".date_format(date_create($timbang->weight_in_time), "Y") ?></a></b></td>
                             </tr>
-                            <tr >
-                                <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>Kontraktor</a></b></td>
-                                <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a> : </a></b></td>
-                                <td style="width: 80%;  padding: 0%; padding-left: 0%;"><a ><?= $kontraktor->nama_vendor ?></a></td>
-                            </tr>
-                            <tr >
-                                <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>Petak</a></b></td>
-                                <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a> : </a></b></td>
-                                <td style="width: 80%;  padding: 0%; padding-left: 0%;"><a ><?= $timbang->kode_petak ?></a></td>
-                            </tr>
+                            
+                            
                         </tbody>
                     </table>
                 <td>
             </tr>
             <tr>
                 <td style="padding-left: 1%; padding-right: 1%">
-                    <table style="width: 100%; border: 1px solid black; border-collapse: collapse;">
+                    <table style="width: 100%; border: 0px dotted black; border-collapse: collapse;">
                         <thead> 
-                            <tr style="border: 1px solid black;">
-                                <th style="width: 25%;text-align: center; padding: 0%;border: 1px solid black"><a>No. WO</a></th>
-                                <th style="width: 25%;text-align: center; padding: 0%;border: 1px solid black"><a>No. Truk</a></th>
-                                <th style="width: 25%;text-align: center; padding: 0%;border: 1px solid black"><a>Jam In</a></th>
-                                <th style="width: 25%;text-align: center; padding: 0%;border: 1px solid black"><a>Jam Out</a></th>
+                            <tr style="border: 0px dotted black;">
+                                <th style="width: 25%;text-align: center; padding: 0%;border-top: 1px dotted black"><a>No. WO</a></th>
+                                <th style="width: 25%;text-align: center; padding: 0%;border-top: 1px dotted black"><a>No. Truk</a></th>
+                                <th style="width: 25%;text-align: center; padding: 0%;border-top: 1px dotted black"><a>Jam In</a></th>
+                                <th style="width: 25%;text-align: center; padding: 0%;border-top: 1px dotted black"><a>Jam Out</a></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr style="border: 1px solid black;">
-                                <td style="text-align: center;border: 1px solid black"><a><?= $timbang->no_wo ?></a></td>
-                                <td style="text-align: center;border: 1px solid black"><a><?= $timbang->kode_truck ?></a></td>
-                                <td style="text-align: center;border: 1px solid black"><a><?= date_format(date_create($timbang->weight_in_time), 'H : i : s')?></a></td>
-                                <td style="text-align: center;border: 1px solid black"><a><?= date_format(date_create($timbang->weight_out_time), 'H : i : s')?></a></td>
+                            <tr style="border: 0px dotted black;">
+                                <td style="text-align: center;border-bottom: 1px dotted black"><b><a><?= $timbang->no_wo ?></a></b></td>
+                                <td style="text-align: center;border-bottom: 1px dotted black"><b><a><?= $timbang->kode_truck ?></a></b></td>
+                                <td style="text-align: center;border-bottom: 1px dotted black"><b><a><?= date_format(date_create($timbang->weight_in_time), 'H : i : s')?></a></b></td>
+                                <td style="text-align: center;border-bottom: 1px dotted black"><b><a><?= date_format(date_create($timbang->weight_out_time), 'H : i : s')?></a></b></td>
                             </tr>
                             <tr>
-                                <td colspan="3" style="text-align: right;border-bottom: 0;border-right: 1px solid black; padding: 0%;">
+                                <td colspan="3" style="text-align: right;border-bottom: 0;border-right: 0x dotted black; padding: 0%;">
                                     <strong><a>Timbang Masuk</a> &emsp;</strong>
                                 </td>
                                 <td style=" padding: 0% ;"><strong><a>  &emsp; <?= number_format($timbang->weight_in, 2, ",", ".") ?> Kg</a></strong></td>
                             </tr>
                             <tr style="border: none; padding: 0%;">
-                                <td colspan="3" style="text-align: right;border-bottom: 0; padding: 0%;border-right: 1px solid black">
+                                <td colspan="3" style="text-align: right;border-bottom: 0; padding: 0%;border-right: 0px dotted black">
                                     <strong><a>Timbang Keluar</a> &emsp;</strong>
                                 </td>
                                 <td style="padding-left: 3%;padding: 0% ;"><strong><a> &emsp; <?= number_format($timbang->weight_out, 2, ",", ".") ?> Kg</a></strong></td>
                             </tr>
                             <tr style="border: none; padding: 0%;">
-                                <td colspan="3" style="text-align: right;border-bottom: 0; padding: 0%;border-right: 1px solid black">
+                                <td colspan="3" style="text-align: right;border-bottom: 0; padding: 0%;border-right: 0px dotted black">
                                     <strong><a>Nett</a> &emsp;</strong>
                                 </td>
                                 <td style="padding-left: 3%;padding: 0% ;"><strong><a> &emsp; <?= number_format($timbang->weight_in - $timbang->weight_out, 2, ",", ".") ?> Kg</a></strong></td>
                             </tr>
-                            <tr style="border: 1px solid black;">
+                            <tr style="border-top: 1px dotted black;">
                                 <td colspan="3" style="padding-left: 1%">
                                     <?
                                     $day = date('l');
@@ -235,7 +231,7 @@
                                     }
                                     
                                      ?>
-                                    <a >Sungai Menang, <strong><?= $d ?> <?= date("d")?> <?= $m." ".date("Y") ?></strong></a></br>
+                                    <a ><strong>Sungai Menang, <?= $d ?> <?= date("d")?> <?= $m." ".date("Y") ?></strong></a></br>
                                     <a ><strong>Supir</strong></a>
                                     <br />
                                     <br />
@@ -243,7 +239,8 @@
                                     <a ><strong><?= $timbang->supir ?></strong></a>
                                 </td>
                                 <td >
-                                    <a ><strong>Operator</strong></a>
+                                    <a ><strong>Operator</strong></a></br>
+									<a ></a>
                                     <br />
                                     <br />
                                     <br />
