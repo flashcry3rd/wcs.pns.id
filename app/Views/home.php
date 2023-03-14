@@ -557,7 +557,7 @@ header("Access-Control-Allow-Origin: *");
               url: "<?=base_url()?>/home/sync2"
             })
           }
-        }, 30000);
+        }, 5000);
         
       })
      
