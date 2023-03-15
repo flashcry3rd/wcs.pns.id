@@ -482,11 +482,15 @@ class Home extends BaseController
                 // $where = array('tipe !=' => 'BP');
             endif;
             if($filterStartDate):
-                $where_arr['DATE(A.weight_in_time) >='] = $filterStartDate;
+                $filterStartDate_06 = $filterStartDate." 06:00:00";
+                $where_arr['A.weight_out_time >='] = $filterStartDate_06;
+                
             endif;
             if($filterEndDate):
-                $where_arr['DATE(A.weight_in_time) <='] = $filterEndDate;
+                $filterEndDate_06 = date("Y-m-d", strtotime('+1 day', strtotime($filterEndDate))). " 05:59:59";
+                $where_arr['A.weight_out_time <='] = $filterEndDate_06;
             endif;
+            // echo $filterStartDate_06." - ".$filterEndDate_06;
             $where_arr['del ='] = 0 ;
             $data['timbang'] = $model->getSelectReportAll('tbl_weight_scale',$where_arr);
         else:
