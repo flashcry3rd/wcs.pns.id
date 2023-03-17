@@ -444,8 +444,7 @@ class Home extends BaseController
         );
         $where = array ("weight_out" => 0);
         session()->set($arr);
-        $data['timbang'] = $model->getSelect('tbl_weight_scale_temp', $where);
-        $data['vendor'] = $model->selectAll('master_vendor');
+        $data['timbang'] = $model->getSelectReportAll('tbl_weight_scale_temp', $where);
 
         echo view("data-timbang", $data);
     }
