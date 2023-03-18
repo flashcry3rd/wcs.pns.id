@@ -117,44 +117,14 @@
                                 <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>Ancak</a></b></td>
                                 <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a> : </a></b></td>
                                 <td style="width: 30%;  padding: 0%; padding-left: 0%;"><b><a ><?= $timbang->ancak ?></a></b></td>
-                                <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>No Alat Muat</a></b></td>
+                                <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>Alat Muat ( Load )</a></b></td>
                                 <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a> : </a></b></td>
                                 <td style="width: 30%;  padding: 0%; padding-left: 0%;"><b><a ><?  if(strtoupper($timbang->tipe)=='TP'){ echo $timbang->loading_vehicle_number; }else if(strtoupper($timbang->tipe)=='TD'){echo $timbang->no_alat2;} ?></a></b></td>
                             </tr>
                             <tr >
-                                <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>Tgl Muat</a></b></td>
+                                <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>Alat Muat ( Lap )</a></b></td>
                                 <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a> : </a></b></td>
-                                <? 
-                                $month = date_format(date_create($timbang->tgl_muat), "m");
-                                if($month=="01"){
-                                    $m = "Januari";
-                                }else if($month=="02"){
-                                    $m = "Februari";
-                                }else if($month=="03"){
-                                    $m = "Maret";
-                                }else if($month=="04"){
-                                    $m = "April";
-                                }else if($month=="05"){
-                                    $m = "Mei";
-                                }else if($month=="06"){
-                                    $m = "Juni";
-                                }else if($month=="07"){
-                                    $m = "Juli";
-                                }else if($month=="08"){
-                                    $m= "Agustus";
-                                }else if($month=="09"){
-                                    $m = "September";
-                                }else if($month=="10"){
-                                    $m = "Oktober";
-                                }else if($month=="11"){
-                                    $m = "November";
-                                }else if($month=='12'){
-                                    $m = 'Desember';
-                                }else{
-                                    $m ="";
-                                }
-                                ?>
-                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><b><a ><?= date_format(date_create($timbang->tgl_muat), "d")." ".$m." ".date_format(date_create($timbang->tgl_muat), "Y") ?></a></b></td>
+                                <td style="width: 30%;  padding: 0%; padding-left: 0%;"><b><a ><? if(strtoupper($timbang->tipe)=='TP'){ echo "-"; }else if(strtoupper($timbang->tipe)=='TD'){echo $timbang->loading_vehicle_number;} ?></a></b></td>
                                 <td style="width: 15%;  padding: 0%; padding-left: 2%"><b><a>Op Alat Muat</a></b></td>
                                 <td style="width: 5%;  padding: 0%; padding-left: 2%"><b><a> : </a></b></td>
                                 <td style="width: 30%;  padding: 0%; padding-left: 0%;"><b><a ><? if(strtoupper($timbang->tipe)=='TP'){ echo $timbang->loading_vehicle_operator; }else if(strtoupper($timbang->tipe)=='TD'){echo $timbang->op_alat2;} ?></a></b></td>
