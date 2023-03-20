@@ -106,6 +106,15 @@ class Home extends BaseController
         
     }
 
+    public function post_getSession()
+    {
+        $session = session()->get('menu');
+        if($session=="/dashboard"){
+           $this->sync2(); 
+        }
+        echo $session  ; 
+    }
+
     public function dashboard()
     {
         $arr = array(
@@ -297,6 +306,19 @@ class Home extends BaseController
         session()->set($arr);
 
         echo view("cu-bridge-settings");
+    }
+
+    public function wcs_material()
+    {
+        if(session()->get('menu')!="/wcs_material"){
+            echo "<script >location.reload()</script>";
+        }
+        $arr = array(
+            "menu" => "/wcs_material"
+        );
+        session()->set($arr);
+
+        echo view("wcs-material");
     }
 
     public function master_user()
@@ -1035,69 +1057,69 @@ class Home extends BaseController
 
     }
 
-    public function autoSync()
-    {
-        $client = \Config\Services::curlrequest();
+    // public function autoSync()
+    // {
+    //     $client = \Config\Services::curlrequest();
 
-        $model = new Home_model();
-        $dateSync = date('Y-m-d H:i:s');
-        $where = "sync IS NULL";
-        $data = array("sync" => $dateSync);
-        $get = $model->getSelect("tbl_weight_scale", $where);
-        // print_r($get);
-        // $response = $client->request('post', 'http://api.pns.co.id/index.php/wcs/autoSync1', ['body' => $get]);
-        $response = $client->request('POST', 'http://api.pns.co.id/index.php/wcs/autoSync1', [
-            'form_params' => $get
-            ,
-        ]);
-        $model->dataUpdate("tbl_weight_scale", $data, $where);
-        // echo "<pre>";
-        $array = json_decode($response->getBody());
-        // print_r($array);
-        foreach($array->data as $ar){
-            $dataAr = array(
-                "no_transaksi" => $ar->no_transaksi, 
-                "tipe" => $ar->tipe,
-                "no_tiket_mobil" => $ar->no_tiket_mobil,
-                "tiket_barge" => $ar->tiket_barge,
-                "no_wo" => $ar->no_wo,
-                "kode_petak" => $ar->kode_petak,
-                "ancak" => $ar->ancak,
-                "jenis_tebu" => $ar->jenis_tebu,
-                "tgl_harvesting" => $ar->tgl_harvesting,
-                "tgl_muat" => $ar->tgl_muat,
-                "kode_kontraktor" => $ar->kode_kontraktor,
-                "loading_vehicle_number" => $ar->loading_vehicle_number,
-                "loading_vehicle_operator" => $ar->loading_vehicle_operator,
-                "kode_barge" => $ar->kode_barge,
-                "kode_tugboat" => $ar->kode_tugboat,
-                "tugboat_captain" => $ar->tugboat_captain,
-                "tujuan_tugboat" => $ar->tujuan_tugboat,
-                "kode_truck" => $ar->kode_truck,
-                "supir" => $ar->supir,
-                "kepala_regu" => $ar->kepala_regu,
-                "weight_in" => $ar->weight_in, 
-                "weight_in_time" => $ar->weight_in_time,
-                "weight_out" => $ar->weight_out,
-                "weight_out_time" => $ar->weight_out_time,
-                "retase" => $ar->retase,
-                "kontraktor_delivery" => $ar->kontraktor_delivery,
-                "no_polisi" => $ar->no_polisi,
-                "tujuan" => $ar->tujuan,
-                "no_alat2" => $ar->no_alat2,
-                "op_alat2" => $ar->op_alat2,
-                "del" => $ar->del,
-                "createby" => $ar->createby,
-                "operator_timbang" => $ar->operator_timbang,
-                "sync" => $dateSync
-            );
-            $where1 = array("no_transaksi" => $ar->no_transaksi);
-            $cari = $model->getSelect("tbl_weight_scale", $where1);
-            if(count($cari) < 1){
-                $model->dataInsert("tbl_weight_scale", $dataAr, $where1);
-            }   
-        }
-    }
+    //     $model = new Home_model();
+    //     $dateSync = date('Y-m-d H:i:s');
+    //     $where = "sync IS NULL";
+    //     $data = array("sync" => $dateSync);
+    //     $get = $model->getSelect("tbl_weight_scale", $where);
+    //     // print_r($get);
+    //     // $response = $client->request('post', 'http://api.pns.co.id/index.php/wcs/autoSync1', ['body' => $get]);
+    //     $response = $client->request('POST', 'http://api.pns.co.id/index.php/wcs/autoSync1', [
+    //         'form_params' => $get
+    //         ,
+    //     ]);
+    //     $model->dataUpdate("tbl_weight_scale", $data, $where);
+    //     // echo "<pre>";
+    //     $array = json_decode($response->getBody());
+    //     // print_r($array);
+    //     foreach($array->data as $ar){
+    //         $dataAr = array(
+    //             "no_transaksi" => $ar->no_transaksi, 
+    //             "tipe" => $ar->tipe,
+    //             "no_tiket_mobil" => $ar->no_tiket_mobil,
+    //             "tiket_barge" => $ar->tiket_barge,
+    //             "no_wo" => $ar->no_wo,
+    //             "kode_petak" => $ar->kode_petak,
+    //             "ancak" => $ar->ancak,
+    //             "jenis_tebu" => $ar->jenis_tebu,
+    //             "tgl_harvesting" => $ar->tgl_harvesting,
+    //             "tgl_muat" => $ar->tgl_muat,
+    //             "kode_kontraktor" => $ar->kode_kontraktor,
+    //             "loading_vehicle_number" => $ar->loading_vehicle_number,
+    //             "loading_vehicle_operator" => $ar->loading_vehicle_operator,
+    //             "kode_barge" => $ar->kode_barge,
+    //             "kode_tugboat" => $ar->kode_tugboat,
+    //             "tugboat_captain" => $ar->tugboat_captain,
+    //             "tujuan_tugboat" => $ar->tujuan_tugboat,
+    //             "kode_truck" => $ar->kode_truck,
+    //             "supir" => $ar->supir,
+    //             "kepala_regu" => $ar->kepala_regu,
+    //             "weight_in" => $ar->weight_in, 
+    //             "weight_in_time" => $ar->weight_in_time,
+    //             "weight_out" => $ar->weight_out,
+    //             "weight_out_time" => $ar->weight_out_time,
+    //             "retase" => $ar->retase,
+    //             "kontraktor_delivery" => $ar->kontraktor_delivery,
+    //             "no_polisi" => $ar->no_polisi,
+    //             "tujuan" => $ar->tujuan,
+    //             "no_alat2" => $ar->no_alat2,
+    //             "op_alat2" => $ar->op_alat2,
+    //             "del" => $ar->del,
+    //             "createby" => $ar->createby,
+    //             "operator_timbang" => $ar->operator_timbang,
+    //             "sync" => $dateSync
+    //         );
+    //         $where1 = array("no_transaksi" => $ar->no_transaksi);
+    //         $cari = $model->getSelect("tbl_weight_scale", $where1);
+    //         if(count($cari) < 1){
+    //             $model->dataInsert("tbl_weight_scale", $dataAr, $where1);
+    //         }   
+    //     }
+    // }
 
     public function check2()
     {
@@ -1109,19 +1131,27 @@ class Home extends BaseController
     public function sync2()
     {
         $model = new Home_model();
-
-        $dateSync = date('Y-m-d H:i:s');
-        $where = "sync IS NULL";
+        $dateNow = date("Y-m-d");
+        $dateSync = date("Y-m-d", strtotime("-1 day", strtotime($dateNow)));
+        $where = "weight_in_time >= '$dateSync'";
         $get = $model->getSelect("tbl_weight_scale", $where);
+        $noTrans = $model->selectAll("tbl_weight_scale", "no_transaksi");
         // echo json_encode($get);
         // exit();
-        $runSync = $model->sync2($get);
+        $runSync = $model->sync2($get, $noTrans);
 
         
         echo json_encode($runSync) ;
 
     }
 
+    public function test_sync()
+    {
+        $model = new Home_model();
+        $run = $model->test_sync();
+
+        echo json_encode($run);
+    }
     public function sinkron_user()
     {
         $model = new Home_model();

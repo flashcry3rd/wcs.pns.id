@@ -519,18 +519,9 @@ header("Access-Control-Allow-Origin: *");
         }else{
           $("#page-item").load("home"+ses_menu);
         }
-
+        
 
         const checkOnlineStatus = async () => {
-          let options = {
-              method: 'GET',
-              headers: {
-                  'Content-Type': 
-                      'application/json;charset=utf-8' ,
-                  'Access-Control-Allow-Origin': '*' 
-
-              }
-          }
           try {
               // const online = await fetch("http://api.pns.co.id/index.php/android/check2");
               const online = await fetch("<?=base_url() ?>/home/check2");
@@ -543,19 +534,38 @@ header("Access-Control-Allow-Origin: *");
           //   .then(response => response.json())
           //   .then(data => console.log(data));
         };
+        
+        const checkSession = async () => {
+          let fetchData = {
+            method: 'POST',
+            // body: JSON.stringify(data),
+            headers: new Headers({
+              'Content-Type': 'application/json; charset=UTF-8'
+            })
+          }
+          try{
+            const session = await fetch("<?= base_url() ?>/home/post_getSession", fetchData)
+             .then(response => response.json())
+            .then(data => console.log(data));
+          } catch (err) {
+            return false ;
+          }
+          
+          
+        };
         var autoHitung = setInterval(async () =>{
           const result = await checkOnlineStatus();
+          // const session = await checkSession() ; 
+          
           if(result==false){
             $(".status-online-btn").removeClass("btn-outline-success");
             $(".status-online-btn").addClass("btn-outline-danger");
             $(".status-online-btn").html("Offline");
           }else{
             $(".status-online-btn").removeClass("btn-outline-danger");
-            $(".status-online-btn").addClass("btn-outline-success");
+            $(".status-online-btn").addClass("btn-outline-success");  
             $(".status-online-btn").html("Online");
-            await $.ajax({
-              url: "<?=base_url()?>/home/sync2"
-            })
+            await checkSession() ; 
           }
         }, 5000);
         
