@@ -109,9 +109,9 @@ class Home extends BaseController
     public function post_getSession()
     {
         $session = session()->get('menu');
-        if($session=="/dashboard"){
-           $this->sync2(); 
-        }
+        
+        $this->sync2(); 
+        
         echo $session  ; 
     }
 
@@ -1138,10 +1138,10 @@ class Home extends BaseController
         $noTrans = $model->selectAll("tbl_weight_scale", "no_transaksi");
         // echo json_encode($get);
         // exit();
-        $runSync = $model->sync2($get, $noTrans);
+        $model->sync2($get, $noTrans);
 
         
-        echo json_encode($runSync) ;
+        // echo json_encode($runSync) ;
 
     }
 

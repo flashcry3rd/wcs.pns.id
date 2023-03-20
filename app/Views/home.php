@@ -550,6 +550,9 @@ header("Access-Control-Allow-Origin: *");
           } catch (err) {
             return false ;
           }
+          // $.ajax({
+          //   url: "<?= base_url() ?>/home/post_getSession"
+          // })
           
           
         };

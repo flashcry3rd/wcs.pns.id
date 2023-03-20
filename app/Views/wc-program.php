@@ -534,7 +534,7 @@
 
     function getData() {
     fetch("http://localhost:3000/data").then(res => res.json().then(data => {
-      console.log(data);
+      // console.log(data);
       num = 1;
       $.each(data.data_weight, function(i, v) {
         if (v != 0) {

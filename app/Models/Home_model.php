@@ -193,8 +193,9 @@ class Home_model extends Model
         // return $arr ;
 
         $db = \Config\Database::connect('db2');
-
-        $noTrans1 = $db->query("SELECT no_transaksi FROM tbl_weight_scale");
+        $dateNow = date("Y-m-d");
+        $dateSync = date("Y-m-d", strtotime("-1 day", strtotime($dateNow)));
+        $noTrans1 = $db->query("SELECT no_transaksi FROM tbl_weight_scale ");
         
         $result = $noTrans1->getResult('array');
         $arrN = array();
@@ -213,7 +214,7 @@ class Home_model extends Model
             $insert->insert($r2);
         }
 
-        $noTrans2 = $this->db->query("SELECT no_transaksi FROM tbl_weight_scale");
+        $noTrans2 = $this->db->query("SELECT no_transaksi FROM tbl_weight_scale ");
         $result3 = $noTrans2->getResult('array');
         $arrN2 = array();
         foreach($result3 as $r3)
