@@ -48,16 +48,10 @@
                                             <td><?=$ti['no_transaksi'] ?></td>
                                             <td><?=$ti['kode_petak'] ?></td>
                                             <td><?=$ti['ancak'] ?></td>
-                                            <? foreach($vendor as $v){ 
-                                                if($v['kode_vendor']==$ti['kode_kontraktor']){
-                                                    echo "<td>".$v['nama_vendor']."</td>";
-                                                } ?>
-                                            <? } ?>
-                                            <? foreach($vendor as $v2){ 
-                                                if($v2['kode_vendor']==$ti['kontraktor_delivery']){
-                                                    echo "<td>".$v['nama_vendor']."</td>";
-                                                } ?>
-                                            <? } ?>
+                                            <td><?=$ti['nama_kontraktor'] ?></td>
+                                                
+                                            <td><?= $ti['nama_kontraktor_delivery']?></td>
+                                            
                                             <td><?=number_format($ti['weight_in'], 2, ",", ".")?></td>
                                             
                                         </tr>

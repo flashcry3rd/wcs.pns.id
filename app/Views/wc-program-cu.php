@@ -77,7 +77,7 @@
                   <h2>Data QR Code</h2>
                   <label><i><a style="color: red;">Arahkan kursor anda ke form input berikut *</a></i></label>
                   <br>
-                  <input class="form-control" type="text" id="get-serial-messages">
+                  <input class="form-control" type="text" id="get-serial-messages" autocomplete="off">
                 </div>
                 <label><i><a style="color: red;" id='warning'></a></i></label>
               </div>

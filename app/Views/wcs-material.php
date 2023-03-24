@@ -1,6 +1,6 @@
 
   <!-- <link rel="stylesheet" href="./styles.css"> -->
-<style>
+  <style>
 .center {
   /* margin: 0; */
   position: relative;
@@ -50,12 +50,6 @@
             <div class="row" style="text-align: center;" >
               <div class="center">
                 <div class="form-group">
-                <h2>Data QR Code</h2>
-                <!-- <button class="message-button btn btn-primary" id='get-serial-messages' data-value="0" >Get Data</button> -->
-                <label><i><a style="color: red;">Arahkan kursor anda ke form input berikut *</a></i></label>
-                <br>
-                <input class="form-control" type="text" id="get-serial-messages" name="serial-input" autocomplete="off">
-                </div>
                 <label ><i><a style="color: red;" id='warning'></a></i></label><br />
                 <label><h4 ><b>Indikator : </b></h4></label>
                 <div ><h3 id="indikator"></h3></div>
@@ -77,30 +71,14 @@
             <div class="card-body" >
             <div id="badan" style="height: 500px; overflow-y: auto; overflow-x: hidden;" >
 
-				
-					
-						
-						
-						
-					
-				
               <div class="row mt-4" >
-				<div class="col-lg-12" >
-					<input style="width: 20px; height:20px;" id="trash" type="checkbox" name="trash" value="1"><label>TRASH</label>
-				</div>
                 <div class="col-lg-6 col-md-6">
                   <div class="form-group">  
-                    <h5>Berat Timbang In </h5>
+                    <h5>Berat Timbang</h5>
                     <input id="berat-in" name="berat_in" class="message form-control barcode" readonly >
                     <input id="berat-in-time" name="berat_in_time"  class="message form-control barcode" hidden>
                   </div>
 
-                </div>
-                <div class="col-lg-6 col-md-6">
-                  <div class="form-group">
-                    <h5>Berat Timbang Out </h5>
-                    <input id="berat-out" name="berat_out" class="message form-control barcode" readonly >
-                  </div>
                 </div>
               </div>
 
@@ -321,7 +299,7 @@
 
     
     $(document).ready(function(){
-        $("#badan").fadeOut(500);
+        // $("#badan").fadeOut(500);
         document.getElementById('get-serial-messages').focus();
       
     })
@@ -534,7 +512,7 @@
 
     function getData() {
     fetch("http://localhost:3000/data").then(res => res.json().then(data => {
-      // console.log(data);
+      console.log(data);
       num = 1;
       $.each(data.data_weight, function(i, v) {
         if (v != 0) {
@@ -558,6 +536,7 @@
             }
             $("#indikator").html(v).trigger('change');
             $("#indikator").html(full_text);
+            $("#berati-in").val(full_text);
           }
         } else {
           full_text = v + " Kg";
