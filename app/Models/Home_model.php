@@ -3,10 +3,18 @@ use CodeIgniter\Model;
  
 class Home_model extends Model
 {
-    public function getSelect($table, $where)
+    public function getSelect($table, $where = "", $like = "")
     {
         $tb = $this->db->table($table);
-        $get = $tb->getWhere($where);
+        if($where != ""){
+            $get = $tb->getWhere($where);
+        }
+        if($like != ""){
+            $tb->like($like);
+            $get = $tb->get();
+        }
+        // $rs = $get->getCompiledSelect();
+        // print_r($rs);
         $result = $get->getResult('array');
         // print_r($this->db->getLastQuery());
 
@@ -124,13 +132,38 @@ class Home_model extends Model
                 $tb->insert($d);
             }
         }
-        $qCari = $db->query("SELECT no_transaksi, tipe, no_tiket_mobil, tiket_barge, no_wo, kode_petak, ancak, jenis_tebu, tgl_harvesting, tgl_muat, kode_kontraktor, loading_vehicle_number, loading_vehicle_operator, kode_barge, kode_tugboat, tugboat_captain, tujuan_tugboat, kode_truck, supir, kepala_regu, weight_in, weight_in_time, weight_out, weight_out_time, retase, kontraktor_delivery, no_polisi, tujuan, no_alat2, op_alat2, del, createby, sync, operator_timbang, trash_status FROM tbl_weight_scale WHERE sync IS NULL");
+        $YesterdayDate = date("Y-m-d", strtotime("yesterday"));
+        $qCari = $db->query("SELECT no_transaksi, tipe, no_tiket_mobil, tiket_barge, no_wo, kode_petak, ancak, jenis_tebu, tgl_harvesting, tgl_muat, kode_kontraktor, loading_vehicle_number, loading_vehicle_operator, kode_barge, kode_tugboat, tugboat_captain, tujuan_tugboat, kode_truck, supir, kepala_regu, weight_in, weight_in_time, weight_out, weight_out_time, retase, kontraktor_delivery, no_polisi, tujuan, no_alat2, op_alat2, del, createby, sync, operator_timbang, trash_status FROM tbl_weight_scale WHERE sync IS NULL AND DATE(weight_in_time) >= '".$YesterdayDate."'");
         $cari = $qCari->getResult('array');
         foreach($cari as $c){
             $qCek = $this->db->query("SELECT * FROM tbl_weight_scale WHERE no_transaksi = '".$c['no_transaksi']."'");
             $res = $qCek->getResult('array');
             if(count($res) < 1){
                 $table = $this->db->table("tbl_weight_scale");
+                $table->insert($c);
+            }
+        }
+        $arr = array("data" => $cari);
+        $dateSync = date("Y-m-d H:i:s");
+        // $db->query("UPDATE tbl_weight_scale SET sync = '$dateSync' WHERE sync IS NULL");
+        return $arr ;
+
+   }
+
+   public function sync_vendor()
+   {
+        $db = \Config\Database::connect('db2');
+        $YesterdayDate = date("Y-m-d", strtotime("yesterday"));
+        // $YesterdayDate = '2023-02-14';
+        $qCari = $db->query("SELECT * FROM master_vendor as A WHERE A.createcomp IS NULL AND DATE(A.createdate) >= '".$YesterdayDate."'");
+        $cari = $qCari->getResult('array');
+        // print_r($db->getLastQuery());
+        // exit;
+        foreach($cari as $c){
+            $qCek = $this->db->query("SELECT * FROM master_vendor WHERE kode_vendor = '".$c['kode_vendor']."'");
+            $res = $qCek->getResult('array');
+            if(count($res) < 1){
+                $table = $this->db->table("master_vendor");
                 $table->insert($c);
             }
         }

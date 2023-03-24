@@ -299,7 +299,11 @@
             <div class="card-body">
               <div id="badan" style="height: 500px; overflow-y: auto; overflow-x: hidden;">
                 <div class="row">
-
+                  <div class="form-group">
+                    <input type="checkbox" style="width: 20px; height:20px;" class="checkbox-primary" name="TrashStatus" id="TrashStatus" value="1">
+                    <label for="TrashStatus" style="font-size: 20px;">TRASH</label>
+                  </div>
+                  
                   <div class="form-group">
                     <h5>No. Transaksi </h5>
                     <input id="no_transaksi" name="no_transaksi" class="form-control barcode" readonly>
@@ -695,7 +699,7 @@
       url: '<?= base_url() ?>/home/saveTruckCU',
       success: function(data) {
         console.log(data);
-        var url = "<?= base_url() ?>/slip-timbang?no=" + data['no_transaksi'];
+        var url = "<?= base_url() ?>/slip-timbang?no=" + data['no'];
         alert(data['msg']);
         console.log(url);
         $("#form-wcs").trigger('reset');
