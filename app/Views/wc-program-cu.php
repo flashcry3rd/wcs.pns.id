@@ -299,6 +299,7 @@
             <div class="card-body">
               <div id="badan" style="height: 500px; overflow-y: auto; overflow-x: hidden;">
                 <div class="row">
+
                   <div class="form-group">
                     <input type="checkbox" style="width: 20px; height:20px;" class="checkbox-primary" name="TrashStatus" id="TrashStatus" value="1">
                     <label for="TrashStatus" style="font-size: 20px;">TRASH</label>
@@ -614,9 +615,10 @@
           $("#cetak-in").fadeIn(500);
           $("#cetak-out").fadeOut(500);
           if (data['alert'] != '') {
+            $("#form-wcs").trigger('reset');
             $("#cetak-in").fadeOut(500);
             $("#cetak-out").fadeOut(500);
-            $("#submit-cu").hide(500);
+            $("#submit-cu").hide();
             // if ($data['tipe'] == "BP") {
             //   $("#warning").html(data['alert']);
             // }
@@ -629,9 +631,10 @@
           $("#cetak-in").fadeOut(500);
           $("#cetak-out").fadeIn(500);
           if (data['alert'] != '') {
+            $("#form-wcs").trigger('reset');
             $("#cetak-in").fadeOut(500);
             $("#cetak-out").fadeOut(500);
-
+            $("#submit-cu").hide();
           }
 
         }

@@ -91,7 +91,7 @@ const SerialPort3 = require('serialport').SerialPort,
 }).setEncoding('utf8');
 
 const SerialPort4 = require('serialport').SerialPort,
-      port4 = new SerialPort4({path: "COM4", baudRate: 9600,  dataBits: 7, stopBits: 1, bufferSize: '16777216'}, err => {
+      port4 = new SerialPort4({path: "COM15", baudRate: 9600,  dataBits: 7, stopBits: 1, bufferSize: '16777216'}, err => {
     if(err != null) {
         console.log(err)
         err4 = err.message;

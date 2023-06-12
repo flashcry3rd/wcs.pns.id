@@ -168,80 +168,80 @@ class Home_model extends Model
 
    public function sync2($data, $noTrans)
    {
-        // $db = \Config\Database::connect('db2');
+        $db = \Config\Database::connect('db2');
         
     
         
-        // foreach($data as $d){
-        //     $qCek = $db->query("SELECT * FROM tbl_weight_scale WHERE no_transaksi = '".$d['no_transaksi']."'");
-        //     $row = $qCek->getResult('array');  
-        //     // print_r($d['no_transaksi']);
-        //     if(count($row) < 1){
-        //         $tb = $db->table("tbl_weight_scale");
-        //         $tb->insert($d);
-        //     }
+        foreach($data as $d){
+            $qCek = $db->query("SELECT * FROM tbl_weight_scale WHERE no_transaksi = '".$d['no_transaksi']."'");
+            $row = $qCek->getResult('array');  
+            // print_r($d['no_transaksi']);
+            if(count($row) < 1){
+                $tb = $db->table("tbl_weight_scale");
+                $tb->insert($d);
+            }
             
-        // }
+        }
 
-        // $dateNow = date("Y-m-d");
-        // $dateSync = date("Y-m-d", strtotime("-1 day", strtotime($dateNow)));
-        // $qCari = $db->query("SELECT no_transaksi, tipe, no_tiket_mobil, tiket_barge, no_wo, kode_petak, ancak, jenis_tebu, tgl_harvesting, tgl_muat, kode_kontraktor, loading_vehicle_number, loading_vehicle_operator, kode_barge, kode_tugboat, tugboat_captain, tujuan_tugboat, kode_truck, supir, kepala_regu, weight_in, weight_in_time, weight_out, weight_out_time, retase, kontraktor_delivery, no_polisi, tujuan, no_alat2, op_alat2, del, createby, sync, operator_timbang, trash_status FROM tbl_weight_scale WHERE sync IS NULL and weight_out_time >= '$dateSync'");
-        // $cari = $qCari->getResult('array');
-        // foreach($cari as $c){
-        //     $qCek = $this->db->query("SELECT * FROM tbl_weight_scale WHERE no_transaksi = '".$c['no_transaksi']."'");
-        //     $res = $qCek->getResult('array');
-        //     if(count($res) < 1){
-        //         $table = $this->db->table("tbl_weight_scale");
-        //         $table->insert($c);
-        //     }
-        // }
-        // $arr = array("data" => $cari);
-        
-        // // $db->query("UPDATE tbl_weight_scale SET sync = '$dateSync' WHERE sync IS NULL");
-        // return $arr ;
-
-        $db = \Config\Database::connect('db2');
         $dateNow = date("Y-m-d");
         $dateSync = date("Y-m-d", strtotime("-1 day", strtotime($dateNow)));
-        $noTrans1 = $db->query("SELECT no_transaksi FROM tbl_weight_scale ");
-        
-        $result = $noTrans1->getResult('array');
-        $arrN = array();
-        foreach($result as $r)
-        {
-            array_push($arrN, $r['no_transaksi']) ;
+        $qCari = $db->query("SELECT no_transaksi, tipe, no_tiket_mobil, tiket_barge, no_wo, kode_petak, ancak, jenis_tebu, tgl_harvesting, tgl_muat, kode_kontraktor, loading_vehicle_number, loading_vehicle_operator, kode_barge, kode_tugboat, tugboat_captain, tujuan_tugboat, kode_truck, supir, kepala_regu, weight_in, weight_in_time, weight_out, weight_out_time, retase, kontraktor_delivery, no_polisi, tujuan, no_alat2, op_alat2, del, createby, sync, operator_timbang, trash_status FROM tbl_weight_scale WHERE sync IS NULL and weight_out_time >= '$dateSync'");
+        $cari = $qCari->getResult('array');
+        foreach($cari as $c){
+            $qCek = $this->db->query("SELECT * FROM tbl_weight_scale WHERE no_transaksi = '".$c['no_transaksi']."'");
+            $res = $qCek->getResult('array');
+            if(count($res) < 1){
+                $table = $this->db->table("tbl_weight_scale");
+                $table->insert($c);
+            }
         }
+        $arr = array("data" => $cari);
         
-        $select = $this->db->table("tbl_weight_scale");
-        $select = $select->havingNotIn('no_transaksi', $arrN);
-        $select = $select->get();
-        $result2 = $select->getResult('array');
+        // $db->query("UPDATE tbl_weight_scale SET sync = '$dateSync' WHERE sync IS NULL");
+        return $arr ;
 
-        foreach($result2 as $r2){
-            $insert = $db->table("tbl_weight_scale");
-            $insert->insert($r2);
-        }
-
-        $noTrans2 = $this->db->query("SELECT no_transaksi FROM tbl_weight_scale ");
-        $result3 = $noTrans2->getResult('array');
-        $arrN2 = array();
-        foreach($result3 as $r3)
-        {
-            array_push($arrN2, $r3['no_transaksi']) ;
-        }
+        // $db = \Config\Database::connect('db2');
+        // $dateNow = date("Y-m-d");
+        // $dateSync = date("Y-m-d", strtotime("-1 day", strtotime($dateNow)));
+        // $noTrans1 = $db->query("SELECT no_transaksi FROM tbl_weight_scale ");
         
-        $select2 = $db->table("tbl_weight_scale");
-        $select2 = $select2->havingNotIn('no_transaksi', $arrN2);
-        $select2 = $select2->get();
-        $result4 = $select2->getResult('array');
+        // $result = $noTrans1->getResult('array');
+        // $arrN = array();
+        // foreach($result as $r)
+        // {
+        //     array_push($arrN, $r['no_transaksi']) ;
+        // }
+        
+        // $select = $this->db->table("tbl_weight_scale");
+        // $select = $select->havingNotIn('no_transaksi', $arrN);
+        // $select = $select->get();
+        // $result2 = $select->getResult('array');
 
-        foreach($result4 as $r4){
-            $insert = $this->db->table("tbl_weight_scale");
-            $insert->insert($r4);
-        }
+        // foreach($result2 as $r2){
+        //     $insert = $db->table("tbl_weight_scale");
+        //     $insert->insert($r2);
+        // }
+
+        // $noTrans2 = $this->db->query("SELECT no_transaksi FROM tbl_weight_scale ");
+        // $result3 = $noTrans2->getResult('array');
+        // $arrN2 = array();
+        // foreach($result3 as $r3)
+        // {
+        //     array_push($arrN2, $r3['no_transaksi']) ;
+        // }
+        
+        // $select2 = $db->table("tbl_weight_scale");
+        // $select2 = $select2->havingNotIn('no_transaksi', $arrN2);
+        // $select2 = $select2->get();
+        // $result4 = $select2->getResult('array');
+
+        // foreach($result4 as $r4){
+        //     $insert = $this->db->table("tbl_weight_scale");
+        //     $insert->insert($r4);
+        // }
         
 
-        return count($arrN)." // ".count($arrN2) ;
+        // return count($arrN)." // ".count($arrN2) ;
 
    }
 

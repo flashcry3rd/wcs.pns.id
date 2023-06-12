@@ -542,66 +542,6 @@ header("Access-Control-Allow-Origin: *");
         $(this).addClass("active");
         $("#page-item").load("home" + link);
 
-        })
-        var ses_menu = "<? if(null !== session()->get('menu')){ echo session()->get('menu') ; }else{ echo "";} ?>";
-        if(ses_menu==""){
-          $("#page-item").load("home/dashboard");
-        }else{
-          $("#page-item").load("home"+ses_menu);
-        }
-        
-
-        const checkOnlineStatus = async () => {
-          try {
-              // const online = await fetch("http://api.pns.co.id/index.php/android/check2");
-              const online = await fetch("<?=base_url() ?>/home/check2");
-              return online.status >= 200 && online.status < 300; // either true or false
-          } catch (err) {
-              return false; // definitely offline
-          }
-       
-          // fetch('http://api.pns.co.id/index.php/android/check', options)
-          //   .then(response => response.json())
-          //   .then(data => console.log(data));
-        };
-        
-        const checkSession = async () => {
-          let fetchData = {
-            method: 'POST',
-            // body: JSON.stringify(data),
-            headers: new Headers({
-              'Content-Type': 'application/json; charset=UTF-8'
-            })
-          }
-          try{
-            const session = await fetch("<?= base_url() ?>/home/post_getSession", fetchData)
-             .then(response => response.json())
-            .then(data => console.log(data));
-          } catch (err) {
-            return false ;
-          }
-          // $.ajax({
-          //   url: "<?= base_url() ?>/home/post_getSession"
-          // })
-          
-          
-        };
-        var autoHitung = setInterval(async () =>{
-          const result = await checkOnlineStatus();
-          // const session = await checkSession() ; 
-          
-          if(result==false){
-            $(".status-online-btn").removeClass("btn-outline-success");
-            $(".status-online-btn").addClass("btn-outline-danger");
-            $(".status-online-btn").html("Offline");
-          }else{
-            $(".status-online-btn").removeClass("btn-outline-danger");
-            $(".status-online-btn").addClass("btn-outline-success");  
-            $(".status-online-btn").html("Online");
-            await checkSession() ; 
-          }
-        }, 5000);
-        
       })
       var ses_menu = "<? if (null !== session()->get('menu')) {
                         echo session()->get('menu');
@@ -627,30 +567,61 @@ header("Access-Control-Allow-Origin: *");
         try {
           // const online = await fetch("http://api.pns.co.id/index.php/android/check2");
           const online = await fetch("<?= base_url() ?>/home/check2");
+          if (online.status >= 200 && online.status < 300) {
+            $(".status-online-btn").removeClass("btn-outline-danger");
+            $(".status-online-btn").addClass("btn-outline-success");
+            $(".status-online-btn").html("Online");
+          }
           return online.status >= 200 && online.status < 300; // either true or false
         } catch (err) {
           return false; // definitely offline
+          $(".status-online-btn").removeClass("btn-outline-success");
+          $(".status-online-btn").addClass("btn-outline-danger");
+          $(".status-online-btn").html("Offline");
         }
 
         // fetch('http://api.pns.co.id/index.php/android/check', options)
         //   .then(response => response.json())
         //   .then(data => console.log(data));
       };
-      var autoHitung = setInterval(async () => {
-        const result = await checkOnlineStatus();
-        if (result == false) {
-          $(".status-online-btn").removeClass("btn-outline-success");
-          $(".status-online-btn").addClass("btn-outline-danger");
-          $(".status-online-btn").html("Offline");
-        } else {
-          $(".status-online-btn").removeClass("btn-outline-danger");
-          $(".status-online-btn").addClass("btn-outline-success");
-          $(".status-online-btn").html("Online");
-          await $.ajax({
-            url: "<?= base_url() ?>/home/sync2"
+
+      setInterval(checkOnlineStatus, 20000);
+      
+      const checkSession = async () => {
+        let fetchData = {
+          method: 'POST',
+          // body: JSON.stringify(data),
+          headers: new Headers({
+            'Content-Type': 'application/json; charset=UTF-8'
           })
         }
-      }, 30000);
+        try {
+          const session = await fetch("<?= base_url() ?>/home/post_getSession", fetchData)
+            .then(response => response.json())
+            .then(data => console.log(data));
+        } catch (err) {
+          return false;
+        }
+
+
+      };
+
+
+      // var autoHitung = setInterval(async () => {
+      //   const result = await checkOnlineStatus();
+      //   if (result == false) {
+      //     $(".status-online-btn").removeClass("btn-outline-success");
+      //     $(".status-online-btn").addClass("btn-outline-danger");
+      //     $(".status-online-btn").html("Offline");
+      //   } else {
+      //     $(".status-online-btn").removeClass("btn-outline-danger");
+      //     $(".status-online-btn").addClass("btn-outline-success");
+      //     $(".status-online-btn").html("Online");
+      //     $.ajax({
+      //       url: "<?= base_url() ?>/home/sync2"
+      //     })
+      //   }
+      // }, 20000);
 
       async function SyncVendor() {
         var mins = new Date().getMinutes();
@@ -663,6 +634,8 @@ header("Access-Control-Allow-Origin: *");
         console.log('Tick ' + mins);
       }
       setInterval(SyncVendor, 10000);
+
+    })
   </script>
 
 </body>
